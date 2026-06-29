@@ -8,10 +8,10 @@ const FISH_IMG = "https://images.unsplash.com/photo-1683405503746-0fcbc47daaa7?c
 const SHRIMP_IMG = "https://images.unsplash.com/photo-1758972572427-fc3d4193bbd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
 
 const counters = [
-  { label: "Crab", count: "+125", icon: "🦀", top: "28%", left: "8%" },
-  { label: "Octopus", count: "+205", icon: "🐙", top: "20%", left: "20%" },
-  { label: "Lobster", count: "+290", icon: "🦞", top: "55%", right: "18%" },
-  { label: "Oyster", count: "+195", icon: "🦪", top: "25%", right: "8%" },
+  { label: "Tulang Ikan", count: "+125 kg", icon: "🦴", top: "28%", left: "8%" },
+  { label: "Kepala Ikan", count: "+205 kg", icon: "🐟", top: "20%", left: "20%" },
+  { label: "Sisik Ikan", count: "+290 kg", icon: "🐡", top: "55%", right: "18%" },
+  { label: "Jeroan Ikan", count: "+195 kg", icon: "🎣", top: "25%", right: "8%" },
 ];
 
 const floatingSeafood = [
@@ -251,10 +251,10 @@ export function HeroSection() {
       ))}
 
       {/* Counter badges */}
-      <CounterBadge label="Crab" count="+125" icon="🦀" top="30%" left="6%" delay={0.5} />
-      <CounterBadge label="Octopus" count="+205" icon="🐙" top="18%" left="22%" delay={0.8} />
-      <CounterBadge label="Lobster" count="+290" icon="🦞" top="58%" right="16%" delay={1.0} />
-      <CounterBadge label="Oyster" count="+195" icon="🦪" top="22%" right="6%" delay={0.6} />
+      <CounterBadge label="Tulang Ikan" count="+125 kg" icon="🦴" top="30%" left="6%" delay={0.5} />
+      <CounterBadge label="Kepala Ikan" count="+205 kg" icon="🐟" top="18%" left="22%" delay={0.8} />
+      <CounterBadge label="Sisik Ikan" count="+290 kg" icon="🐡" top="58%" right="16%" delay={1.0} />
+      <CounterBadge label="Jeroan Ikan" count="+195 kg" icon="🎣" top="22%" right="6%" delay={0.6} />
 
       {/* Lemon decorations */}
       <LemonDecor style={{ top: "15%", left: "38%", opacity: 0.7, zIndex: 4 }} />
@@ -305,7 +305,7 @@ export function HeroSection() {
             textTransform: "uppercase",
           }}
         >
-          Premium Ocean–Fresh Seafood
+          Jual Beli Limbah Ikan Perikanan Aceh
         </motion.p>
 
         <motion.h1
@@ -325,7 +325,7 @@ export function HeroSection() {
             WebkitTextFillColor: "transparent",
           }}
         >
-          CATCH AND<br />DELIVERY
+          Limbah Ikan,<br />Nilai Ekonomi Nyata
         </motion.h1>
 
         <motion.p
@@ -341,8 +341,7 @@ export function HeroSection() {
             lineHeight: 1.7,
           }}
         >
-          Bringing the freshest ocean catch straight to your table.<br />
-          Sustainably sourced, expertly handled, delivered daily.
+          Platform jual beli limbah ikan per potongan — tulang, kepala, sisik, dan jeroan ikan — langsung dari nelayan dan pengolah ikan Aceh. Harga transparan, pengiriman cepat, dan berkontribusi pada perikanan yang berkelanjutan.
         </motion.p>
 
         <motion.button
@@ -365,7 +364,7 @@ export function HeroSection() {
             boxShadow: "0 8px 30px rgba(255,255,255,0.25)",
           }}
         >
-          EARN WITH US
+          BELI LIMBAH IKAN
         </motion.button>
 
         {/* Scroll indicator */}
@@ -384,7 +383,7 @@ export function HeroSection() {
             letterSpacing: "2px",
           }}
         >
-          <span>SCROLL</span>
+          <span>GULIR</span>
           <div
             style={{
               width: 1,

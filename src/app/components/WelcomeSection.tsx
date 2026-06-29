@@ -1,33 +1,38 @@
 import { motion } from "motion/react";
-import { useRef } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
-const FISH_IMG = "https://images.unsplash.com/photo-1683405503746-0fcbc47daaa7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
-const LOBSTER_IMG = "https://images.unsplash.com/photo-1519351635902-7c60d09cb2ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
-const OCTOPUS_IMG = "https://images.unsplash.com/photo-1778439800463-3691caa978b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
-const PROMO_BG = "https://images.unsplash.com/photo-1651323018466-b36b7df1d2b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
+const FISH_BONE_IMG = "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
+const FISH_SCALE_IMG = "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
+const FISH_HEAD_IMG = "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
+const PROMO_BG = "https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
 
 const serviceCards = [
   {
-    title: "Fish",
-    icon: "🐟",
-    img: FISH_IMG,
-    description: "Line-caught daily. Silver-bright and ocean-fresh.",
+    title: "Tulang Ikan",
+    icon: "🦴",
+    img: FISH_BONE_IMG,
+    description: "Tulang ikan kering berkualitas tinggi, cocok untuk bahan pakan ternak dan pupuk organik.",
     color: "#0891b2",
+    harga: "Rp 8.000",
+    satuan: "/kg",
   },
   {
-    title: "Lobster",
-    icon: "🦞",
-    img: LOBSTER_IMG,
-    description: "Premium Atlantic lobster. Sweet, tender, legendary.",
+    title: "Sisik Ikan",
+    icon: "🐟",
+    img: FISH_SCALE_IMG,
+    description: "Sisik ikan segar pilihan, bermanfaat untuk industri kosmetik dan bahan kerajinan.",
     color: "#0E7C8E",
+    harga: "Rp 5.000",
+    satuan: "/kg",
   },
   {
-    title: "Octopus",
-    icon: "🐙",
-    img: OCTOPUS_IMG,
-    description: "Wild-caught deep-sea octopus. Silky and flavourful.",
+    title: "Kepala Ikan",
+    icon: "🎣",
+    img: FISH_HEAD_IMG,
+    description: "Kepala ikan sisa olahan, kaya nutrisi untuk bahan kaldu, pakan, dan pupuk cair.",
     color: "#048092",
+    harga: "Rp 12.000",
+    satuan: "/kg",
   },
 ];
 
@@ -37,6 +42,8 @@ function ServiceCard({
   img,
   description,
   color,
+  harga,
+  satuan,
   delay,
 }: {
   title: string;
@@ -44,6 +51,8 @@ function ServiceCard({
   img: string;
   description: string;
   color: string;
+  harga?: string;
+  satuan?: string;
   delay: number;
 }) {
   return (
@@ -65,7 +74,7 @@ function ServiceCard({
         minWidth: 0,
       }}
     >
-      {/* Circular image */}
+      {/* Gambar lingkaran */}
       <div
         style={{
           width: 110,
@@ -85,7 +94,7 @@ function ServiceCard({
         />
       </div>
 
-      {/* Icon badge */}
+      {/* Lencana ikon */}
       <div
         style={{
           width: 36,
@@ -128,11 +137,47 @@ function ServiceCard({
         {description}
       </p>
 
+      {/* Harga per kg */}
+      {harga && (
+        <div
+          style={{
+            marginTop: "12px",
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "center",
+            gap: "2px",
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 800,
+              fontSize: "20px",
+              color: color,
+              lineHeight: 1,
+            }}
+          >
+            {harga}
+          </span>
+          <span
+            style={{
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 500,
+              fontSize: "12px",
+              color: "#6b8a90",
+            }}
+          >
+            {satuan}
+          </span>
+        </div>
+      )}
+
+      {/* Tombol Beli */}
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
         style={{
-          marginTop: "20px",
+          marginTop: "14px",
           padding: "9px 24px",
           background: `linear-gradient(135deg, ${color}, #3CC8D8)`,
           border: "none",
@@ -145,7 +190,7 @@ function ServiceCard({
           cursor: "pointer",
         }}
       >
-        View More
+        Beli Sekarang
       </motion.button>
     </motion.div>
   );
@@ -167,7 +212,7 @@ export function WelcomeSection() {
           padding: "0 48px",
         }}
       >
-        {/* Section header */}
+        {/* Kepala seksi */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -186,7 +231,7 @@ export function WelcomeSection() {
               marginBottom: "10px",
             }}
           >
-            Welcome
+            Selamat Datang di LautAceh
           </p>
           <h2
             style={{
@@ -198,20 +243,37 @@ export function WelcomeSection() {
               letterSpacing: "-0.5px",
             }}
           >
-            SEAFOOD COMPANY
+            Jual Limbah Ikan
+            <br />
+            <span style={{ color: "#0891b2" }}>Per Potongan</span>
           </h2>
+          <p
+            style={{
+              fontFamily: "Poppins, sans-serif",
+              fontSize: "15px",
+              color: "#6b8a90",
+              marginTop: "14px",
+              maxWidth: "520px",
+              margin: "14px auto 0",
+              lineHeight: 1.7,
+            }}
+          >
+            Beli limbah ikan per potongan — tulang, sisik, dan kepala ikan — langsung
+            dari nelayan Aceh. Stok segar, harga per kg transparan, cocok untuk pakan ternak,
+            pupuk organik, dan industri kreatif.
+          </p>
           <div
             style={{
               width: 60,
               height: 4,
               background: "linear-gradient(90deg, #3CC8D8, #0891b2)",
               borderRadius: "2px",
-              margin: "16px auto 0",
+              margin: "20px auto 0",
             }}
           />
         </motion.div>
 
-        {/* Main grid: promo card + service cards */}
+        {/* Grid utama: kartu promo + kartu produk */}
         <div
           style={{
             display: "grid",
@@ -221,7 +283,7 @@ export function WelcomeSection() {
           }}
           className="welcome-grid"
         >
-          {/* Promo card */}
+          {/* Kartu promo */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -235,7 +297,7 @@ export function WelcomeSection() {
               cursor: "pointer",
             }}
           >
-            {/* Dark seafood background */}
+            {/* Latar belakang makanan laut */}
             <div
               style={{
                 position: "absolute",
@@ -244,7 +306,7 @@ export function WelcomeSection() {
             >
               <ImageWithFallback
                 src={PROMO_BG}
-                alt="Seafood platter"
+                alt="Limbah ikan segar"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
               <div
@@ -256,7 +318,7 @@ export function WelcomeSection() {
               />
             </div>
 
-            {/* Content overlay */}
+            {/* Overlay konten */}
             <div
               style={{
                 position: "relative",
@@ -290,7 +352,7 @@ export function WelcomeSection() {
                     textTransform: "uppercase",
                   }}
                 >
-                  Special Offer
+                  Penawaran Spesial
                 </span>
               </div>
 
@@ -304,7 +366,7 @@ export function WelcomeSection() {
                   marginBottom: "10px",
                 }}
               >
-                SEAFOOD BEST<br />FRESH FOOD
+                PAKET LIMBAH<br />HARGA TERBAIK
               </h3>
 
               <p
@@ -315,7 +377,7 @@ export function WelcomeSection() {
                   marginBottom: "6px",
                 }}
               >
-                Full combo only
+                Paket lengkap mulai dari
               </p>
 
               <div
@@ -329,23 +391,23 @@ export function WelcomeSection() {
                 <span
                   style={{
                     fontFamily: "Poppins, sans-serif",
-                    fontSize: "44px",
+                    fontSize: "28px",
                     fontWeight: 800,
                     color: "#3CC8D8",
                     lineHeight: 1,
                   }}
                 >
-                  99
+                  Rp 50.000
                 </span>
                 <span
                   style={{
                     fontFamily: "Poppins, sans-serif",
-                    fontSize: "18px",
+                    fontSize: "14px",
                     fontWeight: 600,
                     color: "#54D9E8",
                   }}
                 >
-                  $
+                  /kg
                 </span>
               </div>
 
@@ -367,12 +429,12 @@ export function WelcomeSection() {
                   boxShadow: "0 6px 20px rgba(34,197,94,0.4)",
                 }}
               >
-                SHOP NOW
+                BELI SEKARANG
               </motion.button>
             </div>
           </motion.div>
 
-          {/* Service cards */}
+          {/* Kartu produk */}
           <div
             style={{
               display: "flex",
@@ -385,7 +447,7 @@ export function WelcomeSection() {
           </div>
         </div>
 
-        {/* Stats row */}
+        {/* Baris statistik */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -399,10 +461,10 @@ export function WelcomeSection() {
           }}
         >
           {[
-            { num: "50+", label: "Species Available", icon: "🐠" },
-            { num: "2K+", label: "Happy Customers", icon: "😊" },
-            { num: "24h", label: "Fast Delivery", icon: "🚀" },
-            { num: "100%", label: "Fresh Guaranteed", icon: "✨" },
+            { num: "20+", label: "Jenis Limbah Tersedia", icon: "🐠" },
+            { num: "500+", label: "Pembeli Puas", icon: "😊" },
+            { num: "24 Jam", label: "Pengiriman Cepat", icon: "🚀" },
+            { num: "100%", label: "Limbah Halal & Higienis", icon: "✅" },
           ].map((stat) => (
             <div
               key={stat.label}
@@ -443,7 +505,7 @@ export function WelcomeSection() {
         </motion.div>
       </div>
 
-      {/* Responsive styles */}
+      {/* Gaya responsif */}
       <style>{`
         @media (max-width: 900px) {
           .welcome-grid {
