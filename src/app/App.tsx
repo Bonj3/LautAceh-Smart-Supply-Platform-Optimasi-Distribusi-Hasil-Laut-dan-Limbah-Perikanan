@@ -3,6 +3,7 @@ import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
 import { WelcomeSection } from "./components/WelcomeSection";
 import { AboutSection } from "./components/AboutSection";
+import { ProblemSection } from "./components/ProblemSection";
 
 function Footer() {
   return (
@@ -193,6 +194,7 @@ export default function App() {
     >
       <Navbar />
       <HeroSection />
+      <ProblemSection />
       <WelcomeSection />
       <AboutSection />
       <Footer />
