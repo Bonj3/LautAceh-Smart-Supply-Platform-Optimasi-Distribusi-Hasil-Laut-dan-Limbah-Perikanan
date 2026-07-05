@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
 
 const OCEAN_BG = "https://images.unsplash.com/photo-1530053969600-caed2596d242?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920";
 const LOBSTER_IMG = "https://images.unsplash.com/photo-1778327565155-89df3fb82f65?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";

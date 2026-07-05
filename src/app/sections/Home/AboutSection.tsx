@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ZoomIn, RotateCw } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
 
 const SHRIMP_PLATE = "https://images.unsplash.com/photo-1758972572427-fc3d4193bbd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
 
