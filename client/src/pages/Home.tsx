@@ -1,7 +1,7 @@
 import { Navbar } from "../components/Navbar";
 import { HeroSection } from "../sections/Home/HeroSection";
 import { WelcomeSection } from "../sections/Home/WelcomeSection";
-import { ProblemSection } from "../sections/Home/ProblemSection";
+import ProblemSection from "../sections/Home/ProblemSection";
 import { AboutSection } from "../sections/Home/AboutSection";
 
 function Footer() {

@@ -1,17 +1,21 @@
 import { motion } from "motion/react";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
+import sisikikanImg from "./sisik.jpg";
+import kepalaikanImg from "./kepalaikan.jpg";
+import tulangikanImg from "./tulangikan.jpg";
+import jeroanikan from "./jeroanikan.jpg"
 
 const OCEAN_BG = "https://images.unsplash.com/photo-1530053969600-caed2596d242?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920";
-const LOBSTER_IMG = "https://images.unsplash.com/photo-1778327565155-89df3fb82f65?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
-const CRAB_IMG = "https://images.unsplash.com/photo-1553659971-f01207815844?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
+const LOBSTER_IMG = kepalaikanImg;
+const TULANGIKAN_IMG = tulangikanImg;
 const FISH_IMG = "https://images.unsplash.com/photo-1683405503746-0fcbc47daaa7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
-const SHRIMP_IMG = "https://images.unsplash.com/photo-1758972572427-fc3d4193bbd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
+const SISIKIKAN_IMG = sisikikanImg;
 
 const counters = [
   { label: "Tulang Ikan", count: "+125 kg", icon: "🦴", top: "28%", left: "8%" },
   { label: "Kepala Ikan", count: "+205 kg", icon: "🐟", top: "20%", left: "20%" },
   { label: "Sisik Ikan", count: "+290 kg", icon: "🐡", top: "55%", right: "18%" },
-  { label: "Jeroan Ikan", count: "+195 kg", icon: "🎣", top: "25%", right: "8%" },
+  { label: "Ikan", count: "+195 kg", icon: "🎣", top: "25%", right: "8%" },
 ];
 
 const floatingSeafood = [
@@ -26,7 +30,7 @@ const floatingSeafood = [
     rotate: -8,
   },
   {
-    src: CRAB_IMG,
+    src: TULANGIKAN_IMG,
     alt: "Fresh crab",
     size: 140,
     bottom: "18%",
@@ -46,7 +50,7 @@ const floatingSeafood = [
     rotate: 6,
   },
   {
-    src: SHRIMP_IMG,
+    src: SISIKIKAN_IMG,
     alt: "Fresh shrimp",
     size: 130,
     bottom: "22%",
@@ -251,10 +255,10 @@ export function HeroSection() {
       ))}
 
       {/* Counter badges */}
-      <CounterBadge label="Tulang Ikan" count="+125 kg" icon="🦴" top="30%" left="6%" delay={0.5} />
-      <CounterBadge label="Kepala Ikan" count="+205 kg" icon="🐟" top="18%" left="22%" delay={0.8} />
+      <CounterBadge label="Tulang Ikan" count="+125 kg" icon="🦴" top="60%" left="17%" delay={0.5} />
+      <CounterBadge label="Kepala Ikan" count="+205 kg" icon="🐟" top="18%" left="15%" delay={0.8} />
       <CounterBadge label="Sisik Ikan" count="+290 kg" icon="🐡" top="58%" right="16%" delay={1.0} />
-      <CounterBadge label="Jeroan Ikan" count="+195 kg" icon="🎣" top="22%" right="6%" delay={0.6} />
+      <CounterBadge label="Ikan" count="+195 kg" icon="🎣" top="22%" right="15%" delay={0.6} />
 
       {/* Lemon decorations */}
       <LemonDecor style={{ top: "15%", left: "38%", opacity: 0.7, zIndex: 4 }} />
@@ -341,7 +345,7 @@ export function HeroSection() {
             lineHeight: 1.7,
           }}
         >
-          Platform jual beli limbah ikan per potongan — tulang, kepala, sisik, dan jeroan ikan — langsung dari nelayan dan pengolah ikan Aceh. Harga transparan, pengiriman cepat, dan berkontribusi pada perikanan yang berkelanjutan.
+          Platform jual beli limbah ikan per potongan tulang, kepala, sisik, dan jeroan ikan langsung dari nelayan dan pengolah ikan Aceh. Harga transparan, pengiriman cepat, dan berkontribusi pada perikanan yang berkelanjutan.
         </motion.p>
 
         <motion.button

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 
-const navLinks = ["Home", "About Us", "News", "FAQ", "Affiliate", "Contact Us"];
+const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Contact Us"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -57,7 +57,7 @@ export function Navbar() {
             fontFamily: "Poppins, sans-serif",
           }}
         >
-          OCEANIC
+          PasaiEungkot
         </span>
       </div>
 

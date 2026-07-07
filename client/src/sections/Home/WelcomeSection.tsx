@@ -1,9 +1,12 @@
 import { motion } from "motion/react";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
+import kepalaikan from "./kepalaikan.jpg"
+import sisik from "./sisik.jpg"
+import tulangikan from "./tulangikan.jpg"
 
-const FISH_BONE_IMG = "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
-const FISH_SCALE_IMG = "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
-const FISH_HEAD_IMG = "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
+const FISH_BONE_IMG = tulangikan;
+const FISH_SCALE_IMG = sisik;
+const FISH_HEAD_IMG = kepalaikan;
 const PROMO_BG = "https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
 
 const serviceCards = [
@@ -258,7 +261,7 @@ export function WelcomeSection() {
               lineHeight: 1.7,
             }}
           >
-            Beli limbah ikan per potongan — tulang, sisik, dan kepala ikan — langsung
+            Beli limbah ikan per potongan tulang, sisik, dan kepala ikan langsung
             dari nelayan Aceh. Stok segar, harga per kg transparan, cocok untuk pakan ternak,
             pupuk organik, dan industri kreatif.
           </p>
