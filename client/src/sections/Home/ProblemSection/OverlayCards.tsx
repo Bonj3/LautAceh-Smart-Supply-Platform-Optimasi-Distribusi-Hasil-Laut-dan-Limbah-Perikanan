@@ -26,10 +26,10 @@ export default function OverlayCards({ scrollYProgress }: Props) {
   const CardTemplate = ({ opacity, y, title, description }: any) => (
     <motion.div
       style={{ opacity, y }}
-      className="absolute top-[20%] right-[10%] w-[90%] max-w-[400px] pointer-events-none"
+      className="absolute top-[10%] sm:top-[15%] md:top-[20%] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[5%] lg:right-[10%] w-[90%] max-w-[400px] pointer-events-none z-50"
     >
-      <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-3xl shadow-2xl">
-        <h3 className="text-xl md:text-2xl font-bold text-white mb-4 tracking-tight">
+      <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 md:p-8 rounded-3xl shadow-2xl mx-auto md:mx-0">
+        <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4 tracking-tight">
           {title}
         </h3>
         <p className="text-slate-300 text-sm md:text-base leading-relaxed">
@@ -45,12 +45,12 @@ export default function OverlayCards({ scrollYProgress }: Props) {
       {/* Intro Scene 1 */}
       <motion.div
         style={{ opacity: introOpacity, y: introY }}
-        className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[90%] max-w-[600px] text-center"
+        className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[90%] max-w-[600px] text-center z-50"
       >
-        <h1 className="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-lg">
+        <h1 className="font-black text-white mb-4 md:mb-6 drop-shadow-lg tracking-tight" style={{ fontSize: 'clamp(2rem, 6vw, 3.75rem)', lineHeight: 1.1 }}>
           {STORY_DATA.intro.headline}
         </h1>
-        <p className="text-slate-200 text-lg md:text-xl leading-relaxed drop-shadow-md">
+        <p className="text-slate-200 text-base md:text-lg lg:text-xl leading-relaxed drop-shadow-md">
           {STORY_DATA.intro.supporting}
         </p>
       </motion.div>

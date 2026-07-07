@@ -160,7 +160,10 @@ export default function Scene6Hub({ scrollYProgress }: Props) {
         </div>
 
         {/* Headline */}
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight mb-3">
+        <h2 
+          className="font-extrabold text-white tracking-tight mb-3"
+          style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', lineHeight: 1.1 }}
+        >
           {STORY_DATA.outro.headline}
         </h2>
 
@@ -172,7 +175,7 @@ export default function Scene6Hub({ scrollYProgress }: Props) {
         </div>
 
         {/* Supporting Text */}
-        <p className="text-teal-100/70 max-w-lg text-sm leading-relaxed">
+        <p className="text-teal-100/70 max-w-lg text-xs md:text-sm leading-relaxed">
           {STORY_DATA.outro.supporting}
         </p>
       </motion.div>
@@ -190,7 +193,7 @@ export default function Scene6Hub({ scrollYProgress }: Props) {
           transform: "translate(-50%, -50%)",
         }}
       >
-        <div className="relative w-[400px] h-[400px]">
+        <div className="relative w-[400px] h-[400px] scale-[0.65] sm:scale-[0.8] md:scale-100 origin-center transition-transform duration-300">
           {/* ── SVG: Lingkaran Orbit + Garis ke Pusat ── */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none"

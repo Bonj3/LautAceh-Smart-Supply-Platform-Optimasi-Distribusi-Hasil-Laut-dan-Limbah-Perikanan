@@ -6,80 +6,26 @@ import { AboutSection } from "../sections/Home/AboutSection";
 
 function Footer() {
   return (
-    <footer
-      style={{
-        background: "#0d2b31",
-        color: "white",
-        padding: "60px 48px 32px",
-        fontFamily: "Poppins, sans-serif",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "2fr 1fr 1fr 1fr",
-          gap: "48px",
-          marginBottom: "48px",
-        }}
-        className="footer-grid"
-      >
-        <div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-            <div
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, #3CC8D8, #0891b2)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "18px",
-              }}
-            >
+    <footer className="bg-[#0d2b31] text-white px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 pb-8 font-sans w-full">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-12 mb-12">
+        <div className="lg:col-span-2">
+          <div className="flex items-center gap-2.5 mb-4">
+            <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-[0_4px_15px_rgba(60,200,216,0.3)]" style={{ background: "linear-gradient(135deg, #3CC8D8, #0891b2)" }}>
               🐚
             </div>
-            <span style={{ fontWeight: 800, fontSize: "18px", letterSpacing: "3px", color: "white" }}>
+            <span className="font-extrabold text-lg tracking-[3px] text-white">
               OCEANIC
             </span>
           </div>
-          <p
-            style={{
-              fontSize: "14px",
-              color: "rgba(255,255,255,0.5)",
-              lineHeight: 1.7,
-              fontWeight: 300,
-              maxWidth: 280,
-            }}
-          >
+          <p className="text-sm text-white/50 leading-[1.7] font-light max-w-[280px]">
             Bringing the finest ocean catch to your table since 2018. Freshness you can taste in every bite.
           </p>
 
-          <div style={{ display: "flex", gap: "10px", marginTop: "24px" }}>
+          <div className="flex gap-2.5 mt-6">
             {['📘', '📸', '🐦', '▶️'].map((icon) => (
               <button
                 key={icon}
-                style={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: "50%",
-                  background: "rgba(60,200,216,0.12)",
-                  border: "1px solid rgba(60,200,216,0.2)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  fontSize: "14px",
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(60,200,216,0.25)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(60,200,216,0.12)";
-                }}
+                className="w-9 h-9 rounded-full bg-[#3cc8d81f] border border-[#3cc8d833] flex items-center justify-center cursor-pointer text-sm transition-colors duration-200 hover:bg-[#3cc8d840]"
               >
                 {icon}
               </button>
@@ -102,36 +48,15 @@ function Footer() {
           },
         ].map((col) => (
           <div key={col.title}>
-            <h4
-              style={{
-                fontSize: "13px",
-                fontWeight: 700,
-                letterSpacing: "2px",
-                color: "#3CC8D8",
-                textTransform: "uppercase",
-                marginBottom: "20px",
-              }}
-            >
+            <h4 className="text-[13px] font-bold tracking-[2px] text-[#3CC8D8] uppercase mb-5">
               {col.title}
             </h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+            <ul className="list-none p-0 m-0 flex flex-col gap-2.5">
               {col.links.map((link) => (
                 <li key={link}>
                   <a
                     href="#"
-                    style={{
-                      color: "rgba(255,255,255,0.55)",
-                      textDecoration: "none",
-                      fontSize: "14px",
-                      fontWeight: 300,
-                      transition: "color 0.2s",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "#54D9E8";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "rgba(255,255,255,0.55)";
-                    }}
+                    className="text-white/55 no-underline text-sm font-light transition-colors duration-200 hover:text-[#54D9E8]"
                   >
                     {link}
                   </a>
@@ -142,39 +67,14 @@ function Footer() {
         ))}
       </div>
 
-      <div
-        style={{
-          borderTop: "1px solid rgba(255,255,255,0.08)",
-          paddingTop: "24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          maxWidth: 1200,
-          margin: "0 auto",
-          flexWrap: "wrap",
-          gap: "12px",
-        }}
-      >
-        <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", fontWeight: 300 }}>
+      <div className="w-full max-w-7xl mx-auto border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <p className="text-[13px] text-white/35 font-light">
           © 2026 Oceanic Seafood Co. All rights reserved.
         </p>
-        <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", fontWeight: 300 }}>
+        <p className="text-[13px] text-white/35 font-light">
           Privacy Policy · Terms of Service
         </p>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          .footer-grid {
-            grid-template-columns: 1fr 1fr !important;
-          }
-        }
-        @media (max-width: 500px) {
-          .footer-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </footer>
   );
 }
