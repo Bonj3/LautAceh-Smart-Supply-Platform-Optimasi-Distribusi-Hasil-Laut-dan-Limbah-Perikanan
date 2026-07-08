@@ -6,9 +6,16 @@ export default function Marketplace() {
   return (
     <>
       <Navbar />
-      <div style={{ paddingTop: "80px" }}>
-        <MarketplaceView />
-      </div>
+      <main
+  className="pt-20"
+  style={{
+    background: "#0b4553",
+    minHeight: "100vh",
+  }}
+>
+    <MarketplaceView />
+</main>
+      {/* </div> */}
       <Footer />
     </>
   );
