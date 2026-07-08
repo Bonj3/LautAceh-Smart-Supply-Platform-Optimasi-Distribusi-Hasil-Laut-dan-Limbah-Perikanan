@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 
-const navLinks = ["Home", "About Us", "News", "FAQ", "Affiliate", "Contact Us"];
+const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Contact Us"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -15,17 +15,13 @@ export function Navbar() {
 
   return (
     <nav
+      className="px-4 sm:px-6 md:px-8 lg:px-12 py-[18px] flex items-center justify-between transition-all duration-400 ease-in-out w-full"
       style={{
         position: "fixed",
         top: 0,
         left: 0,
         right: 0,
         zIndex: 1000,
-        padding: "18px 48px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        transition: "all 0.4s ease",
         background: scrolled ? "rgba(4, 70, 84, 0.92)" : "transparent",
         backdropFilter: scrolled ? "blur(16px)" : "none",
         boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.15)" : "none",
@@ -49,22 +45,15 @@ export function Navbar() {
           🐚
         </div>
         <span
-          style={{
-            color: "white",
-            fontWeight: 800,
-            fontSize: "18px",
-            letterSpacing: "3px",
-            fontFamily: "Poppins, sans-serif",
-          }}
+          className="text-white font-extrabold text-lg tracking-[3px] font-sans"
         >
-          OCEANIC
+          PasaiEungkot
         </span>
       </div>
 
       {/* Nav links - desktop */}
       <div
-        className="hidden md:flex"
-        style={{ gap: "36px", alignItems: "center" }}
+        className="hidden md:flex items-center gap-6 lg:gap-9"
       >
         {navLinks.map((link) => (
           <a
@@ -94,7 +83,7 @@ export function Navbar() {
       </div>
 
       {/* Actions */}
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
         <button
           style={{
             width: 38,

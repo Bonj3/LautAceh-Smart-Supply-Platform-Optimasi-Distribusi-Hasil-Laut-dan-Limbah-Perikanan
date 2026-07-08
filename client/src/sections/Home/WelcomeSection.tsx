@@ -1,9 +1,12 @@
 import { motion } from "motion/react";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
+import kepalaikan from "./kepalaikan.jpg"
+import sisik from "./sisik.jpg"
+import tulangikan from "./tulangikan.jpg"
 
-const FISH_BONE_IMG = "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
-const FISH_SCALE_IMG = "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
-const FISH_HEAD_IMG = "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600";
+const FISH_BONE_IMG = tulangikan;
+const FISH_SCALE_IMG = sisik;
+const FISH_HEAD_IMG = kepalaikan;
 const PROMO_BG = "https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
 
 const serviceCards = [
@@ -62,29 +65,14 @@ function ServiceCard({
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
       whileHover={{ y: -8, boxShadow: "0 24px 60px rgba(14,124,142,0.18)" }}
-      style={{
-        background: "white",
-        borderRadius: "24px",
-        padding: "32px 24px",
-        textAlign: "center",
-        boxShadow: "0 8px 32px rgba(0,0,0,0.06)",
-        transition: "box-shadow 0.3s",
-        cursor: "default",
-        flex: 1,
-        minWidth: 0,
-      }}
+      className="bg-white rounded-[24px] p-6 md:p-8 text-center flex-1 min-w-0 transition-shadow duration-300 cursor-default shadow-[0_8px_32px_rgba(0,0,0,0.06)]"
     >
       {/* Gambar lingkaran */}
       <div
+        className="w-[90px] h-[90px] md:w-[110px] md:h-[110px] rounded-full overflow-hidden mx-auto mb-4 md:mb-5 relative"
         style={{
-          width: 110,
-          height: 110,
-          borderRadius: "50%",
-          overflow: "hidden",
-          margin: "0 auto 20px",
           boxShadow: `0 12px 35px ${color}40`,
           border: `3px solid ${color}25`,
-          position: "relative",
         }}
       >
         <ImageWithFallback
@@ -96,77 +84,32 @@ function ServiceCard({
 
       {/* Lencana ikon */}
       <div
+        className="w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center -mt-8 md:-mt-9 mb-4 mx-auto text-base md:text-lg relative z-10"
         style={{
-          width: 36,
-          height: 36,
-          borderRadius: "50%",
           background: `linear-gradient(135deg, ${color}, #3CC8D8)`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "-18px auto 16px",
-          fontSize: "18px",
           boxShadow: `0 4px 14px ${color}55`,
-          position: "relative",
-          zIndex: 2,
         }}
       >
         {icon}
       </div>
 
-      <h3
-        style={{
-          fontFamily: "Poppins, sans-serif",
-          fontWeight: 700,
-          fontSize: "18px",
-          color: "#1a3a42",
-          marginBottom: "8px",
-        }}
-      >
+      <h3 className="font-sans font-bold text-base md:text-lg text-[#1a3a42] mb-2">
         {title}
       </h3>
-      <p
-        style={{
-          fontFamily: "Poppins, sans-serif",
-          fontSize: "13px",
-          color: "#6b8a90",
-          lineHeight: 1.6,
-          fontWeight: 400,
-        }}
-      >
+      <p className="font-sans text-xs md:text-[13px] text-[#6b8a90] leading-relaxed font-normal">
         {description}
       </p>
 
       {/* Harga per kg */}
       {harga && (
-        <div
-          style={{
-            marginTop: "12px",
-            display: "flex",
-            alignItems: "baseline",
-            justifyContent: "center",
-            gap: "2px",
-          }}
-        >
+        <div className="mt-3 flex items-baseline justify-center gap-1">
           <span
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 800,
-              fontSize: "20px",
-              color: color,
-              lineHeight: 1,
-            }}
+            className="font-sans font-extrabold text-lg md:text-xl leading-none"
+            style={{ color: color }}
           >
             {harga}
           </span>
-          <span
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 500,
-              fontSize: "12px",
-              color: "#6b8a90",
-            }}
-          >
+          <span className="font-sans font-medium text-[11px] md:text-xs text-[#6b8a90]">
             {satuan}
           </span>
         </div>
@@ -176,18 +119,9 @@ function ServiceCard({
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
+        className="mt-4 px-5 md:px-6 py-2 md:py-2.5 border-none rounded-full text-white font-sans font-semibold text-[11px] md:text-xs tracking-[0.5px] cursor-pointer"
         style={{
-          marginTop: "14px",
-          padding: "9px 24px",
           background: `linear-gradient(135deg, ${color}, #3CC8D8)`,
-          border: "none",
-          borderRadius: "20px",
-          color: "white",
-          fontFamily: "Poppins, sans-serif",
-          fontWeight: 600,
-          fontSize: "12px",
-          letterSpacing: "0.5px",
-          cursor: "pointer",
         }}
       >
         Beli Sekarang
@@ -200,213 +134,93 @@ export function WelcomeSection() {
   return (
     <section
       id="about-us"
-      style={{
-        background: "#f0fbfd",
-        padding: "80px 0 100px",
-      }}
+      className="bg-[#f0fbfd] py-16 sm:py-20 md:py-24 w-full"
     >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "0 48px",
-        }}
-      >
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Kepala seksi */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          style={{ textAlign: "center", marginBottom: "60px" }}
+          className="text-center mb-12 md:mb-16"
         >
-          <p
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "13px",
-              letterSpacing: "6px",
-              color: "#3CC8D8",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              marginBottom: "10px",
-            }}
-          >
+          <p className="font-sans text-[11px] md:text-[13px] tracking-[4px] md:tracking-[6px] text-[#3CC8D8] font-semibold uppercase mb-2 md:mb-3">
             Selamat Datang di LautAceh
           </p>
           <h2
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "clamp(32px, 4vw, 52px)",
-              fontWeight: 800,
-              color: "#1a3a42",
-              lineHeight: 1.15,
-              letterSpacing: "-0.5px",
-            }}
+            className="font-sans font-extrabold text-[#1a3a42] leading-[1.15] tracking-tight"
+            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
           >
             Jual Limbah Ikan
             <br />
             <span style={{ color: "#0891b2" }}>Per Potongan</span>
           </h2>
-          <p
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "15px",
-              color: "#6b8a90",
-              marginTop: "14px",
-              maxWidth: "520px",
-              margin: "14px auto 0",
-              lineHeight: 1.7,
-            }}
-          >
-            Beli limbah ikan per potongan — tulang, sisik, dan kepala ikan — langsung
+          <p className="font-sans text-sm md:text-[15px] text-[#6b8a90] mt-4 md:mt-5 max-w-[520px] mx-auto leading-relaxed">
+            Beli limbah ikan per potongan tulang, sisik, dan kepala ikan langsung
             dari nelayan Aceh. Stok segar, harga per kg transparan, cocok untuk pakan ternak,
             pupuk organik, dan industri kreatif.
           </p>
           <div
+            className="w-12 md:w-[60px] h-1 md:h-1.5 rounded-sm mx-auto mt-5 md:mt-6"
             style={{
-              width: 60,
-              height: 4,
               background: "linear-gradient(90deg, #3CC8D8, #0891b2)",
-              borderRadius: "2px",
-              margin: "20px auto 0",
             }}
           />
         </motion.div>
 
         {/* Grid utama: kartu promo + kartu produk */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "300px 1fr",
-            gap: "28px",
-            alignItems: "start",
-          }}
-          className="welcome-grid"
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] xl:grid-cols-[340px_1fr] gap-6 md:gap-7 items-stretch">
           {/* Kartu promo */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            style={{
-              borderRadius: "28px",
-              overflow: "hidden",
-              position: "relative",
-              minHeight: 360,
-              cursor: "pointer",
-            }}
+            className="rounded-[28px] overflow-hidden relative min-h-[320px] md:min-h-[360px] cursor-pointer"
           >
             {/* Latar belakang makanan laut */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-              }}
-            >
+            <div className="absolute inset-0">
               <ImageWithFallback
                 src={PROMO_BG}
                 alt="Limbah ikan segar"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
               <div
+                className="absolute inset-0"
                 style={{
-                  position: "absolute",
-                  inset: 0,
                   background: "linear-gradient(to top, rgba(2,28,34,0.92) 40%, rgba(5,60,72,0.65) 100%)",
                 }}
               />
             </div>
 
             {/* Overlay konten */}
-            <div
-              style={{
-                position: "relative",
-                zIndex: 2,
-                padding: "36px 28px",
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                minHeight: 360,
-              }}
-            >
+            <div className="relative z-10 p-7 md:p-9 h-full flex flex-col justify-end min-h-[320px] md:min-h-[360px]">
               <div
+                className="inline-block rounded-[20px] px-3 py-1 md:px-4 md:py-1.5 mb-3 md:mb-4 w-fit"
                 style={{
-                  display: "inline-block",
                   background: "rgba(60,200,216,0.2)",
                   border: "1px solid rgba(60,200,216,0.4)",
-                  borderRadius: "20px",
-                  padding: "4px 14px",
-                  marginBottom: "16px",
-                  width: "fit-content",
                 }}
               >
-                <span
-                  style={{
-                    color: "#54D9E8",
-                    fontFamily: "Poppins, sans-serif",
-                    fontSize: "11px",
-                    fontWeight: 600,
-                    letterSpacing: "2px",
-                    textTransform: "uppercase",
-                  }}
-                >
+                <span className="text-[#54D9E8] font-sans text-[10px] md:text-[11px] font-semibold tracking-[2px] uppercase">
                   Penawaran Spesial
                 </span>
               </div>
 
-              <h3
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 800,
-                  fontSize: "22px",
-                  color: "white",
-                  lineHeight: 1.2,
-                  marginBottom: "10px",
-                }}
-              >
+              <h3 className="font-sans font-extrabold text-[20px] md:text-[22px] text-white leading-[1.2] mb-2 md:mb-3">
                 PAKET LIMBAH<br />HARGA TERBAIK
               </h3>
 
-              <p
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "13px",
-                  color: "rgba(255,255,255,0.7)",
-                  marginBottom: "6px",
-                }}
-              >
+              <p className="font-sans text-xs md:text-[13px] text-white/70 mb-1.5">
                 Paket lengkap mulai dari
               </p>
 
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  gap: "4px",
-                  marginBottom: "24px",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    fontSize: "28px",
-                    fontWeight: 800,
-                    color: "#3CC8D8",
-                    lineHeight: 1,
-                  }}
-                >
+              <div className="flex items-baseline gap-1.5 mb-5 md:mb-6">
+                <span className="font-sans text-[24px] md:text-[28px] font-extrabold text-[#3CC8D8] leading-none">
                   Rp 50.000
                 </span>
-                <span
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    fontSize: "14px",
-                    fontWeight: 600,
-                    color: "#54D9E8",
-                  }}
-                >
+                <span className="font-sans text-xs md:text-sm font-semibold text-[#54D9E8]">
                   /kg
                 </span>
               </div>
@@ -414,19 +228,9 @@ export function WelcomeSection() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="px-6 py-2.5 md:px-8 md:py-3 border-none rounded-full text-white font-sans font-bold text-xs md:text-[13px] tracking-[1.5px] cursor-pointer w-fit shadow-[0_6px_20px_rgba(34,197,94,0.4)]"
                 style={{
-                  padding: "12px 32px",
                   background: "linear-gradient(135deg, #22c55e, #16a34a)",
-                  border: "none",
-                  borderRadius: "24px",
-                  color: "white",
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "13px",
-                  letterSpacing: "1.5px",
-                  cursor: "pointer",
-                  width: "fit-content",
-                  boxShadow: "0 6px 20px rgba(34,197,94,0.4)",
                 }}
               >
                 BELI SEKARANG
@@ -435,12 +239,7 @@ export function WelcomeSection() {
           </motion.div>
 
           {/* Kartu produk */}
-          <div
-            style={{
-              display: "flex",
-              gap: "20px",
-            }}
-          >
+          <div className="flex flex-col sm:flex-row gap-5">
             {serviceCards.map((card, i) => (
               <ServiceCard key={card.title} {...card} delay={i * 0.15 + 0.2} />
             ))}
@@ -453,12 +252,7 @@ export function WelcomeSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "16px",
-            marginTop: "60px",
-          }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12 md:mt-16"
         >
           {[
             { num: "20+", label: "Jenis Limbah Tersedia", icon: "🐠" },
@@ -468,56 +262,19 @@ export function WelcomeSection() {
           ].map((stat) => (
             <div
               key={stat.label}
-              style={{
-                background: "white",
-                borderRadius: "20px",
-                padding: "28px 20px",
-                textAlign: "center",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-              }}
+              className="bg-white rounded-[20px] p-5 md:p-7 text-center shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
             >
-              <div style={{ fontSize: "30px", marginBottom: "8px" }}>{stat.icon}</div>
-              <div
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 800,
-                  fontSize: "28px",
-                  color: "#0891b2",
-                  lineHeight: 1.1,
-                }}
-              >
+              <div className="text-[26px] md:text-[30px] mb-2">{stat.icon}</div>
+              <div className="font-sans font-extrabold text-[24px] md:text-[28px] text-[#0891b2] leading-[1.1]">
                 {stat.num}
               </div>
-              <div
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "12px",
-                  color: "#6b8a90",
-                  fontWeight: 500,
-                  marginTop: "4px",
-                  letterSpacing: "0.3px",
-                }}
-              >
+              <div className="font-sans text-[11px] md:text-[12px] text-[#6b8a90] font-medium mt-1 tracking-[0.3px]">
                 {stat.label}
               </div>
             </div>
           ))}
         </motion.div>
       </div>
-
-      {/* Gaya responsif */}
-      <style>{`
-        @media (max-width: 900px) {
-          .welcome-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-        @media (max-width: 640px) {
-          .welcome-grid > div:last-child {
-            flex-direction: column !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

@@ -8,26 +8,14 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      style={{
-        background: "#1a3d45",
-        position: "relative",
-        overflow: "hidden",
-      }}
+      className="bg-[#1a3d45] relative overflow-hidden w-full"
     >
       {/* Brush-stroke top edge */}
-      <div
-        style={{
-          position: "absolute",
-          top: -2,
-          left: 0,
-          right: 0,
-          zIndex: 5,
-        }}
-      >
+      <div className="absolute -top-0.5 left-0 right-0 z-10">
         <svg
           viewBox="0 0 1440 80"
           preserveAspectRatio="none"
-          style={{ display: "block", width: "100%" }}
+          className="block w-full h-[40px] sm:h-[80px]"
         >
           <path
             d="M0,80 C80,35 160,65 280,38 C400,12 500,70 640,44 C780,18 900,72 1040,35 C1160,8 1300,60 1380,30 C1420,18 1440,40 1440,40 L1440,0 L0,0 Z"
@@ -42,28 +30,13 @@ export function AboutSection() {
 
       {/* Background texture */}
       <div
+        className="absolute inset-0 z-0"
         style={{
-          position: "absolute",
-          inset: 0,
           backgroundImage: `radial-gradient(circle at 20% 50%, rgba(60,200,216,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(8,145,178,0.1) 0%, transparent 50%)`,
-          zIndex: 0,
         }}
       />
 
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "120px 48px 100px",
-          position: "relative",
-          zIndex: 2,
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "80px",
-          alignItems: "center",
-        }}
-        className="about-grid"
-      >
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 relative z-[2] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         {/* Left content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -76,15 +49,7 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "12px",
-              letterSpacing: "5px",
-              color: "#3CC8D8",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              marginBottom: "12px",
-            }}
+            className="font-sans text-[11px] md:text-[12px] tracking-[4px] md:tracking-[5px] text-[#3CC8D8] font-semibold uppercase mb-3"
           >
             About
           </motion.p>
@@ -94,26 +59,16 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "clamp(36px, 4vw, 56px)",
-              fontWeight: 900,
-              color: "white",
-              lineHeight: 1.1,
-              letterSpacing: "-0.5px",
-              marginBottom: "28px",
-            }}
+            className="font-sans font-black text-white leading-[1.1] tracking-[-0.5px] mb-6 md:mb-7"
+            style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
           >
             ABOUT US
           </motion.h2>
 
           <div
+            className="w-10 md:w-[50px] h-1 rounded-sm mb-6 md:mb-7"
             style={{
-              width: 50,
-              height: 4,
               background: "linear-gradient(90deg, #3CC8D8, #54D9E8)",
-              borderRadius: "2px",
-              marginBottom: "28px",
             }}
           />
 
@@ -122,14 +77,7 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "15px",
-              color: "rgba(255,255,255,0.7)",
-              lineHeight: 1.8,
-              fontWeight: 300,
-              marginBottom: "16px",
-            }}
+            className="font-sans text-sm md:text-[15px] text-white/70 leading-[1.8] font-light mb-4"
           >
             We are passionate about bringing the ocean's finest treasures to your plate.
             Founded by a team of seafood enthusiasts, we source only the highest-quality
@@ -141,14 +89,7 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "15px",
-              color: "rgba(255,255,255,0.7)",
-              lineHeight: 1.8,
-              fontWeight: 300,
-              marginBottom: "36px",
-            }}
+            className="font-sans text-sm md:text-[15px] text-white/70 leading-[1.8] font-light mb-8 md:mb-9"
           >
             Every piece is handled with care from boat to table — maintaining the
             natural freshness, flavour, and nutritional value your family deserves.
@@ -160,26 +101,14 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}
+            className="flex flex-wrap gap-3 sm:gap-4"
           >
             {["SHRIMPY", "BIG CLAM MUSH"].map((label) => (
               <motion.button
                 key={label}
                 whileHover={{ scale: 1.05, background: "#3CC8D8", color: "white" }}
                 whileTap={{ scale: 0.97 }}
-                style={{
-                  padding: "12px 28px",
-                  background: "transparent",
-                  border: "2px solid rgba(60,200,216,0.6)",
-                  borderRadius: "30px",
-                  color: "#54D9E8",
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "12px",
-                  letterSpacing: "2.5px",
-                  cursor: "pointer",
-                  transition: "all 0.25s",
-                }}
+                className="px-6 py-2.5 sm:px-7 sm:py-3 bg-transparent border-2 border-[#3cc8d899] rounded-full text-[#54D9E8] font-sans font-bold text-[11px] sm:text-[12px] tracking-[2px] sm:tracking-[2.5px] cursor-pointer transition-colors duration-250"
               >
                 {label}
               </motion.button>
@@ -192,38 +121,18 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            style={{ marginTop: "48px", display: "flex", flexDirection: "column", gap: "14px" }}
+            className="mt-10 md:mt-12 flex flex-col gap-3.5"
           >
             {[
               { icon: "🌊", text: "Sustainably sourced from certified fisheries" },
               { icon: "❄️", text: "Flash-frozen within hours of the catch" },
               { icon: "🚢", text: "Direct from dock to your doorstep" },
             ].map((item) => (
-              <div key={item.text} style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                <div
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: "50%",
-                    background: "rgba(60,200,216,0.15)",
-                    border: "1px solid rgba(60,200,216,0.3)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "18px",
-                    flexShrink: 0,
-                  }}
-                >
+              <div key={item.text} className="flex items-center gap-3.5">
+                <div className="w-9 h-9 md:w-[38px] md:h-[38px] rounded-full bg-[#3cc8d826] border border-[#3cc8d84d] flex items-center justify-center text-base md:text-lg shrink-0">
                   {item.icon}
                 </div>
-                <p
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    fontSize: "14px",
-                    color: "rgba(255,255,255,0.7)",
-                    fontWeight: 400,
-                  }}
-                >
+                <p className="font-sans text-xs md:text-[14px] text-white/70 font-normal">
                   {item.text}
                 </p>
               </div>
@@ -237,21 +146,13 @@ export function AboutSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          style={{ position: "relative", display: "flex", justifyContent: "center" }}
+          className="relative flex justify-center items-center py-10"
         >
           {/* Main plate */}
           <motion.div
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            style={{
-              width: 420,
-              height: 420,
-              borderRadius: "50%",
-              overflow: "hidden",
-              boxShadow: "0 40px 80px rgba(0,0,0,0.5), 0 0 60px rgba(60,200,216,0.2)",
-              border: "6px solid rgba(255,255,255,0.12)",
-              position: "relative",
-            }}
+            className="w-full max-w-[280px] sm:max-w-[340px] md:max-w-[420px] aspect-square rounded-full overflow-hidden relative border-4 md:border-[6px] border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.4),0_0_50px_rgba(60,200,216,0.15)] md:shadow-[0_40px_80px_rgba(0,0,0,0.5),0_0_60px_rgba(60,200,216,0.2)]"
           >
             <ImageWithFallback
               src={SHRIMP_PLATE}
@@ -259,42 +160,21 @@ export function AboutSection() {
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
             {/* Inner glow */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                borderRadius: "50%",
-                boxShadow: "inset 0 0 40px rgba(60,200,216,0.1)",
-              }}
-            />
+            <div className="absolute inset-0 rounded-full shadow-[inset_0_0_30px_rgba(60,200,216,0.1)] md:shadow-[inset_0_0_40px_rgba(60,200,216,0.1)]" />
           </motion.div>
 
           {/* Decorative green leaves */}
           <motion.div
             animate={{ rotate: [-5, 5, -5] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{
-              position: "absolute",
-              top: "5%",
-              right: "2%",
-              fontSize: "50px",
-              filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.3))",
-              userSelect: "none",
-            }}
+            className="hidden md:block absolute top-[5%] right-[2%] text-[40px] lg:text-[50px] select-none drop-shadow-md"
           >
             🌿
           </motion.div>
           <motion.div
             animate={{ rotate: [5, -5, 5] }}
             transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            style={{
-              position: "absolute",
-              bottom: "8%",
-              left: "2%",
-              fontSize: "45px",
-              filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.3))",
-              userSelect: "none",
-            }}
+            className="hidden md:block absolute bottom-[8%] left-[2%] text-[36px] lg:text-[45px] select-none drop-shadow-md"
           >
             🌱
           </motion.div>
@@ -309,19 +189,17 @@ export function AboutSection() {
           ].map((pepper, i) => (
             <motion.div
               key={i}
+              className="hidden md:block absolute rounded-full shadow-md"
               animate={{ y: [0, -5, 0], opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 2.5 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: pepper.delay }}
               style={{
-                position: "absolute",
                 top: pepper.top,
-                left: (pepper as any).left,
-                right: (pepper as any).right,
+                left: pepper.left,
+                right: pepper.right,
                 bottom: pepper.bottom,
                 width: pepper.size,
                 height: pepper.size,
-                borderRadius: "50%",
                 background: "radial-gradient(circle, #b91c1c, #7f1d1d)",
-                boxShadow: "0 2px 6px rgba(0,0,0,0.4)",
               }}
             />
           ))}
@@ -333,24 +211,9 @@ export function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.8 }}
             whileHover={{ scale: 1.15 }}
-            style={{
-              position: "absolute",
-              top: "10%",
-              left: "5%",
-              width: 48,
-              height: 48,
-              borderRadius: "50%",
-              background: "rgba(255,255,255,0.15)",
-              backdropFilter: "blur(8px)",
-              border: "1px solid rgba(255,255,255,0.3)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              boxShadow: "0 8px 24px rgba(0,0,0,0.25)",
-            }}
+            className="absolute top-[5%] md:top-[10%] left-[10%] md:left-[5%] w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center cursor-pointer shadow-[0_8px_20px_rgba(0,0,0,0.2)] md:shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
           >
-            <ZoomIn size={20} color="white" />
+            <ZoomIn size={18} color="white" className="md:w-5 md:h-5" />
           </motion.div>
 
           <motion.div
@@ -359,36 +222,19 @@ export function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 1.0 }}
             whileHover={{ scale: 1.15, rotate: 180 }}
+            className="absolute bottom-[10%] md:bottom-[15%] right-[10%] md:right-[5%] w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center cursor-pointer shadow-[0_8px_20px_rgba(60,200,216,0.4)] md:shadow-[0_8px_24px_rgba(60,200,216,0.5)]"
             style={{
-              position: "absolute",
-              bottom: "15%",
-              right: "5%",
-              width: 48,
-              height: 48,
-              borderRadius: "50%",
               background: "linear-gradient(135deg, #3CC8D8, #0891b2)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              boxShadow: "0 8px 24px rgba(60,200,216,0.5)",
             }}
           >
-            <RotateCw size={20} color="white" />
+            <RotateCw size={18} color="white" className="md:w-5 md:h-5" />
           </motion.div>
 
           {/* Floating lemon near plate */}
           <motion.div
             animate={{ y: [0, -8, 0], rotate: [0, 15, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            style={{
-              position: "absolute",
-              top: "38%",
-              left: "2%",
-              fontSize: "32px",
-              filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.4))",
-              userSelect: "none",
-            }}
+            className="hidden md:block absolute top-[38%] left-[2%] text-[28px] lg:text-[32px] select-none drop-shadow-md"
           >
             🍋
           </motion.div>
@@ -401,60 +247,24 @@ export function AboutSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
-        style={{
-          borderTop: "1px solid rgba(60,200,216,0.12)",
-          padding: "48px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          maxWidth: 1200,
-          margin: "0 auto",
-          flexWrap: "wrap",
-          gap: "24px",
-          position: "relative",
-          zIndex: 2,
-        }}
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 border-t border-[#3cc8d81f] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative z-[2] text-center md:text-left"
       >
         <div>
-          <p
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "22px",
-              fontWeight: 700,
-              color: "white",
-              marginBottom: "6px",
-            }}
-          >
+          <p className="font-sans text-xl md:text-[22px] font-bold text-white mb-1.5 md:mb-2">
             Ready to taste the ocean?
           </p>
-          <p
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "14px",
-              color: "rgba(255,255,255,0.55)",
-              fontWeight: 300,
-            }}
-          >
+          <p className="font-sans text-xs md:text-[14px] text-white/55 font-light">
             Order now and get free delivery on your first purchase.
           </p>
         </div>
 
-        <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-center w-full md:w-auto">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
+            className="w-full sm:w-auto px-8 py-3 md:px-9 md:py-3.5 border-none rounded-full text-white font-sans font-bold text-xs md:text-[13px] tracking-[1.5px] cursor-pointer shadow-[0_8px_25px_rgba(60,200,216,0.3)] md:shadow-[0_8px_30px_rgba(60,200,216,0.35)]"
             style={{
-              padding: "14px 36px",
               background: "linear-gradient(135deg, #3CC8D8, #0891b2)",
-              border: "none",
-              borderRadius: "30px",
-              color: "white",
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 700,
-              fontSize: "13px",
-              letterSpacing: "1.5px",
-              cursor: "pointer",
-              boxShadow: "0 8px 30px rgba(60,200,216,0.35)",
             }}
           >
             ORDER NOW
@@ -462,32 +272,12 @@ export function AboutSection() {
 
           <motion.button
             whileHover={{ scale: 1.05 }}
-            style={{
-              padding: "14px 36px",
-              background: "transparent",
-              border: "2px solid rgba(60,200,216,0.45)",
-              borderRadius: "30px",
-              color: "#54D9E8",
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 600,
-              fontSize: "13px",
-              letterSpacing: "1px",
-              cursor: "pointer",
-              transition: "all 0.2s",
-            }}
+            className="w-full sm:w-auto px-8 py-3 md:px-9 md:py-3.5 bg-transparent border-2 border-[#3cc8d873] rounded-full text-[#54D9E8] font-sans font-semibold text-xs md:text-[13px] tracking-[1px] cursor-pointer transition-colors"
           >
             LEARN MORE
           </motion.button>
         </div>
       </motion.div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          .about-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }
