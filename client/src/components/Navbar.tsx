@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
+import { routes } from "../routes";
 
 const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Contact Us"];
 
@@ -55,31 +57,54 @@ export function Navbar() {
       <div
         className="hidden md:flex items-center gap-6 lg:gap-9"
       >
-        {navLinks.map((link) => (
-          <a
-            key={link}
-            href={`#${link.toLowerCase().replace(/\s+/g, "-")}`}
-            style={{
-              color: "rgba(255,255,255,0.88)",
-              textDecoration: "none",
-              fontSize: "13px",
-              fontWeight: 500,
-              letterSpacing: "0.5px",
-              fontFamily: "Poppins, sans-serif",
-              transition: "color 0.2s, opacity 0.2s",
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = "#3CC8D8";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = "rgba(255,255,255,0.88)";
-            }}
-          >
-            {link}
-          </a>
-        ))}
+        {navLinks.map((link) => {
+          const isMarketplace = link === "Marketplace";
+          const linkStyle = {
+            color: "rgba(255,255,255,0.88)",
+            textDecoration: "none",
+            fontSize: "13px",
+            fontWeight: 500,
+            letterSpacing: "0.5px",
+            fontFamily: "Poppins, sans-serif",
+            transition: "color 0.2s, opacity 0.2s",
+            cursor: "pointer",
+            whiteSpace: "nowrap" as const,
+          };
+
+          if (isMarketplace) {
+            return (
+              <Link
+                key={link}
+                to={routes.marketplace}
+                style={linkStyle}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#3CC8D8";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "rgba(255,255,255,0.88)";
+                }}
+              >
+                {link}
+              </Link>
+            );
+          }
+
+          return (
+            <a
+              key={link}
+              href={`#${link.toLowerCase().replace(/\s+/g, "-")}`}
+              style={linkStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "#3CC8D8";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "rgba(255,255,255,0.88)";
+              }}
+            >
+              {link}
+            </a>
+          );
+        })}
       </div>
 
       {/* Actions */}
