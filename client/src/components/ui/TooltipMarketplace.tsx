@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect, useRef } from "react";
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 
 function IconQuestionCircle({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -23,7 +23,7 @@ function IconQuestionCircle({ className, style }: { className?: string; style?: 
   );
 }
 
-export function TooltipMarketplace() {
+export function TooltipMarketplace({ type = "industri" }: { type?: "fresh" | "industri" }) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLSpanElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -65,9 +65,9 @@ export function TooltipMarketplace() {
         <span
           ref={triggerRef}
           onClick={handleTriggerClick}
-          style={{ display: "inline-flex", cursor: "pointer", marginLeft: "6px", verticalAlign: "middle" }}
+          style={{ display: "inline-flex", cursor: "pointer", marginLeft: "8px", verticalAlign: "middle" }}
         >
-          <IconQuestionCircle style={{ width: "16px", height: "16px", color: open ? "#ffffff" : "rgba(180,220,230,0.6)", transition: "color 0.2s" }} />
+          <IconQuestionCircle style={{ width: "20px", height: "20px", color: open ? "#ffffff" : "#5de8d4", transition: "color 0.2s" }} />
         </span>
       </HoverCardPrimitive.Trigger>
       <HoverCardPrimitive.Portal>
@@ -79,32 +79,36 @@ export function TooltipMarketplace() {
           avoidCollisions={true}
           collisionPadding={16}
           className="tooltip-card-container"
+          style={{ zIndex: 9999 }}
         >
           {/* Image Section */}
           <div className="tooltip-card-img-wrap">
             <ImageWithFallback
-              src="https://images.unsplash.com/photo-1579631542720-3a87824fff86?w=600&q=80"
-              alt="Bahan Baku Industri"
+              src={
+                type === "fresh"
+                  ? "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80"
+                  : "https://images.unsplash.com/photo-1579631542720-3a87824fff86?w=600&q=80"
+              }
+              alt={type === "fresh" ? "Ikan Fresh" : "Bahan Baku Industri"}
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>
-          
+
           {/* Content Section */}
           <div className="tooltip-card-body">
             <h3 className="tooltip-card-title">
-              Apa itu Bahan Baku Industri?
+              {type === "fresh" ? "Apa itu Ikan Fresh?" : "Apa itu Bahan Baku Industri?"}
             </h3>
             <p className="tooltip-card-desc">
-              Bahan baku industri adalah limbah atau hasil samping ikan yang
-              masih memiliki nilai guna. Produk-produk ini dapat diolah kembali
-              oleh pelaku usaha menjadi berbagai produk, seperti pupuk
-              organik, pakan ternak, tepung ikan, dan kebutuhan industri lainnya.
+              {type === "fresh"
+                ? "Ikan segar berkualitas tinggi langsung dari tangkapan nelayan Aceh. Cocok untuk hidangan keluarga maupun bisnis kuliner yang mengutamakan kesegaran dan cita rasa laut terbaik."
+                : "Bahan baku industri adalah limbah atau hasil samping ikan yang masih memiliki nilai guna. Produk-produk ini dapat diolah kembali oleh pelaku usaha menjadi berbagai produk, seperti pupuk organik, pakan ternak, tepung ikan, dan kebutuhan industri lainnya."}
             </p>
-            
+
             {/* Footer Row */}
             <div className="tooltip-card-footer">
               <span className="tooltip-card-badge">
-                KATEGORI MARKETPLACE #3
+                {type === "fresh" ? "KATEGORI MARKETPLACE #1" : "KATEGORI MARKETPLACE #2"}
               </span>
               <a
                 href="#"

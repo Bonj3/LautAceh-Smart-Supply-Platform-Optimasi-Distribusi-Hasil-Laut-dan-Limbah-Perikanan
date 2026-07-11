@@ -4,4 +4,6 @@ export const routes = {
   dashboard: '/dashboard',
   education: '/education',
   contact: '/contact',
+  portal: '/portal',
+  category: '/category',
 };

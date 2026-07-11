@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
 import sisikikanImg from "./sisik.jpg";
 import kepalaikanImg from "./kepalaikan.jpg";
@@ -169,6 +170,8 @@ function LemonDecor({ style }: { style: React.CSSProperties }) {
 }
 
 export function HeroSection() {
+  const navigate = useNavigate();
+
   return (
     <section
       id="home"
@@ -282,9 +285,10 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 1.1 }}
           whileHover={{ scale: 1.07, boxShadow: "0 12px 40px rgba(255,255,255,0.35)" }}
           whileTap={{ scale: 0.97 }}
+          onClick={() => navigate('/portal')}
           className="px-8 py-3 sm:px-12 sm:py-4 bg-white rounded-full text-[#0E7C8E] font-sans font-bold text-xs sm:text-sm tracking-[2px] sm:tracking-[2.5px] cursor-pointer shadow-[0_8px_30px_rgba(255,255,255,0.25)] transition-shadow"
         >
-          BELI LIMBAH IKAN
+          BELI IKAN
         </motion.button>
 
         {/* Scroll indicator */}

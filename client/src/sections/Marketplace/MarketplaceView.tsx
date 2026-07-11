@@ -1,30 +1,132 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { TooltipMarketplace } from "@/components/TooltipMarketplace";
+import { TooltipMarketplace } from "@/components/ui/TooltipMarketplace";
+import { useSearchParams } from "react-router-dom";
 
 /* ──────────────────────────────────────────────
    DATA LAYER – Typed product catalogues
    ────────────────────────────────────────────── */
 
-interface ProdukSegar {
+interface ProdukFresh {
   id: number;
   nama: string;
   harga: string;
   satuan: string;
+  minimalPembelian: string;
   gambar: string;
   kategori: string;
+  tag: string;
+  terjual: string;
+  diskon: string;
 }
 
-interface ProdukGrosir {
-  id: number;
-  nama: string;
-  harga: string;
-  satuan: string;
-  minimum: string;
-  gambar: string;
-  kategori: string;
-}
+const dataFresh: ProdukFresh[] = [
+  {
+    id: 1,
+    nama: "Fillet Tuna Super Premium",
+    harga: "Rp 125.000",
+    satuan: "Kg",
+    minimalPembelian: "Min. 250 gram",
+    gambar:
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80",
+    kategori: "Tuna Sirip Kuning",
+    tag: "Grosir",
+    terjual: "10RB+ terjual",
+    diskon: "-20%",
+  },
+  {
+    id: 2,
+    nama: "Ikan Kembung Banjar Segar",
+    harga: "Rp 45.000",
+    satuan: "Kg",
+    minimalPembelian: "Min. 250 gram",
+    gambar:
+      "https://images.unsplash.com/photo-1498654200943-1088dd4438ae?w=600&q=80",
+    kategori: "Kembung",
+    tag: "Pusat",
+    terjual: "10RB+ terjual",
+    diskon: "-20%",
+  },
+  {
+    id: 3,
+    nama: "Kakap Merah Utuh (800g+)",
+    harga: "Rp 88.000",
+    satuan: "Kg",
+    minimalPembelian: "Min. 250 gram",
+    gambar:
+      "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80",
+    kategori: "Kakap Merah",
+    tag: "Grosir",
+    terjual: "10RB+ terjual",
+    diskon: "-20%",
+  },
+  {
+    id: 4,
+    nama: "Udang Vaname Jumbo",
+    harga: "Rp 110.000",
+    satuan: "Kg",
+    minimalPembelian: "Min. 250 gram",
+    gambar:
+      "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=600&q=80",
+    kategori: "Udang",
+    tag: "Pusat",
+    terjual: "10RB+ terjual",
+    diskon: "-20%",
+  },
+  {
+    id: 5,
+    nama: "Ikan Tongkol Segar",
+    harga: "Rp 35.000",
+    satuan: "Kg",
+    minimalPembelian: "Min. 250 gram",
+    gambar:
+      "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=600&q=80",
+    kategori: "Tongkol",
+    tag: "Grosir",
+    terjual: "10RB+ terjual",
+    diskon: "-20%",
+  },
+  {
+    id: 6,
+    nama: "Cumi-Cumi Segar Pilihan",
+    harga: "Rp 75.000",
+    satuan: "Kg",
+    minimalPembelian: "Min. 250 gram",
+    gambar:
+      "https://images.unsplash.com/photo-1579631542720-3a87824fff86?w=600&q=80",
+    kategori: "Cumi-Cumi",
+    tag: "Pusat",
+    terjual: "10RB+ terjual",
+    diskon: "-20%",
+  },
+  {
+    id: 7,
+    nama: "Ikan Cakalang Utuh",
+    harga: "Rp 28.000",
+    satuan: "Kg",
+    minimalPembelian: "Min. 250 gram",
+    gambar:
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80",
+    kategori: "Cakalang",
+    tag: "Grosir",
+    terjual: "10RB+ terjual",
+    diskon: "-20%",
+  },
+  {
+    id: 8,
+    nama: "Ikan Tenggiri Potong",
+    harga: "Rp 65.000",
+    satuan: "Kg",
+    minimalPembelian: "Min. 250 gram",
+    gambar:
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80",
+    kategori: "Tenggiri",
+    tag: "Pusat",
+    terjual: "10RB+ terjual",
+    diskon: "-20%",
+  },
+];
 
 interface ProdukIndustri {
   id: number;
@@ -34,124 +136,6 @@ interface ProdukIndustri {
   gambar: string;
   kategori: string;
 }
-
-const dataSegar: ProdukSegar[] = [
-  {
-    id: 1,
-    nama: "Fillet Tuna Super Premium",
-    harga: "Rp 125.000",
-    satuan: "Kg",
-    gambar:
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80",
-    kategori: "Tuna Sirip Kuning",
-  },
-  {
-    id: 2,
-    nama: "Ikan Kembung Banjar Segar",
-    harga: "Rp 45.000",
-    satuan: "Kg",
-    gambar:
-      "https://images.unsplash.com/photo-1498654200943-1088dd4438ae?w=600&q=80",
-    kategori: "Kembung",
-  },
-  {
-    id: 3,
-    nama: "Kakap Merah Utuh (800g+)",
-    harga: "Rp 88.000",
-    satuan: "Ekor",
-    gambar:
-      "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80",
-    kategori: "Kakap Merah",
-  },
-  {
-    id: 4,
-    nama: "Udang Vaname Jumbo",
-    harga: "Rp 110.000",
-    satuan: "Kg",
-    gambar:
-      "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=600&q=80",
-    kategori: "Udang",
-  },
-  {
-    id: 5,
-    nama: "Ikan Tongkol Segar",
-    harga: "Rp 35.000",
-    satuan: "Kg",
-    gambar:
-      "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=600&q=80",
-    kategori: "Tongkol",
-  },
-  {
-    id: 6,
-    nama: "Cumi-Cumi Segar Pilihan",
-    harga: "Rp 75.000",
-    satuan: "Kg",
-    gambar:
-      "https://images.unsplash.com/photo-1579631542720-3a87824fff86?w=600&q=80",
-    kategori: "Cumi-Cumi",
-  },
-  {
-    id: 7,
-    nama: "Ikan Cakalang Utuh",
-    harga: "Rp 28.000",
-    satuan: "Ekor",
-    gambar:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80",
-    kategori: "Cakalang",
-  },
-  {
-    id: 8,
-    nama: "Ikan Tenggiri Potong",
-    harga: "Rp 65.000",
-    satuan: "Kg",
-    gambar:
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80",
-    kategori: "Tenggiri",
-  },
-];
-
-const dataGrosir: ProdukGrosir[] = [
-  {
-    id: 1,
-    nama: "Ikan Tongkol Segar (Box)",
-    harga: "Rp 40.000",
-    satuan: "Kg",
-    minimum: "Min. 5 Kg",
-    gambar:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80",
-    kategori: "Grosir",
-  },
-  {
-    id: 2,
-    nama: "Ikan Kembung Curah",
-    harga: "Rp 15.000",
-    satuan: "Kg",
-    minimum: "Min. 10 Kg",
-    gambar:
-      "https://images.unsplash.com/photo-1498654200943-1088dd4438ae?w=600&q=80",
-    kategori: "Surplus",
-  },
-  {
-    id: 3,
-    nama: "Ikan Tuna Potong B2B",
-    harga: "Rp 55.000",
-    satuan: "Kg",
-    minimum: "Min. 10 Kg",
-    gambar:
-      "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80",
-    kategori: "B2B",
-  },
-  {
-    id: 4,
-    nama: "Udang Windu Premium",
-    harga: "Rp 85.000",
-    satuan: "Kg",
-    minimum: "Min. 2 Kg",
-    gambar:
-      "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=600&q=80",
-    kategori: "Premium",
-  },
-];
 
 const dataIndustri: ProdukIndustri[] = [
   {
@@ -582,23 +566,40 @@ function BubbleGroup() {
    COMPONENT – MarketplaceView
    ────────────────────────────────────────────── */
 
-type TabKey = "segar" | "grosir" | "industri";
+type TabKey = "fresh" | "industri";
 
 export default function MarketplaceView() {
-  const [activeTab, setActiveTab] = useState<TabKey>("segar");
+  const [searchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState<TabKey>(() => {
+    const tab = searchParams.get("tab");
+    if (tab === "fresh" || tab === "industri") {
+      return tab;
+    }
+    return "fresh";
+  });
+
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab === "fresh" || tab === "industri") {
+      setActiveTab(tab);
+    }
+    const category = searchParams.get("category");
+    if (category) {
+      setSearchQuery(category);
+    }
+  }, [searchParams]);
+
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get("category") || "");
 
   // Filter helper
   const matchSearch = (text: string) =>
     text.toLowerCase().includes(searchQuery.toLowerCase());
 
-  const filteredSegar = dataSegar.filter(
+  const filteredFresh = dataFresh.filter(
     (item) => matchSearch(item.nama) || matchSearch(item.kategori)
   );
-  const filteredGrosir = dataGrosir.filter(
-    (item) => matchSearch(item.nama) || matchSearch(item.kategori)
-  );
+
   const filteredIndustri = dataIndustri.filter(
     (item) =>
       matchSearch(item.jenisLimbah) ||
@@ -668,34 +669,19 @@ export default function MarketplaceView() {
         <TooltipProvider delayDuration={150}>
           <nav style={styles.tabNav} className="mp-tab-nav">
             <button
-              style={styles.tabBtn(activeTab === "segar")}
+              style={styles.tabBtn(activeTab === "fresh")}
               className="mp-tab-btn"
-              onClick={() => setActiveTab("segar")}
+              onClick={() => setActiveTab("fresh")}
               onMouseEnter={(e) => {
-                if (activeTab !== "segar")
+                if (activeTab !== "fresh")
                   e.currentTarget.style.color = "rgba(180,220,230,0.9)";
               }}
               onMouseLeave={(e) => {
-                if (activeTab !== "segar")
+                if (activeTab !== "fresh")
                   e.currentTarget.style.color = "rgba(180,220,230,0.6)";
               }}
             >
-              Tangkapan Segar
-            </button>
-            <button
-              style={styles.tabBtn(activeTab === "grosir")}
-              className="mp-tab-btn"
-              onClick={() => setActiveTab("grosir")}
-              onMouseEnter={(e) => {
-                if (activeTab !== "grosir")
-                  e.currentTarget.style.color = "rgba(180,220,230,0.9)";
-              }}
-              onMouseLeave={(e) => {
-                if (activeTab !== "grosir")
-                  e.currentTarget.style.color = "rgba(180,220,230,0.6)";
-              }}
-            >
-              Surplus Grosir
+              Ikan Fresh
             </button>
             <button
               style={styles.tabBtn(activeTab === "industri")}
@@ -715,11 +701,11 @@ export default function MarketplaceView() {
             </button>
           </nav>
 
-          {/* ── Tab Content: Tangkapan Segar ── */}
-          {activeTab === "segar" && (
+          {/* ── Tab Content: Ikan Fresh ── */}
+          {activeTab === "fresh" && (
             <div style={styles.productGrid} className="mp-grid">
-              {filteredSegar.map((item) => {
-                const key = `segar-${item.id}`;
+              {filteredFresh.map((item) => {
+                const key = `fresh-${item.id}`;
                 const isHovered = hoveredCard === key;
                 return (
                   <div
@@ -732,7 +718,7 @@ export default function MarketplaceView() {
                     onMouseLeave={() => setHoveredCard(null)}
                     className="mp-card"
                   >
-                    <div style={{ overflow: "hidden" }}>
+                    <div style={{ overflow: "hidden", position: "relative" }}>
                       <ImageWithFallback
                         src={item.gambar}
                         alt={item.nama}
@@ -742,107 +728,75 @@ export default function MarketplaceView() {
                           transform: isHovered ? "scale(1.08)" : "scale(1)",
                         }}
                       />
-                    </div>
-                    <div style={styles.cardBody} className="mp-card-body">
-                      <span style={styles.categoryBadge} className="mp-card-badge">{item.kategori}</span>
-                      <h3 style={styles.productName} className="mp-card-title">{item.nama}</h3>
-                      <div style={styles.priceRow}>
-                        <div style={styles.priceBlock}>
-                          <span style={styles.price} className="mp-card-price">{item.harga}</span>
-                          <span style={styles.priceSatuan} className="mp-card-price-satuan">
-                            / {item.satuan}
-                          </span>
-                        </div>
-                        <button
-                          style={styles.beliBtn}
-                          className="mp-card-btn"
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.background =
-                              "linear-gradient(135deg, #14b8a6, #0d9488)";
-                            e.currentTarget.style.transform = "scale(1.05)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.background =
-                              "linear-gradient(135deg, #0d9488, #0f766e)";
-                            e.currentTarget.style.transform = "scale(1)";
-                          }}
-                        >
-                          Beli
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
-          {/* ── Tab Content: Surplus Grosir ── */}
-          {activeTab === "grosir" && (
-            <div style={styles.productGrid} className="mp-grid">
-              {filteredGrosir.map((item) => {
-                const key = `grosir-${item.id}`;
-                const isHovered = hoveredCard === key;
-                return (
-                  <div
-                    key={key}
-                    style={{
-                      ...styles.card,
-                      ...(isHovered ? styles.cardHover : {}),
-                    }}
-                    onMouseEnter={() => setHoveredCard(key)}
-                    onMouseLeave={() => setHoveredCard(null)}
-                    className="mp-card"
-                  >
-                    <div style={{ overflow: "hidden" }}>
-                      <ImageWithFallback
-                        src={item.gambar}
-                        alt={item.nama}
-                        className="mp-card-img"
-                        style={{
-                          ...styles.cardImage,
-                          transform: isHovered ? "scale(1.08)" : "scale(1)",
-                        }}
-                      />
-                    </div>
-                    <div style={styles.cardBody} className="mp-card-body">
-                      <span style={styles.categoryBadge} className="mp-card-badge">{item.kategori}</span>
-                      <h3 style={styles.productName} className="mp-card-title">{item.nama}</h3>
-                      {item.minimum && (
-                        <p
+                      {/* Discount Tag Overlay */}
+                      {item.diskon && (
+                        <div
                           style={{
-                            fontSize: "12px",
-                            color: "rgba(180,220,230,0.45)",
-                            margin: "0 0 6px 0",
+                            position: "absolute",
+                            top: "8px",
+                            right: "8px",
+                            background: "#ffffff",
+                            color: "#4b5563", // gray-600
+                            padding: "2px 8px",
+                            borderRadius: "4px",
+                            fontSize: "11px",
+                            fontWeight: 700,
+                            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
                           }}
-                          className="mp-card-meta"
                         >
-                          {item.minimum}
-                        </p>
+                          {item.diskon}
+                        </div>
                       )}
+                    </div>
+                    <div style={styles.cardBody} className="mp-card-body">
+                      <h3 style={styles.productName} className="mp-card-title">
+                        {/* Store Tag (Grosir / Pusat) inline with name */}
+                        <span
+                          style={{
+                            display: "inline-block",
+                            padding: "3px 8px",
+                            borderRadius: "4px",
+                            fontSize: "10px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            background:
+                              item.tag === "Grosir"
+                                ? "linear-gradient(135deg, #f97316, #ea580c)"
+                                : "linear-gradient(135deg, #991b1b, #7f1d1d)",
+                            marginRight: "8px",
+                            letterSpacing: "0.3px",
+                          }}
+                          className="mp-card-badge"
+                        >
+                          {item.tag}
+                        </span>
+                        {item.nama}
+                      </h3>
                       <div style={styles.priceRow}>
                         <div style={styles.priceBlock}>
                           <span style={styles.price} className="mp-card-price">{item.harga}</span>
-                          <span style={styles.priceSatuan} className="mp-card-price-satuan">
+                          {/* Unit / Kg in white */}
+                          <span
+                            style={{
+                              fontSize: "13px",
+                              fontWeight: 400,
+                              color: "#ffffff",
+                              marginLeft: "4px",
+                            }}
+                          >
                             / {item.satuan}
                           </span>
                         </div>
-                        <button
-                          style={styles.beliBtn}
-                          className="mp-card-btn"
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.background =
-                              "linear-gradient(135deg, #14b8a6, #0d9488)";
-                            e.currentTarget.style.transform = "scale(1.05)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.background =
-                              "linear-gradient(135deg, #0d9488, #0f766e)";
-                            e.currentTarget.style.transform = "scale(1)";
+                        {/* Sold count in white */}
+                        <span
+                          style={{
+                            fontSize: "11px",
+                            color: "#ffffff",
+                            fontWeight: 500,
                           }}
                         >
-                          Beli
-                        </button>
+                          {item.terjual}
+                        </span>
                       </div>
                     </div>
                   </div>

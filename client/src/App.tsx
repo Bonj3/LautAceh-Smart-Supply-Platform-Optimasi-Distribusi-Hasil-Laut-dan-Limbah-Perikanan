@@ -5,6 +5,8 @@ import { routes } from "./routes"; // Mengambil kamus URL dari temanmu
 import Home from "./pages/Home";
 import Marketplace from "./pages/Marketplace";
 import Contact from "./pages/Contact";
+import Portal from "./pages/Portal";
+import Category from "./pages/Category";
 
 export default function App() {
   return (
@@ -18,6 +20,12 @@ export default function App() {
 
         {/* URL: "/contact" */}
         <Route path={routes.contact} element={<Contact />} />
+
+        {/* URL: "/portal" */}
+        <Route path={routes.portal} element={<Portal />} />
+
+        {/* URL: "/category" */}
+        <Route path={routes.category} element={<Category />} />
 
         {/* Catatan: Untuk Education dan Dashboard bisa kamu tambahkan 
             nanti kalau file halamannya sudah dibuat */}
