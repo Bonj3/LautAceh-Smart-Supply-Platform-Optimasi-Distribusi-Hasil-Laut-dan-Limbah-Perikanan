@@ -9,4 +9,5 @@ export const routes = {
   portal: '/portal',
   category: '/category',
   penjual: '/penjual',
+  faq: '/faq',
 };

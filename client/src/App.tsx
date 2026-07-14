@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Portal from "./pages/Portal";
 import Category from "./pages/Category";
 import Penjual from "./pages/Penjual";
+import Faq from "./pages/Faq";
 
 export default function App() {
   return (
@@ -40,6 +41,9 @@ export default function App() {
 
           {/* URL: "/penjual" */}
           <Route path={routes.penjual} element={<Penjual />} />
+
+          {/* URL: "/faq" */}
+          <Route path={routes.faq} element={<Faq />} />
 
           {/* Catatan: Untuk Education dan Dashboard bisa kamu tambahkan 
             nanti kalau file halamannya sudah dibuat */}
