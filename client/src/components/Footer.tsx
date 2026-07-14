@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { routes } from "../routes";
 import textUrl from "../assets/logo-pasaieungkot.png";
 import iconUrl from "../assets/PasaieUngkot.png";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 export function Footer() {
   return (
@@ -18,8 +21,8 @@ export function Footer() {
           maxWidth: 1200,
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "2fr 1fr 1fr 1fr",
-          gap: "48px",
+          gridTemplateColumns: "1.5fr 1fr 1fr 1fr 1fr",
+          gap: "32px",
           marginBottom: "48px",
         }}
         className="footer-grid"
@@ -50,37 +53,8 @@ export function Footer() {
               maxWidth: 280,
             }}
           >
-            Platform digital yang menghubungkan seluruh ekosistem perikanan Aceh — dari nelayan hingga konsumen — secara transparan, efisien, dan berkelanjutan.
+            Platform digital yang menghubungkan seluruh ekosistem perikanan Aceh dari nelayan hingga konsumen secara transparan, efisien, dan berkelanjutan.
           </p>
-
-          <div style={{ display: "flex", gap: "10px", marginTop: "24px" }}>
-            {['📘', '📸', '🐦', '▶️'].map((icon) => (
-              <button
-                key={icon}
-                style={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: "50%",
-                  background: "rgba(60,200,216,0.12)",
-                  border: "1px solid rgba(60,200,216,0.2)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  fontSize: "14px",
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(60,200,216,0.25)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(60,200,216,0.12)";
-                }}
-              >
-                {icon}
-              </button>
-            ))}
-          </div>
         </div>
 
         {[
@@ -88,9 +62,18 @@ export function Footer() {
             title: "Platform",
             links: [
               { label: "Beranda", to: routes.home },
-              { label: "Marketplace", to: routes.marketplace },
-              { label: "Edukasi", to: routes.education },
-              { label: "Tentang Kami", to: "#about-us" },
+              { label: "Toko", to: routes.marketplace },
+              { label: "Berita", to: routes.education },
+              { label: "Mulai Menjual", to: routes.penjual },
+            ],
+          },
+          {
+            title: "Ikan Fresh",
+            links: [
+              { label: "Tuna", to: routes.marketplace },
+              { label: "Tongkol", to: routes.marketplace },
+              { label: "Kerapu", to: routes.marketplace },
+              { label: "Kakap", to: routes.marketplace },
             ],
           },
           {
@@ -106,10 +89,49 @@ export function Footer() {
             title: "Bantuan",
             links: [
               { label: "FAQ", to: "#faq" },
-              { label: "Hubungi Kami", to: routes.contact },
-              { label: "Info Pengiriman", to: "#" },
-              { label: "Pengembalian", to: "#" },
             ],
+            customContent: (
+              <div style={{ marginTop: "16px" }}>
+                <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)", display: "block", marginBottom: "8px" }}>
+                  Hubungi Kami
+                </span>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  {[
+                    { icon: <InstagramIcon fontSize="small" />, label: 'Instagram' },
+                    { icon: <FacebookIcon fontSize="small" />, label: 'Facebook' },
+                    { icon: <WhatsAppIcon fontSize="small" />, label: 'WhatsApp' }
+                  ].map((social) => (
+                    <Link
+                      to="/"
+                      key={social.label}
+                      title={social.label}
+                      style={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: "50%",
+                        background: "rgba(60,200,216,0.12)",
+                        border: "1px solid rgba(60,200,216,0.2)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        color: "white",
+                        textDecoration: "none",
+                        transition: "all 0.2s",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "rgba(60,200,216,0.25)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "rgba(60,200,216,0.12)";
+                      }}
+                    >
+                      {social.icon}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )
           },
         ].map((col) => (
           <div key={col.title}>
@@ -149,6 +171,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+            {col.customContent && col.customContent}
           </div>
         ))}
       </div>
@@ -167,7 +190,7 @@ export function Footer() {
         }}
       >
         <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", fontWeight: 300 }}>
-          © 2026 PasaiEungkot. Hak Cipta Dilindungi.
+          © 2026 PasaieUngkot. Hak Cipta Dilindungi.
         </p>
         <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", fontWeight: 300 }}>
           Kebijakan Privasi · Syarat & Ketentuan
