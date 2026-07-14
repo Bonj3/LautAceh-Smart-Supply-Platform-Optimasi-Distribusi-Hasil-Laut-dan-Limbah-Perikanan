@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import { routes } from "../routes";
 
-const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Contact Us"];
+// const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Contact Us"];
+const navLinks = [
+  { label: "Home", to: routes.home, type: "route" },
+  { label: "Marketplace", to: routes.marketplace, type: "route" },
+  { label: "News", to: "#news", type: "section" },
+  { label: "FAQ", to: "#faq", type: "section" },
+  { label: "Affiliate", to: "#affiliate", type: "section" },
+  { label: "Contact Us", to: routes.contact, type: "route" },
+];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -58,7 +66,6 @@ export function Navbar() {
         className="hidden md:flex items-center gap-6 lg:gap-9"
       >
         {navLinks.map((link) => {
-          const isMarketplace = link === "Marketplace";
           const linkStyle = {
             color: "rgba(255,255,255,0.88)",
             textDecoration: "none",
@@ -66,16 +73,16 @@ export function Navbar() {
             fontWeight: 500,
             letterSpacing: "0.5px",
             fontFamily: "Poppins, sans-serif",
-            transition: "color 0.2s, opacity 0.2s",
+            transition: "color 0.2s",
             cursor: "pointer",
             whiteSpace: "nowrap" as const,
           };
 
-          if (isMarketplace) {
+          if (link.type === "route") {
             return (
               <Link
-                key={link}
-                to={routes.marketplace}
+                key={link.label}
+                to={link.to}
                 style={linkStyle}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = "#3CC8D8";
@@ -84,15 +91,15 @@ export function Navbar() {
                   e.currentTarget.style.color = "rgba(255,255,255,0.88)";
                 }}
               >
-                {link}
+                {link.label}
               </Link>
             );
           }
 
           return (
             <a
-              key={link}
-              href={`#${link.toLowerCase().replace(/\s+/g, "-")}`}
+              key={link.label}
+              href={link.to}
               style={linkStyle}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = "#3CC8D8";
@@ -101,93 +108,92 @@ export function Navbar() {
                 e.currentTarget.style.color = "rgba(255,255,255,0.88)";
               }}
             >
-              {link}
+              {link.label}
             </a>
           );
         })}
-      </div>
+</div>
+        {/* Actions */}
+        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
+          <button
+            style={{
+              width: 38,
+              height: 38,
+              borderRadius: "50%",
+              background: "rgba(255,255,255,0.15)",
+              border: "1px solid rgba(255,255,255,0.25)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              color: "white",
+              transition: "all 0.2s",
+              flexShrink: 0,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.25)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.15)";
+            }}
+          >
+            <Search size={15} />
+          </button>
 
-      {/* Actions */}
-      <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
-        <button
-          style={{
-            width: 38,
-            height: 38,
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.15)",
-            border: "1px solid rgba(255,255,255,0.25)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            color: "white",
-            transition: "all 0.2s",
-            flexShrink: 0,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.25)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.15)";
-          }}
-        >
-          <Search size={15} />
-        </button>
+          <button
+            className="hidden sm:block"
+            style={{
+              padding: "8px 22px",
+              background: "transparent",
+              border: "1px solid rgba(255,255,255,0.45)",
+              borderRadius: "24px",
+              color: "white",
+              cursor: "pointer",
+              fontSize: "13px",
+              fontWeight: 500,
+              fontFamily: "Poppins, sans-serif",
+              transition: "all 0.2s",
+              letterSpacing: "0.3px",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.12)";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.7)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
+            }}
+          >
+            Sign In
+          </button>
 
-        <button
-          className="hidden sm:block"
-          style={{
-            padding: "8px 22px",
-            background: "transparent",
-            border: "1px solid rgba(255,255,255,0.45)",
-            borderRadius: "24px",
-            color: "white",
-            cursor: "pointer",
-            fontSize: "13px",
-            fontWeight: 500,
-            fontFamily: "Poppins, sans-serif",
-            transition: "all 0.2s",
-            letterSpacing: "0.3px",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.12)";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.7)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
-          }}
-        >
-          Sign In
-        </button>
-
-        <button
-          style={{
-            padding: "8px 22px",
-            background: "white",
-            border: "none",
-            borderRadius: "24px",
-            color: "#0E7C8E",
-            cursor: "pointer",
-            fontSize: "13px",
-            fontWeight: 700,
-            fontFamily: "Poppins, sans-serif",
-            transition: "all 0.2s",
-            letterSpacing: "0.3px",
-            boxShadow: "0 4px 15px rgba(255,255,255,0.2)",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.05)";
-            e.currentTarget.style.boxShadow = "0 6px 20px rgba(255,255,255,0.3)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-            e.currentTarget.style.boxShadow = "0 4px 15px rgba(255,255,255,0.2)";
-          }}
-        >
-          Sign Up
-        </button>
-      </div>
+          <button
+            style={{
+              padding: "8px 22px",
+              background: "white",
+              border: "none",
+              borderRadius: "24px",
+              color: "#0E7C8E",
+              cursor: "pointer",
+              fontSize: "13px",
+              fontWeight: 700,
+              fontFamily: "Poppins, sans-serif",
+              transition: "all 0.2s",
+              letterSpacing: "0.3px",
+              boxShadow: "0 4px 15px rgba(255,255,255,0.2)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.05)";
+              e.currentTarget.style.boxShadow = "0 6px 20px rgba(255,255,255,0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow = "0 4px 15px rgba(255,255,255,0.2)";
+            }}
+          >
+            Sign Up
+          </button>
+        </div>
     </nav>
   );
 }

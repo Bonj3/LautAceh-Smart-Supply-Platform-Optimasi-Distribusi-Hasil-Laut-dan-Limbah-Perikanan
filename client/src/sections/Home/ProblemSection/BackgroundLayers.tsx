@@ -9,13 +9,13 @@ export default function BackgroundLayers({ scrollYProgress }: Props) {
   const bgTop = useTransform(
     scrollYProgress,
     [0, 0.3, 0.6, 0.85, 1],
-    ["#B8DFF5", "#EFF6FF", "#1E293B", "#0F172A", "#06102B"]
+    ["#7DD3FC", "#DBEAFE", "#1E293B", "#0F172A", "#08132B"] // Brighter ocean top -> deeper darks
   );
 
   const bgBottom = useTransform(
     scrollYProgress,
     [0, 0.3, 0.6, 0.85, 1],
-    ["#0F4C81", "#1E3A8A", "#0F172A", "#020617", "#0F4C81"]
+    ["#0284C7", "#1E3A8A", "#0F172A", "#020617", "#0E395B"] // Richer ocean bottom
   );
 
   return (

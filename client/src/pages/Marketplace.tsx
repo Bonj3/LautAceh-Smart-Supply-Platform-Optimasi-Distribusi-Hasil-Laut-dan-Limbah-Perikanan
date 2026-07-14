@@ -1,6 +1,7 @@
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import MarketplaceView from "../sections/Marketplace/MarketplaceView";
+import AISmartMarketplace from "../components/AISmartMarketplace/AISmartMarketplace";
 
 export default function Marketplace() {
   return (
@@ -17,6 +18,7 @@ export default function Marketplace() {
 </main>
       {/* </div> */}
       <Footer />
+      <AISmartMarketplace />
     </>
   );
 }
