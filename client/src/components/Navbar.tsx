@@ -11,7 +11,7 @@ const navLinks = [
   { label: "News", to: "#news", type: "section" },
   { label: "FAQ", to: "#faq", type: "section" },
   { label: "Affiliate", to: "#affiliate", type: "section" },
-  { label: "Mulai Menjual", to: routes.portal, type: "route" },
+  { label: "Mulai Menjual", to: routes.penjual, type: "route" },
 ];
 
 export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
