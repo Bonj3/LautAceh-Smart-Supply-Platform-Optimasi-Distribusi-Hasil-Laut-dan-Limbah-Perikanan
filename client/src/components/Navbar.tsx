@@ -21,6 +21,8 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
   const { user, isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
   const profileRef = useRef<HTMLDivElement>(null);
+  
+  const isPenjual = user?.role === "seller";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
