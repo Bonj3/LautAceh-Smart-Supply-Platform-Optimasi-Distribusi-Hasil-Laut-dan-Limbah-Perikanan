@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { routes } from "../routes";
-import logoUrl from "../logoutu.jpeg?url";
+import textUrl from "../assets/logo-pasaieungkot.png";
+import iconUrl from "../assets/PasaieUngkot.png";
 
 export function Footer() {
   return (
@@ -24,21 +25,21 @@ export function Footer() {
         className="footer-grid"
       >
         <div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
             <img
-              src={logoUrl}
-              alt="PasaiEungkot Logo"
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
-                objectFit: "cover",
-                boxShadow: "0 4px 15px rgba(60,200,216,0.4)",
-              }}
+              src={iconUrl}
+              alt="PasaiEungkot Icon"
+              style={{ height: "40px", objectFit: "contain" }}
             />
-            <span style={{ fontWeight: 800, fontSize: "18px", letterSpacing: "3px", color: "white" }}>
-              PasaiEungkot
-            </span>
+            <img 
+              src={textUrl} 
+              alt="PasaiEungkot Text" 
+              style={{ 
+                height: "20px", 
+                objectFit: "contain",
+                filter: "brightness(1.8) drop-shadow(0px 0px 2px rgba(255,255,255,0.2))"
+              }} 
+            />
           </div>
           <p
             style={{

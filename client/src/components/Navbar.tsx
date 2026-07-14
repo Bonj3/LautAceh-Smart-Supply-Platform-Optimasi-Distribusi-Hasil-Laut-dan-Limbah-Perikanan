@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, LogOut, User, ChevronDown } from "lucide-react";
+import { motion } from "motion/react";
 import { routes } from "../routes";
 import { useAuth } from "../context/AuthContext";
+import textUrl from "../assets/logo-pasaieungkot.png";
+import iconUrl from "../assets/PasaieUngkot.png";
 
 // const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Mulai Menjual "];
 const navLinks = [
@@ -57,28 +60,69 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
       }}
     >
       {/* Logo */}
-      <div style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
-        <div
-          style={{
-            width: 42,
-            height: 42,
-            borderRadius: "50%",
-            background: "linear-gradient(135deg, #3CC8D8, #0891b2)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "20px",
-            boxShadow: "0 4px 15px rgba(60,200,216,0.4)",
-          }}
+      <Link to={routes.home} style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer", textDecoration: "none" }}>
+
+        {/* ICON */}
+        <motion.div style={{ position: "relative", height: "42px" }} whileHover={{ scale: 1.1, rotate: 5 }}>
+          <img src={iconUrl} alt="PasaiEungkot Icon" style={{ height: "100%", objectFit: "contain" }} />
+          <div style={{
+            position: "absolute", inset: 0,
+            WebkitMaskImage: `url(${iconUrl})`, maskImage: `url(${iconUrl})`,
+            WebkitMaskSize: "contain", maskSize: "contain",
+            WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat",
+            WebkitMaskPosition: "center", maskPosition: "center",
+            pointerEvents: "none"
+          }}>
+            <motion.div
+              style={{
+                position: "absolute", top: 0, left: 0, width: "200%", height: "100%",
+                background: "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.9) 50%, transparent 70%)",
+              }}
+              animate={{ x: ["-100%", "100%", "100%"] }}
+              transition={{ duration: 9, repeat: Infinity, ease: "linear", times: [0, 0.3, 1] }}
+            />
+          </div>
+        </motion.div>
+
+        {/* TEXT */}
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          whileHover={{ scale: 1.02 }}
+          style={{ position: "relative", height: "22px" }}
         >
-          🐚
-        </div>
-        <span
-          className={`font-extrabold text-lg tracking-[3px] font-sans ${theme === "light" ? "text-gray-900" : "text-white"}`}
-        >
-          PasaiEungkot
-        </span>
-      </div>
+          <img
+            src={textUrl}
+            alt="PasaiEungkot Text"
+            style={{
+              height: "100%",
+              objectFit: "contain",
+              filter: theme === "light"
+                ? "invert(1) brightness(0)"
+                : "brightness(1.8) drop-shadow(0px 0px 2px rgba(255,255,255,0.2))"
+            }}
+          />
+          <div style={{
+            position: "absolute", inset: 0,
+            WebkitMaskImage: `url(${textUrl})`, maskImage: `url(${textUrl})`,
+            WebkitMaskSize: "contain", maskSize: "contain",
+            WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat",
+            WebkitMaskPosition: "center", maskPosition: "center",
+            pointerEvents: "none"
+          }}>
+            <motion.div
+              style={{
+                position: "absolute", top: 0, left: 0, width: "200%", height: "100%",
+                background: "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.9) 50%, transparent 70%)",
+              }}
+              animate={{ x: ["-100%", "-100%", "100%", "100%"] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear", times: [0, 0.2, 0.45, 1] }}
+            />
+          </div>
+        </motion.div>
+
+      </Link>
 
       {/* Nav links - desktop */}
       <div
