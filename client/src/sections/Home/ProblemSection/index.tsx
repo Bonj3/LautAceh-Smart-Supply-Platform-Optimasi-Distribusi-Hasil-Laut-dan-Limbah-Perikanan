@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useScroll, motion, useTransform } from "motion/react";
 
-import BackgroundLayers from "./BackgroundLayers";
 import Fish from "./Fish";
 import OverlayCards from "./OverlayCards";
 
@@ -22,21 +21,17 @@ export default function ProblemSection() {
     offset: ["start start", "end end"],
   });
 
-  // Perjalanan horisontal berakhir di 0.80 (Scene6 sudah terlihat).
-  // Dari 0.80 → 1.0, x dikunci di -83.3333% agar Scene6 (Hub) tetap terlihat
-  // dan tidak bergeser kemana-mana selama sisa scroll berlangsung.
-  const x = useTransform(scrollYProgress, [0, 0.80, 1], ["0%", "-83.3333%", "-83.3333%"]);
+  // Perjalanan horisontal berakhir di 0.90 (Scene6 sudah terlihat).
+  // Dari 0.90 → 1.0, x dikunci di -83.3333% agar Scene6 (Hub) tetap terlihat.
+  const xVal = useTransform(scrollYProgress, [0, 0.90, 1], [0, -83.333333, -83.333333]);
+  const x = useTransform(xVal, v => `${v}%`);
 
   return (
-    // Section height 500vh: 80% untuk perjalanan horisontal, 20% untuk menetap di Scene6 (Hub).
-    // Dengan total 500vh, user punya ~100vh waktu nyaman untuk membaca penutup cerita.
-    <section ref={containerRef} className="relative h-[500vh] bg-slate-900">
+    // Section height 410vh: animasi horisontal sampai 0.90, lalu Hub menetap hingga 1.0.
+    <section ref={containerRef} className="relative h-[410vh]" style={{ background: "linear-gradient(180deg, #1a7a8e 0%, #0c3547 20%, #0c3547 80%, #0c3547 100%)" }}>
       
       {/* Sticky Container - fixed to viewport while scrolling */}
       <div className="sticky top-0 h-screen w-full overflow-hidden font-sans">
-        
-        {/* Dynamic Background */}
-        <BackgroundLayers scrollYProgress={scrollYProgress} />
 
         {/* The Continuous Horizontal Journey Container */}
         <motion.div 
@@ -57,6 +52,20 @@ export default function ProblemSection() {
         {/* Glassmorphism Story Overlays */}
         <OverlayCards scrollYProgress={scrollYProgress} />
 
+      </div>
+
+      {/* Smooth wave transition to WelcomeSection */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="block w-full h-[60px] sm:h-[120px]">
+          <path
+            d="M0,40 C240,100 480,10 720,60 C960,110 1200,20 1440,50 L1440,120 L0,120 Z"
+            fill="#f0fbfd"
+          />
+          <path
+            d="M0,60 C300,20 600,90 900,50 C1100,25 1300,70 1440,45 L1440,120 L0,120 Z"
+            fill="rgba(240,251,253,0.5)"
+          />
+        </svg>
       </div>
     </section>
   );

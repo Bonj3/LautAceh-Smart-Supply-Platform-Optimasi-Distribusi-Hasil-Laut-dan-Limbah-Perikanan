@@ -38,7 +38,7 @@ export default function Fish({ scrollYProgress }: FishProps) {
   // Opacity: Ikan memudar di scene limbah, kembali, lalu menghilang saat menyatu dengan Hub
   const opacity = useTransform(
     scrollYProgress,
-    [0, 0.65, 0.72, 0.82, 0.85, 0.9, 1],
+    [0, 0.70, 0.78, 0.88, 0.92, 0.95, 1],
     [1, 1, 0.3, 0.3, 1, 0, 0]
   );
 

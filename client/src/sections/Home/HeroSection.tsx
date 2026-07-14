@@ -308,18 +308,24 @@ export function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Bottom wave */}
+      {/* Bottom wave — transitions into ProblemSection ocean */}
       <div
         className="absolute -bottom-1 left-0 right-0 z-30"
       >
         <svg viewBox="0 0 1440 100" preserveAspectRatio="none" className="block w-full h-[50px] sm:h-[100px]">
+          <defs>
+            <linearGradient id="hero-wave-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#0e96b0" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#1a7a8e" />
+            </linearGradient>
+          </defs>
           <path
             d="M0,40 C180,90 360,10 540,55 C720,100 900,20 1080,60 C1260,100 1380,40 1440,50 L1440,100 L0,100 Z"
-            fill="white"
+            fill="url(#hero-wave-grad)"
           />
           <path
             d="M0,60 C200,30 400,80 600,50 C800,20 1000,75 1200,45 C1350,25 1420,60 1440,55 L1440,100 L0,100 Z"
-            fill="rgba(255,255,255,0.5)"
+            fill="rgba(14,150,176,0.35)"
           />
         </svg>
       </div>

@@ -11,6 +11,13 @@ export default function Scene1Ocean({ scrollYProgress }: Props) {
   return (
     <motion.div style={{ opacity }} className="w-screen h-screen flex-shrink-0 relative flex items-center justify-center overflow-hidden">
       
+      {/* Sky-to-ocean gradient background — blends from HeroSection teal */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(180deg, #1a7a8e 0%, #7DD3FC 20%, #38BDF8 45%, #0e6b80 70%, #0C3547 100%)",
+        }}
+      />
       {/* ── Light Rays from Sun ── */}
       <div className="absolute top-[10%] right-[5%] w-[500px] h-[500px] pointer-events-none">
         {[0, 30, 60, 90, 120, 150].map((angle, i) => (

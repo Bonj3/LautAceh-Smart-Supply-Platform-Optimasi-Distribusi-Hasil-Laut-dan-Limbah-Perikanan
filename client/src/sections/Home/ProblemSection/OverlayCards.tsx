@@ -7,21 +7,27 @@ interface Props {
 
 export default function OverlayCards({ scrollYProgress }: Props) {
   // Animasi untuk setiap card. Mereka muncul (fade in & slide up) lalu menghilang.
+  // 6 scenes @ 0.15 each: Scene1=0-0.15, Scene2=0.15-0.30, Scene3=0.30-0.45, Scene4=0.45-0.60, Scene5=0.60-0.75
 
-  const introOpacity = useTransform(scrollYProgress, [0, 0.001, 0.06, 0.09], [0, 1, 1, 0]);
-  const introY = useTransform(scrollYProgress, [0, 0.001, 0.06, 0.09], [0, 0, 0, -50]);
+  // Intro (Scene 1: Ocean) — 0.00 to 0.15
+  const introOpacity = useTransform(scrollYProgress, [0, 0.01, 0.10, 0.14], [0, 1, 1, 0]);
+  const introY = useTransform(scrollYProgress, [0, 0.01, 0.10, 0.14], [0, 0, 0, -50]);
 
-  const card2Opacity = useTransform(scrollYProgress, [0.15, 0.2, 0.3, 0.35], [0, 1, 1, 0]);
-  const card2Y = useTransform(scrollYProgress, [0.15, 0.2, 0.3, 0.35], [50, 0, 0, -50]);
+  // Card 2 (Scene 2: Fisherman — "Harga Belum Transparan") — 0.15 to 0.30
+  const card2Opacity = useTransform(scrollYProgress, [0.16, 0.19, 0.26, 0.29], [0, 1, 1, 0]);
+  const card2Y = useTransform(scrollYProgress, [0.16, 0.19, 0.26, 0.29], [50, 0, 0, -50]);
 
-  const card3Opacity = useTransform(scrollYProgress, [0.35, 0.4, 0.5, 0.55], [0, 1, 1, 0]);
-  const card3Y = useTransform(scrollYProgress, [0.35, 0.4, 0.5, 0.55], [50, 0, 0, -50]);
+  // Card 3 (Scene 3: Logistics — "Distribusi Belum Efisien") — 0.30 to 0.45
+  const card3Opacity = useTransform(scrollYProgress, [0.31, 0.34, 0.41, 0.44], [0, 1, 1, 0]);
+  const card3Y = useTransform(scrollYProgress, [0.31, 0.34, 0.41, 0.44], [50, 0, 0, -50]);
 
-  const card4Opacity = useTransform(scrollYProgress, [0.55, 0.6, 0.7, 0.75], [0, 1, 1, 0]);
-  const card4Y = useTransform(scrollYProgress, [0.55, 0.6, 0.7, 0.75], [50, 0, 0, -50]);
+  // Card 4 (Scene 4: SupplyChain — "Rantai Pasok Terfragmentasi") — 0.45 to 0.60
+  const card4Opacity = useTransform(scrollYProgress, [0.46, 0.49, 0.56, 0.59], [0, 1, 1, 0]);
+  const card4Y = useTransform(scrollYProgress, [0.46, 0.49, 0.56, 0.59], [50, 0, 0, -50]);
 
-  const card5Opacity = useTransform(scrollYProgress, [0.75, 0.78, 0.82, 0.85], [0, 1, 1, 0]);
-  const card5Y = useTransform(scrollYProgress, [0.75, 0.78, 0.82, 0.85], [50, 0, 0, -50]);
+  // Card 5 (Scene 5: Processing — "Potensi Belum Dimanfaatkan") — 0.60 to 0.75
+  const card5Opacity = useTransform(scrollYProgress, [0.61, 0.64, 0.71, 0.74], [0, 1, 1, 0]);
+  const card5Y = useTransform(scrollYProgress, [0.61, 0.64, 0.71, 0.74], [50, 0, 0, -50]);
 
   const CardTemplate = ({ opacity, y, title, description }: any) => (
     <motion.div

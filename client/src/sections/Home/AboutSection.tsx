@@ -118,7 +118,7 @@ export function AboutSection() {
           >
             PasaiEungkot hadir sebagai solusi digital untuk mengoptimalkan distribusi
             hasil laut dan limbah perikanan di Aceh. Kami percaya bahwa setiap bagian
-            dari tangkapan laut memiliki nilai — dari daging hingga tulang, sisik, dan jeroan.
+            dari tangkapan laut memiliki nilai dari daging hingga tulang, sisik, dan jeroan.
           </motion.p>
 
           <motion.p
@@ -129,7 +129,7 @@ export function AboutSection() {
             className="font-sans text-sm md:text-[15px] text-white/70 leading-[1.8] font-light mb-8 md:mb-9"
           >
             Platform kami menghubungkan nelayan, pengolah ikan, restoran, dan pelaku industri
-            sirkular dalam satu ekosistem terintegrasi — menciptakan rantai pasok yang transparan,
+            sirkular dalam satu ekosistem terintegrasi menciptakan rantai pasok yang transparan,
             efisien, dan berkelanjutan.
           </motion.p>
 

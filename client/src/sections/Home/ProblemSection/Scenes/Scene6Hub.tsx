@@ -116,9 +116,9 @@ function EcosystemNode({
 // ─── Komponen Utama Scene 6 Hub ───────────────────────────────────────────────
 export default function Scene6Hub({ scrollYProgress }: Props) {
   // Fade in sekali lalu tetap terlihat selamanya (tidak ada fade out)
-  const sceneOpacity = useTransform(scrollYProgress, [0.75, 0.82], [0, 1]);
-  const glowScale = useTransform(scrollYProgress, [0.78, 0.92], [0.3, 1.8]);
-  const contentOpacity = useTransform(scrollYProgress, [0.80, 0.88], [0, 1]);
+  const sceneOpacity = useTransform(scrollYProgress, [0.85, 0.92], [0, 1]);
+  const glowScale = useTransform(scrollYProgress, [0.88, 0.96], [0.3, 1.8]);
+  const contentOpacity = useTransform(scrollYProgress, [0.90, 0.96], [0, 1]);
 
   return (
     <motion.div
