@@ -143,7 +143,7 @@ export function AboutSection() {
           >
             {[
               { icon: "🌊", text: "Sumber daya dari nelayan lokal Aceh yang terverifikasi" },
-              { icon: "♻️", text: "Mendukung ekonomi sirkular — dari laut ke meja, tanpa sisa" },
+              { icon: "♻️", text: "Mendukung ekonomi sirkular dari laut ke meja, tanpa sisa" },
               { icon: "🚚", text: "Distribusi digital langsung ke tangan pembeli" },
             ].map((item) => (
               <div key={item.text} className="flex items-center gap-3.5">
