@@ -1,10 +1,44 @@
 import { motion } from "motion/react";
-import { ZoomIn, RotateCw } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../routes";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
+import { Anchor, Recycle, Truck, ShieldCheck, Users, Leaf } from "lucide-react";
 
-const SHRIMP_PLATE = "https://images.unsplash.com/photo-1758972572427-fc3d4193bbd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
+const ABOUT_IMG = "https://images.unsplash.com/photo-1544551763-46a013bb70d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
+
+const stats = [
+  { value: "500+", label: "Nelayan Terdaftar", icon: Anchor },
+  { value: "12+", label: "Kota Jangkauan", icon: Truck },
+  { value: "98%", label: "Tingkat Kepuasan", icon: ShieldCheck },
+  { value: "50 Ton", label: "Limbah Terkelola/Bulan", icon: Recycle },
+];
+
+const features = [
+  {
+    icon: "🐟",
+    title: "Harga Transparan",
+    description: "Harga limbah ikan langsung dari sumber, tanpa tengkulak. Nelayan mendapat harga adil, pembeli mendapat harga terbaik.",
+  },
+  {
+    icon: "♻️",
+    title: "Ekonomi Sirkular",
+    description: "Tulang, sisik, kepala, dan jeroan ikan yang biasanya terbuang kini memiliki nilai ekonomi tinggi untuk industri pakan, pupuk, dan kosmetik.",
+  },
+  {
+    icon: "🚚",
+    title: "Distribusi Terintegrasi",
+    description: "Sistem distribusi digital yang menghubungkan nelayan, pengolah, dan pembeli di seluruh Aceh secara efisien dan tepat waktu.",
+  },
+  {
+    icon: "🌊",
+    title: "Perikanan Berkelanjutan",
+    description: "Mendorong pemanfaatan seluruh bagian hasil tangkapan laut untuk mendukung ekosistem perikanan yang ramah lingkungan.",
+  },
+];
 
 export function AboutSection() {
+  const navigate = useNavigate();
+
   return (
     <section
       id="about"
@@ -36,6 +70,7 @@ export function AboutSection() {
         }}
       />
 
+      {/* ═══ BAGIAN 1: Tentang Kami ═══ */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 relative z-[2] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         {/* Left content */}
         <motion.div
@@ -51,7 +86,7 @@ export function AboutSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="font-sans text-[11px] md:text-[12px] tracking-[4px] md:tracking-[5px] text-[#3CC8D8] font-semibold uppercase mb-3"
           >
-            About
+            Tentang Kami
           </motion.p>
 
           <motion.h2
@@ -60,9 +95,11 @@ export function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="font-sans font-black text-white leading-[1.1] tracking-[-0.5px] mb-6 md:mb-7"
-            style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
+            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
           >
-            ABOUT US
+            Menghubungkan Ekosistem
+            <br />
+            <span className="text-[#3CC8D8]">Perikanan Aceh</span>
           </motion.h2>
 
           <div
@@ -79,9 +116,9 @@ export function AboutSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="font-sans text-sm md:text-[15px] text-white/70 leading-[1.8] font-light mb-4"
           >
-            We are passionate about bringing the ocean's finest treasures to your plate.
-            Founded by a team of seafood enthusiasts, we source only the highest-quality
-            catch from sustainable fisheries around the world.
+            PasaiEungkot hadir sebagai solusi digital untuk mengoptimalkan distribusi
+            hasil laut dan limbah perikanan di Aceh. Kami percaya bahwa setiap bagian
+            dari tangkapan laut memiliki nilai — dari daging hingga tulang, sisik, dan jeroan.
           </motion.p>
 
           <motion.p
@@ -91,42 +128,23 @@ export function AboutSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="font-sans text-sm md:text-[15px] text-white/70 leading-[1.8] font-light mb-8 md:mb-9"
           >
-            Every piece is handled with care from boat to table — maintaining the
-            natural freshness, flavour, and nutritional value your family deserves.
+            Platform kami menghubungkan nelayan, pengolah ikan, restoran, dan pelaku industri
+            sirkular dalam satu ekosistem terintegrasi — menciptakan rantai pasok yang transparan,
+            efisien, dan berkelanjutan.
           </motion.p>
-
-          {/* Pill buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap gap-3 sm:gap-4"
-          >
-            {["SHRIMPY", "BIG CLAM MUSH"].map((label) => (
-              <motion.button
-                key={label}
-                whileHover={{ scale: 1.05, background: "#3CC8D8", color: "white" }}
-                whileTap={{ scale: 0.97 }}
-                className="px-6 py-2.5 sm:px-7 sm:py-3 bg-transparent border-2 border-[#3cc8d899] rounded-full text-[#54D9E8] font-sans font-bold text-[11px] sm:text-[12px] tracking-[2px] sm:tracking-[2.5px] cursor-pointer transition-colors duration-250"
-              >
-                {label}
-              </motion.button>
-            ))}
-          </motion.div>
 
           {/* Features list */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-10 md:mt-12 flex flex-col gap-3.5"
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-col gap-3.5"
           >
             {[
-              { icon: "🌊", text: "Sustainably sourced from certified fisheries" },
-              { icon: "❄️", text: "Flash-frozen within hours of the catch" },
-              { icon: "🚢", text: "Direct from dock to your doorstep" },
+              { icon: "🌊", text: "Sumber daya dari nelayan lokal Aceh yang terverifikasi" },
+              { icon: "♻️", text: "Mendukung ekonomi sirkular — dari laut ke meja, tanpa sisa" },
+              { icon: "🚚", text: "Distribusi digital langsung ke tangan pembeli" },
             ].map((item) => (
               <div key={item.text} className="flex items-center gap-3.5">
                 <div className="w-9 h-9 md:w-[38px] md:h-[38px] rounded-full bg-[#3cc8d826] border border-[#3cc8d84d] flex items-center justify-center text-base md:text-lg shrink-0">
@@ -140,7 +158,7 @@ export function AboutSection() {
           </motion.div>
         </motion.div>
 
-        {/* Right - plate image */}
+        {/* Right - image */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -148,72 +166,47 @@ export function AboutSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative flex justify-center items-center py-10"
         >
-          {/* Main plate */}
+          {/* Main image */}
           <motion.div
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-full max-w-[280px] sm:max-w-[340px] md:max-w-[420px] aspect-square rounded-full overflow-hidden relative border-4 md:border-[6px] border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.4),0_0_50px_rgba(60,200,216,0.15)] md:shadow-[0_40px_80px_rgba(0,0,0,0.5),0_0_60px_rgba(60,200,216,0.2)]"
+            className="w-full max-w-[280px] sm:max-w-[340px] md:max-w-[420px] aspect-square rounded-3xl overflow-hidden relative border-4 md:border-[6px] border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.4),0_0_50px_rgba(60,200,216,0.15)]"
           >
             <ImageWithFallback
-              src={SHRIMP_PLATE}
-              alt="Grilled shrimp on white plate"
+              src={ABOUT_IMG}
+              alt="Nelayan Aceh di laut"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
             {/* Inner glow */}
-            <div className="absolute inset-0 rounded-full shadow-[inset_0_0_30px_rgba(60,200,216,0.1)] md:shadow-[inset_0_0_40px_rgba(60,200,216,0.1)]" />
+            <div className="absolute inset-0 rounded-3xl shadow-[inset_0_0_30px_rgba(60,200,216,0.1)]" />
           </motion.div>
 
-          {/* Decorative green leaves */}
+          {/* Decorative elements */}
           <motion.div
             animate={{ rotate: [-5, 5, -5] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             className="hidden md:block absolute top-[5%] right-[2%] text-[40px] lg:text-[50px] select-none drop-shadow-md"
           >
-            🌿
+            🐟
           </motion.div>
           <motion.div
             animate={{ rotate: [5, -5, 5] }}
             transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             className="hidden md:block absolute bottom-[8%] left-[2%] text-[36px] lg:text-[45px] select-none drop-shadow-md"
           >
-            🌱
+            🌊
           </motion.div>
 
-          {/* Pepper seeds scattered */}
-          {[
-            { top: "18%", left: "8%", size: "14px", delay: 0 },
-            { top: "30%", right: "5%", size: "12px", delay: 0.3 },
-            { bottom: "25%", right: "8%", size: "16px", delay: 0.6 },
-            { bottom: "15%", left: "18%", size: "10px", delay: 0.9 },
-            { top: "12%", left: "22%", size: "12px", delay: 1.2 },
-          ].map((pepper, i) => (
-            <motion.div
-              key={i}
-              className="hidden md:block absolute rounded-full shadow-md"
-              animate={{ y: [0, -5, 0], opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2.5 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: pepper.delay }}
-              style={{
-                top: pepper.top,
-                left: pepper.left,
-                right: pepper.right,
-                bottom: pepper.bottom,
-                width: pepper.size,
-                height: pepper.size,
-                background: "radial-gradient(circle, #b91c1c, #7f1d1d)",
-              }}
-            />
-          ))}
-
-          {/* Action icons */}
+          {/* Floating stat badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            whileHover={{ scale: 1.15 }}
-            className="absolute top-[5%] md:top-[10%] left-[10%] md:left-[5%] w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center cursor-pointer shadow-[0_8px_20px_rgba(0,0,0,0.2)] md:shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
+            className="absolute top-[5%] md:top-[8%] left-[5%] md:left-[0%] bg-white/15 backdrop-blur-md border border-white/30 rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
           >
-            <ZoomIn size={18} color="white" className="md:w-5 md:h-5" />
+            <p className="text-[#3CC8D8] font-black text-lg md:text-xl">500+</p>
+            <p className="text-white/60 text-[9px] md:text-[10px] font-medium tracking-wide">Nelayan Aktif</p>
           </motion.div>
 
           <motion.div
@@ -221,27 +214,81 @@ export function AboutSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 1.0 }}
-            whileHover={{ scale: 1.15, rotate: 180 }}
-            className="absolute bottom-[10%] md:bottom-[15%] right-[10%] md:right-[5%] w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center cursor-pointer shadow-[0_8px_20px_rgba(60,200,216,0.4)] md:shadow-[0_8px_24px_rgba(60,200,216,0.5)]"
-            style={{
-              background: "linear-gradient(135deg, #3CC8D8, #0891b2)",
-            }}
+            className="absolute bottom-[10%] md:bottom-[12%] right-[5%] md:right-[0%] bg-white/15 backdrop-blur-md border border-white/30 rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
           >
-            <RotateCw size={18} color="white" className="md:w-5 md:h-5" />
-          </motion.div>
-
-          {/* Floating lemon near plate */}
-          <motion.div
-            animate={{ y: [0, -8, 0], rotate: [0, 15, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="hidden md:block absolute top-[38%] left-[2%] text-[28px] lg:text-[32px] select-none drop-shadow-md"
-          >
-            🍋
+            <p className="text-[#3CC8D8] font-black text-lg md:text-xl">50 Ton</p>
+            <p className="text-white/60 text-[9px] md:text-[10px] font-medium tracking-wide">Limbah/Bulan</p>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Bottom CTA stripe */}
+      {/* ═══ BAGIAN 2: Statistik ═══ */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-20 relative z-[2]">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {stats.map((stat, i) => {
+            const Icon = stat.icon;
+            return (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-2xl p-5 md:p-6 text-center hover:bg-white/[0.1] transition-colors duration-300"
+              >
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#3cc8d820] border border-[#3cc8d840] flex items-center justify-center mx-auto mb-3">
+                  <Icon className="w-5 h-5 md:w-6 md:h-6 text-[#3CC8D8]" />
+                </div>
+                <p className="font-sans font-black text-white text-2xl md:text-3xl mb-1">{stat.value}</p>
+                <p className="font-sans text-white/50 text-[11px] md:text-xs font-medium tracking-wide">{stat.label}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ═══ BAGIAN 3: Keunggulan ═══ */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-24 relative z-[2]">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <p className="font-sans text-[11px] md:text-[12px] tracking-[4px] text-[#3CC8D8] font-semibold uppercase mb-3">
+            Keunggulan
+          </p>
+          <h3
+            className="font-sans font-black text-white tracking-[-0.5px]"
+            style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}
+          >
+            Mengapa Memilih PasaiEungkot?
+          </h3>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          {features.map((feature, i) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              className="bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-7 hover:bg-white/[0.1] hover:border-[#3cc8d840] transition-all duration-300 cursor-default"
+            >
+              <div className="text-3xl md:text-4xl mb-4">{feature.icon}</div>
+              <h4 className="font-sans font-bold text-white text-base md:text-lg mb-2">{feature.title}</h4>
+              <p className="font-sans text-white/55 text-xs md:text-[13px] leading-relaxed font-light">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* ═══ BAGIAN 4: CTA Bawah ═══ */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -251,10 +298,10 @@ export function AboutSection() {
       >
         <div>
           <p className="font-sans text-xl md:text-[22px] font-bold text-white mb-1.5 md:mb-2">
-            Ready to taste the ocean?
+            Siap memanfaatkan limbah ikan?
           </p>
           <p className="font-sans text-xs md:text-[14px] text-white/55 font-light">
-            Order now and get free delivery on your first purchase.
+            Jelajahi marketplace kami dan temukan produk limbah ikan berkualitas dari Aceh.
           </p>
         </div>
 
@@ -262,19 +309,21 @@ export function AboutSection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="w-full sm:w-auto px-8 py-3 md:px-9 md:py-3.5 border-none rounded-full text-white font-sans font-bold text-xs md:text-[13px] tracking-[1.5px] cursor-pointer shadow-[0_8px_25px_rgba(60,200,216,0.3)] md:shadow-[0_8px_30px_rgba(60,200,216,0.35)]"
+            onClick={() => navigate(routes.marketplace)}
+            className="w-full sm:w-auto px-8 py-3 md:px-9 md:py-3.5 border-none rounded-full text-white font-sans font-bold text-xs md:text-[13px] tracking-[1.5px] cursor-pointer shadow-[0_8px_25px_rgba(60,200,216,0.3)]"
             style={{
               background: "linear-gradient(135deg, #3CC8D8, #0891b2)",
             }}
           >
-            ORDER NOW
+            JELAJAHI MARKETPLACE
           </motion.button>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
+            onClick={() => navigate(routes.contact)}
             className="w-full sm:w-auto px-8 py-3 md:px-9 md:py-3.5 bg-transparent border-2 border-[#3cc8d873] rounded-full text-[#54D9E8] font-sans font-semibold text-xs md:text-[13px] tracking-[1px] cursor-pointer transition-colors"
           >
-            LEARN MORE
+            HUBUNGI KAMI
           </motion.button>
         </div>
       </motion.div>

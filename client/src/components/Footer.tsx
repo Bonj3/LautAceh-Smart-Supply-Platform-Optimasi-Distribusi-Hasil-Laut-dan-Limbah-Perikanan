@@ -1,3 +1,7 @@
+import { Link } from "react-router-dom";
+import { routes } from "../routes";
+import logoUrl from "../logoutu.jpeg";
+
 export function Footer() {
   return (
     <footer
@@ -21,22 +25,19 @@ export function Footer() {
       >
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-            <div
+            <img
+              src={logoUrl}
+              alt="PasaiEungkot Logo"
               style={{
                 width: 40,
                 height: 40,
                 borderRadius: "50%",
-                background: "linear-gradient(135deg, #3CC8D8, #0891b2)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "18px",
+                objectFit: "cover",
+                boxShadow: "0 4px 15px rgba(60,200,216,0.4)",
               }}
-            >
-              🐚
-            </div>
+            />
             <span style={{ fontWeight: 800, fontSize: "18px", letterSpacing: "3px", color: "white" }}>
-              OCEANIC
+              PasaiEungkot
             </span>
           </div>
           <p
@@ -48,7 +49,7 @@ export function Footer() {
               maxWidth: 280,
             }}
           >
-            Bringing the finest ocean catch to your table since 2018. Freshness you can taste in every bite.
+            Platform digital yang menghubungkan seluruh ekosistem perikanan Aceh — dari nelayan hingga konsumen — secara transparan, efisien, dan berkelanjutan.
           </p>
 
           <div style={{ display: "flex", gap: "10px", marginTop: "24px" }}>
@@ -83,16 +84,31 @@ export function Footer() {
 
         {[
           {
-            title: "Company",
-            links: ["About Us", "Our Mission", "Careers", "Press"],
+            title: "Platform",
+            links: [
+              { label: "Beranda", to: routes.home },
+              { label: "Marketplace", to: routes.marketplace },
+              { label: "Edukasi", to: routes.education },
+              { label: "Tentang Kami", to: "#about-us" },
+            ],
           },
           {
-            title: "Products",
-            links: ["Fresh Fish", "Lobster", "Crab", "Shrimp", "Octopus"],
+            title: "Produk Limbah",
+            links: [
+              { label: "Tulang Ikan", to: routes.marketplace },
+              { label: "Sisik Ikan", to: routes.marketplace },
+              { label: "Kepala Ikan", to: routes.marketplace },
+              { label: "Jeroan Ikan", to: routes.marketplace },
+            ],
           },
           {
-            title: "Support",
-            links: ["FAQ", "Contact Us", "Delivery Info", "Returns"],
+            title: "Bantuan",
+            links: [
+              { label: "FAQ", to: "#faq" },
+              { label: "Hubungi Kami", to: routes.contact },
+              { label: "Info Pengiriman", to: "#" },
+              { label: "Pengembalian", to: "#" },
+            ],
           },
         ].map((col) => (
           <div key={col.title}>
@@ -110,9 +126,9 @@ export function Footer() {
             </h4>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
               {col.links.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
+                <li key={link.label}>
+                  <Link
+                    to={link.to}
                     style={{
                       color: "rgba(255,255,255,0.55)",
                       textDecoration: "none",
@@ -127,8 +143,8 @@ export function Footer() {
                       e.currentTarget.style.color = "rgba(255,255,255,0.55)";
                     }}
                   >
-                    {link}
-                  </a>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -150,10 +166,10 @@ export function Footer() {
         }}
       >
         <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", fontWeight: 300 }}>
-          © 2026 Oceanic Seafood Co. All rights reserved.
+          © 2026 PasaiEungkot. Hak Cipta Dilindungi.
         </p>
         <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)", fontWeight: 300 }}>
-          Privacy Policy · Terms of Service
+          Kebijakan Privasi · Syarat & Ketentuan
         </p>
       </div>
 

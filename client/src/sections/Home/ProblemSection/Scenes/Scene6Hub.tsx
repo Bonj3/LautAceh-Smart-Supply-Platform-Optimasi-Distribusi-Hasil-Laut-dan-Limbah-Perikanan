@@ -160,7 +160,7 @@ export default function Scene6Hub({ scrollYProgress }: Props) {
         </div>
 
         {/* Headline */}
-        <h2 
+        <h2
           className="font-extrabold text-white tracking-tight mb-3"
           style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', lineHeight: 1.1 }}
         >

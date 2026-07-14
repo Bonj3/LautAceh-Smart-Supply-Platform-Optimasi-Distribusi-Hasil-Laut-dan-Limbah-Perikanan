@@ -8,8 +8,8 @@ interface Props {
 export default function OverlayCards({ scrollYProgress }: Props) {
   // Animasi untuk setiap card. Mereka muncul (fade in & slide up) lalu menghilang.
 
-  const introOpacity = useTransform(scrollYProgress, [0, 0.04, 0.08], [1, 1, 0]);
-  const introY = useTransform(scrollYProgress, [0, 0.04, 0.08], [0, 0, -50]);
+  const introOpacity = useTransform(scrollYProgress, [0, 0.001, 0.06, 0.09], [0, 1, 1, 0]);
+  const introY = useTransform(scrollYProgress, [0, 0.001, 0.06, 0.09], [0, 0, 0, -50]);
 
   const card2Opacity = useTransform(scrollYProgress, [0.15, 0.2, 0.3, 0.35], [0, 1, 1, 0]);
   const card2Y = useTransform(scrollYProgress, [0.15, 0.2, 0.3, 0.35], [50, 0, 0, -50]);
