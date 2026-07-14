@@ -4,14 +4,14 @@ import { Search, LogOut, User, ChevronDown } from "lucide-react";
 import { routes } from "../routes";
 import { useAuth } from "../context/AuthContext";
 
-// const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Contact Us"];
+// const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Mulai Menjual "];
 const navLinks = [
   { label: "Home", to: routes.home, type: "route" },
   { label: "Marketplace", to: routes.marketplace, type: "route" },
   { label: "News", to: "#news", type: "section" },
   { label: "FAQ", to: "#faq", type: "section" },
   { label: "Affiliate", to: "#affiliate", type: "section" },
-  { label: "Contact Us", to: routes.contact, type: "route" },
+  { label: "Mulai Menjual", to: routes.portal, type: "route" },
 ];
 
 export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
@@ -21,7 +21,7 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
   const { user, isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
   const profileRef = useRef<HTMLDivElement>(null);
-  
+
   const isPenjual = user?.role === "seller";
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
         className="hidden md:flex items-center gap-6 lg:gap-9"
       >
         {navLinks.map((link) => {
-          const isMarketplace = link === "Marketplace";
+          const isMarketplace = link.label === "Marketplace";
           const linkStyle = {
             color: theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)",
             textDecoration: "none",
@@ -97,6 +97,24 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
             cursor: "pointer",
             whiteSpace: "nowrap" as const,
           };
+
+          if (isPenjual && isMarketplace) {
+            return (
+              <Link
+                key={link.label}
+                to={routes.penjual}
+                style={linkStyle}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#0E7C8E";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)";
+                }}
+              >
+                Dashboard Penjual
+              </Link>
+            );
+          }
 
           if (link.type === "route") {
             return (
@@ -115,23 +133,7 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
               </Link>
             );
           }
-          if (isPenjual) {
-            return (
-              <Link
-                key={link}
-                to={routes.penjual}
-                style={linkStyle}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#0E7C8E";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)";
-                }}
-              >
-                {link.label}
-              </Link>
-            );
-          }
+
 
           return (
             <a
