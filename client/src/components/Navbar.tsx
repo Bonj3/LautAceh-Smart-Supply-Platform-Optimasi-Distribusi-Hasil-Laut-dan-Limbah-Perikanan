@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import { routes } from "../routes";
 
-const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Contact Us"];
+const navLinks = ["Beranda", "Toko", "Berita", "FAQ", "Afiliasi", "Mulai Menjual"];
 
-export function Navbar() {
+export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -24,9 +24,10 @@ export function Navbar() {
         left: 0,
         right: 0,
         zIndex: 1000,
-        background: scrolled ? "rgba(4, 70, 84, 0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
-        boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.15)" : "none",
+        background: theme === "light" ? "rgba(255, 255, 255, 0.98)" : (scrolled ? "rgba(4, 70, 84, 0.92)" : "transparent"),
+        backdropFilter: (scrolled || theme === "light") ? "blur(16px)" : "none",
+        boxShadow: (scrolled || theme === "light") ? "0 2px 20px rgba(0,0,0,0.08)" : "none",
+        borderBottom: theme === "light" ? "1px solid rgba(0,0,0,0.05)" : "none",
       }}
     >
       {/* Logo */}
@@ -47,7 +48,7 @@ export function Navbar() {
           🐚
         </div>
         <span
-          className="text-white font-extrabold text-lg tracking-[3px] font-sans"
+          className={`font-extrabold text-lg tracking-[3px] font-sans ${theme === "light" ? "text-gray-900" : "text-white"}`}
         >
           PasaiEungkot
         </span>
@@ -58,9 +59,10 @@ export function Navbar() {
         className="hidden md:flex items-center gap-6 lg:gap-9"
       >
         {navLinks.map((link) => {
-          const isMarketplace = link === "Marketplace";
+          const isMarketplace = link === "Marketplace" || link === "Toko";
+          const isPenjual = link === "Mulai Menjual";
           const linkStyle = {
-            color: "rgba(255,255,255,0.88)",
+            color: theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)",
             textDecoration: "none",
             fontSize: "13px",
             fontWeight: 500,
@@ -82,6 +84,23 @@ export function Navbar() {
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.color = "rgba(255,255,255,0.88)";
+                }}
+              >
+                {link}
+              </Link>
+            );
+          }
+          if (isPenjual) {
+            return (
+              <Link
+                key={link}
+                to={routes.penjual}
+                style={linkStyle}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#0E7C8E";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)";
                 }}
               >
                 {link}
@@ -114,21 +133,21 @@ export function Navbar() {
             width: 38,
             height: 38,
             borderRadius: "50%",
-            background: "rgba(255,255,255,0.15)",
-            border: "1px solid rgba(255,255,255,0.25)",
+            background: theme === "light" ? "rgba(0,0,0,0.04)" : "rgba(255,255,255,0.15)",
+            border: theme === "light" ? "1px solid rgba(0,0,0,0.08)" : "1px solid rgba(255,255,255,0.25)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
-            color: "white",
+            color: theme === "light" ? "#4b5563" : "white",
             transition: "all 0.2s",
             flexShrink: 0,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.25)";
+            e.currentTarget.style.background = theme === "light" ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.25)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.15)";
+            e.currentTarget.style.background = theme === "light" ? "rgba(0,0,0,0.04)" : "rgba(255,255,255,0.15)";
           }}
         >
           <Search size={15} />
@@ -139,9 +158,9 @@ export function Navbar() {
           style={{
             padding: "8px 22px",
             background: "transparent",
-            border: "1px solid rgba(255,255,255,0.45)",
+            border: theme === "light" ? "1px solid rgba(0,0,0,0.15)" : "1px solid rgba(255,255,255,0.45)",
             borderRadius: "24px",
-            color: "white",
+            color: theme === "light" ? "#374151" : "white",
             cursor: "pointer",
             fontSize: "13px",
             fontWeight: 500,
@@ -150,12 +169,12 @@ export function Navbar() {
             letterSpacing: "0.3px",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.12)";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.7)";
+            e.currentTarget.style.background = theme === "light" ? "rgba(0,0,0,0.04)" : "rgba(255,255,255,0.12)";
+            e.currentTarget.style.borderColor = theme === "light" ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.7)";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
+            e.currentTarget.style.borderColor = theme === "light" ? "rgba(0,0,0,0.15)" : "rgba(255,255,255,0.45)";
           }}
         >
           Sign In
@@ -164,25 +183,25 @@ export function Navbar() {
         <button
           style={{
             padding: "8px 22px",
-            background: "white",
+            background: theme === "light" ? "#0E7C8E" : "white",
             border: "none",
             borderRadius: "24px",
-            color: "#0E7C8E",
+            color: theme === "light" ? "white" : "#0E7C8E",
             cursor: "pointer",
             fontSize: "13px",
             fontWeight: 700,
             fontFamily: "Poppins, sans-serif",
             transition: "all 0.2s",
             letterSpacing: "0.3px",
-            boxShadow: "0 4px 15px rgba(255,255,255,0.2)",
+            boxShadow: theme === "light" ? "0 4px 15px rgba(14,124,142,0.3)" : "0 4px 15px rgba(255,255,255,0.2)",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = "scale(1.05)";
-            e.currentTarget.style.boxShadow = "0 6px 20px rgba(255,255,255,0.3)";
+            e.currentTarget.style.boxShadow = theme === "light" ? "0 6px 20px rgba(14,124,142,0.4)" : "0 6px 20px rgba(255,255,255,0.3)";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = "scale(1)";
-            e.currentTarget.style.boxShadow = "0 4px 15px rgba(255,255,255,0.2)";
+            e.currentTarget.style.boxShadow = theme === "light" ? "0 4px 15px rgba(14,124,142,0.3)" : "0 4px 15px rgba(255,255,255,0.2)";
           }}
         >
           Sign Up

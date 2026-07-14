@@ -8,11 +8,16 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "@lautaceh/shared": "file:../shared",
+    "cors": "^2.8.6",
+    "express": "^4.19.2",
+    "uuid": "^14.0.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.1",
+    "@types/uuid": "^10.0.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
   }

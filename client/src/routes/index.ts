@@ -6,4 +6,5 @@ export const routes = {
   contact: '/contact',
   portal: '/portal',
   category: '/category',
+  penjual: '/penjual',
 };

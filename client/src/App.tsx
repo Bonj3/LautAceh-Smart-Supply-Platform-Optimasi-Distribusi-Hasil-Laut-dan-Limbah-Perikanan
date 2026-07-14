@@ -7,6 +7,7 @@ import Marketplace from "./pages/Marketplace";
 import Contact from "./pages/Contact";
 import Portal from "./pages/Portal";
 import Category from "./pages/Category";
+import Penjual from "./pages/Penjual";
 
 export default function App() {
   return (
@@ -26,6 +27,9 @@ export default function App() {
 
         {/* URL: "/category" */}
         <Route path={routes.category} element={<Category />} />
+
+        {/* URL: "/penjual" */}
+        <Route path={routes.penjual} element={<Penjual />} />
 
         {/* Catatan: Untuk Education dan Dashboard bisa kamu tambahkan 
             nanti kalau file halamannya sudah dibuat */}

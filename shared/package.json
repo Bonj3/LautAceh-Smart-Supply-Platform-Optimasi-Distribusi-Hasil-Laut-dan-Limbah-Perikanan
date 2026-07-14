@@ -1,0 +1,9 @@
+{
+  "name": "@lautaceh/shared",
+  "version": "1.0.0",
+  "description": "Shared types and utilities for LautAceh project",
+  "main": "index.js",
+  "types": "index.ts",
+  "author": "",
+  "license": "ISC"
+}
