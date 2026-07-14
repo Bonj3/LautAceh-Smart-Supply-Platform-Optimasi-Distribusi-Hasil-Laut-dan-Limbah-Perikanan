@@ -64,7 +64,7 @@ export function StageInfoCard({ sp, stage, si }: { sp: number; stage: number; si
         transition: "border-color 0.7s ease",
       }}>
         <div style={{ display: "flex", gap: "5px", marginBottom: "18px", alignItems: "center" }}>
-          {STAGES.map((s, idx) => (
+          {STAGES.map((s: any, idx: number) => (
             <div key={idx} style={{
               height: "5px", borderRadius: "3px",
               width: idx + 1 === currentStage ? "22px" : "5px",
@@ -119,7 +119,7 @@ export function HubOverlay({ sp, isHub, hubP }: { sp: number; isHub: boolean; hu
         position: "absolute", bottom: "4%", left: "50%", transform: "translateX(-50%)",
         display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px", maxWidth: "660px", width: "90%",
       }}>
-        {SUCCESS.map((item, idx) => {
+        {SUCCESS.map((item: any, idx: number) => {
           const p = easeOut(rng(sp, 0.90 + idx * 0.026, 1.0));
           return (
             <div key={idx} style={{
@@ -153,7 +153,7 @@ export function BottomProgressPath({ sp }: { sp: number }) {
         <path d="M 10 40 C 96 14, 168 12, 240 28 S 392 42, 470 18" fill="none" stroke="url(#ps-route)" strokeWidth="3" strokeLinecap="round"
           strokeDasharray="480" strokeDashoffset={480 * (1 - clamp(sp / 0.84))} />
 
-        {PROGRESS_MILESTONES.map((m, mi) => {
+        {PROGRESS_MILESTONES.map((m: any, mi: number) => {
           const reached = sp >= m.thresh;
           const isCurrent = mi === Math.min(Math.floor(sp / 0.22), 4);
           return (

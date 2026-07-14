@@ -31,14 +31,14 @@ export function Footer() {
               alt="PasaiEungkot Icon"
               style={{ height: "40px", objectFit: "contain" }}
             />
-            <img 
-              src={textUrl} 
-              alt="PasaiEungkot Text" 
-              style={{ 
-                height: "20px", 
+            <img
+              src={textUrl}
+              alt="PasaiEungkot Text"
+              style={{
+                height: "20px",
                 objectFit: "contain",
                 filter: "brightness(1.8) drop-shadow(0px 0px 2px rgba(255,255,255,0.2))"
-              }} 
+              }}
             />
           </div>
           <p
