@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { ArrowLeft, Mail, Lock, LogIn } from "lucide-react";
 import { routes } from "../routes";
 import { useAuth, DUMMY_USERS } from "../context/AuthContext";
-import logoUrl from "../logoutu.jpeg";
+import logoUrl from "../logoutu.jpeg?url";
 
 export default function Login() {
   const navigate = useNavigate();

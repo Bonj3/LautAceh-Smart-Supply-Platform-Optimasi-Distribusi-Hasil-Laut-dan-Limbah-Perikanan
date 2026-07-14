@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { routes } from "../routes";
-import logoUrl from "../logoutu.jpeg";
+import logoUrl from "../logoutu.jpeg?url";
 
 export function Footer() {
   return (

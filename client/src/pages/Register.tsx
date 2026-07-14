@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { ArrowLeft, Mail, Lock, User, UserPlus } from "lucide-react";
 import { routes } from "../routes";
 import { useAuth } from "../context/AuthContext";
-import logoUrl from "../logoutu.jpeg";
+import logoUrl from "../logoutu.jpeg?url";
 
 export default function Register() {
   const navigate = useNavigate();

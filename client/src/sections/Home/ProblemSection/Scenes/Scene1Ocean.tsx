@@ -5,7 +5,7 @@ interface Props {
 }
 
 export default function Scene1Ocean({ scrollYProgress }: Props) {
-  // Perlebar fade out agar scene terlihat lebih lama
+  // Perlebar fade out agar scene terlihat lebih lam
   const opacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
 
   return (
