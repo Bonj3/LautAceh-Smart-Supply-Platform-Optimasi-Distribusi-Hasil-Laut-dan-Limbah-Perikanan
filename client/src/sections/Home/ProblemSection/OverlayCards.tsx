@@ -7,9 +7,9 @@ interface Props {
 
 export default function OverlayCards({ scrollYProgress }: Props) {
   // Animasi untuk setiap card. Mereka muncul (fade in & slide up) lalu menghilang.
-  
-  const introOpacity = useTransform(scrollYProgress, [0, 0.05, 0.12, 0.15], [0, 1, 1, 0]);
-  const introY = useTransform(scrollYProgress, [0, 0.05, 0.12, 0.15], [50, 0, 0, -50]);
+
+  const introOpacity = useTransform(scrollYProgress, [0, 0.001, 0.06, 0.09], [0, 1, 1, 0]);
+  const introY = useTransform(scrollYProgress, [0, 0.001, 0.06, 0.09], [0, 0, 0, -50]);
 
   const card2Opacity = useTransform(scrollYProgress, [0.15, 0.2, 0.3, 0.35], [0, 1, 1, 0]);
   const card2Y = useTransform(scrollYProgress, [0.15, 0.2, 0.3, 0.35], [50, 0, 0, -50]);
@@ -28,7 +28,7 @@ export default function OverlayCards({ scrollYProgress }: Props) {
       style={{ opacity, y }}
       className="absolute top-[10%] sm:top-[15%] md:top-[20%] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[5%] lg:right-[10%] w-[90%] max-w-[400px] pointer-events-none z-50"
     >
-      <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 md:p-8 rounded-3xl shadow-2xl mx-auto md:mx-0">
+      <div className="bg-white/[0.14] backdrop-blur-2xl border border-white/30 p-6 md:p-8 rounded-3xl shadow-2xl shadow-black/10 mx-auto md:mx-0">
         <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4 tracking-tight">
           {title}
         </h3>
@@ -41,7 +41,7 @@ export default function OverlayCards({ scrollYProgress }: Props) {
 
   return (
     <div className="absolute inset-0 z-50 pointer-events-none">
-      
+
       {/* Intro Scene 1 */}
       <motion.div
         style={{ opacity: introOpacity, y: introY }}
@@ -56,29 +56,29 @@ export default function OverlayCards({ scrollYProgress }: Props) {
       </motion.div>
 
       {/* Cards for Scenes 2-5 */}
-      <CardTemplate 
-        opacity={card2Opacity} 
-        y={card2Y} 
-        title={STORY_DATA.scenes[0].title} 
-        description={STORY_DATA.scenes[0].description} 
+      <CardTemplate
+        opacity={card2Opacity}
+        y={card2Y}
+        title={STORY_DATA.scenes[0].title}
+        description={STORY_DATA.scenes[0].description}
       />
-      <CardTemplate 
-        opacity={card3Opacity} 
-        y={card3Y} 
-        title={STORY_DATA.scenes[1].title} 
-        description={STORY_DATA.scenes[1].description} 
+      <CardTemplate
+        opacity={card3Opacity}
+        y={card3Y}
+        title={STORY_DATA.scenes[1].title}
+        description={STORY_DATA.scenes[1].description}
       />
-      <CardTemplate 
-        opacity={card4Opacity} 
-        y={card4Y} 
-        title={STORY_DATA.scenes[2].title} 
-        description={STORY_DATA.scenes[2].description} 
+      <CardTemplate
+        opacity={card4Opacity}
+        y={card4Y}
+        title={STORY_DATA.scenes[2].title}
+        description={STORY_DATA.scenes[2].description}
       />
-      <CardTemplate 
-        opacity={card5Opacity} 
-        y={card5Y} 
-        title={STORY_DATA.scenes[3].title} 
-        description={STORY_DATA.scenes[3].description} 
+      <CardTemplate
+        opacity={card5Opacity}
+        y={card5Y}
+        title={STORY_DATA.scenes[3].title}
+        description={STORY_DATA.scenes[3].description}
       />
 
     </div>

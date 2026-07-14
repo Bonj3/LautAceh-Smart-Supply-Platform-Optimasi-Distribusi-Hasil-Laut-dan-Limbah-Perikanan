@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { routes } from "../../routes";
 import { useNavigate } from "react-router-dom";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
 import sisikikanImg from "./sisik.jpg";
@@ -267,7 +268,7 @@ export function HeroSection() {
             WebkitTextFillColor: "transparent",
           }}
         >
-          Limbah Ikan,<br />Nilai Ekonomi Nyata
+          Dari Laut ke Meja,<br />Tanpa Sisa
         </motion.h1>
 
         <motion.p

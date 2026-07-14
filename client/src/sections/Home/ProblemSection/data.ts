@@ -39,3 +39,19 @@ export const STORY_DATA = {
     tagline: "Dari Laut ke Meja, Tanpa Sisa."
   }
 };
+
+export const SCENE_ASSETS = {
+  boat: "",
+  truck: "",
+  warehouse: "",
+  restaurant: "",
+  hubLogo: ""
+};
+
+export const HUB_NODES = [
+  { label: "Nelayan" },
+  { label: "Pengepul" },
+  { label: "Pasar" },
+  { label: "Restoran" },
+  { label: "Pabrik" }
+];

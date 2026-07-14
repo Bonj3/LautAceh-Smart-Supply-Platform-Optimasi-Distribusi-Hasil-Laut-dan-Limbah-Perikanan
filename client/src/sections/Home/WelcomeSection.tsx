@@ -1,4 +1,6 @@
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../routes";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
 import kepalaikan from "./kepalaikan.jpg"
 import sisik from "./sisik.jpg"
@@ -58,6 +60,7 @@ function ServiceCard({
   satuan?: string;
   delay: number;
 }) {
+  const navigate = useNavigate();
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -119,6 +122,7 @@ function ServiceCard({
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
+        onClick={() => navigate(routes.marketplace)}
         className="mt-4 px-5 md:px-6 py-2 md:py-2.5 border-none rounded-full text-white font-sans font-semibold text-[11px] md:text-xs tracking-[0.5px] cursor-pointer"
         style={{
           background: `linear-gradient(135deg, ${color}, #3CC8D8)`,

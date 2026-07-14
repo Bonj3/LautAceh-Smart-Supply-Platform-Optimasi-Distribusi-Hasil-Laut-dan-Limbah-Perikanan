@@ -1,18 +1,42 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Search } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Search, LogOut, User, ChevronDown } from "lucide-react";
 import { routes } from "../routes";
+import { useAuth } from "../context/AuthContext";
 
-const navLinks = ["Beranda", "Toko", "Berita", "FAQ", "Afiliasi", "Mulai Menjual"];
+// const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Contact Us"];
+const navLinks = [
+  { label: "Home", to: routes.home, type: "route" },
+  { label: "Marketplace", to: routes.marketplace, type: "route" },
+  { label: "News", to: "#news", type: "section" },
+  { label: "FAQ", to: "#faq", type: "section" },
+  { label: "Affiliate", to: "#affiliate", type: "section" },
+  { label: "Contact Us", to: routes.contact, type: "route" },
+];
 
 export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const { user, isLoggedIn, logout } = useAuth();
+  const navigate = useNavigate();
+  const profileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close profile dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -59,8 +83,7 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
         className="hidden md:flex items-center gap-6 lg:gap-9"
       >
         {navLinks.map((link) => {
-          const isMarketplace = link === "Marketplace" || link === "Toko";
-          const isPenjual = link === "Mulai Menjual";
+          const isMarketplace = link === "Marketplace";
           const linkStyle = {
             color: theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)",
             textDecoration: "none",
@@ -68,16 +91,16 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
             fontWeight: 500,
             letterSpacing: "0.5px",
             fontFamily: "Poppins, sans-serif",
-            transition: "color 0.2s, opacity 0.2s",
+            transition: "color 0.2s",
             cursor: "pointer",
             whiteSpace: "nowrap" as const,
           };
 
-          if (isMarketplace) {
+          if (link.type === "route") {
             return (
               <Link
-                key={link}
-                to={routes.marketplace}
+                key={link.label}
+                to={link.to}
                 style={linkStyle}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = "#3CC8D8";
@@ -86,7 +109,7 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
                   e.currentTarget.style.color = "rgba(255,255,255,0.88)";
                 }}
               >
-                {link}
+                {link.label}
               </Link>
             );
           }
@@ -103,15 +126,15 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
                   e.currentTarget.style.color = theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)";
                 }}
               >
-                {link}
+                {link.label}
               </Link>
             );
           }
 
           return (
             <a
-              key={link}
-              href={`#${link.toLowerCase().replace(/\s+/g, "-")}`}
+              key={link.label}
+              href={link.to}
               style={linkStyle}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = "#3CC8D8";
@@ -120,12 +143,11 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
                 e.currentTarget.style.color = "rgba(255,255,255,0.88)";
               }}
             >
-              {link}
+              {link.label}
             </a>
           );
         })}
       </div>
-
       {/* Actions */}
       <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
         <button
@@ -153,59 +175,124 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
           <Search size={15} />
         </button>
 
-        <button
-          className="hidden sm:block"
-          style={{
-            padding: "8px 22px",
-            background: "transparent",
-            border: theme === "light" ? "1px solid rgba(0,0,0,0.15)" : "1px solid rgba(255,255,255,0.45)",
-            borderRadius: "24px",
-            color: theme === "light" ? "#374151" : "white",
-            cursor: "pointer",
-            fontSize: "13px",
-            fontWeight: 500,
-            fontFamily: "Poppins, sans-serif",
-            transition: "all 0.2s",
-            letterSpacing: "0.3px",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = theme === "light" ? "rgba(0,0,0,0.04)" : "rgba(255,255,255,0.12)";
-            e.currentTarget.style.borderColor = theme === "light" ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.7)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.borderColor = theme === "light" ? "rgba(0,0,0,0.15)" : "rgba(255,255,255,0.45)";
-          }}
-        >
-          Sign In
-        </button>
+        {isLoggedIn && user ? (
+          /* ── Logged In: Profile Dropdown ── */
+          <div ref={profileRef} className="relative">
+            <button
+              onClick={() => setProfileOpen(!profileOpen)}
+              className="flex items-center gap-2 cursor-pointer bg-white/10 hover:bg-white/20 border border-white/20 rounded-full py-1.5 px-3 transition-all"
+            >
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white"
+                style={{ background: "linear-gradient(135deg, #3CC8D8, #0891b2)" }}
+              >
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+              <span className="hidden sm:block text-white text-xs font-medium max-w-[100px] truncate">
+                {user.name}
+              </span>
+              <ChevronDown size={14} className={`text-white/60 transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+            </button>
 
-        <button
-          style={{
-            padding: "8px 22px",
-            background: theme === "light" ? "#0E7C8E" : "white",
-            border: "none",
-            borderRadius: "24px",
-            color: theme === "light" ? "white" : "#0E7C8E",
-            cursor: "pointer",
-            fontSize: "13px",
-            fontWeight: 700,
-            fontFamily: "Poppins, sans-serif",
-            transition: "all 0.2s",
-            letterSpacing: "0.3px",
-            boxShadow: theme === "light" ? "0 4px 15px rgba(14,124,142,0.3)" : "0 4px 15px rgba(255,255,255,0.2)",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.05)";
-            e.currentTarget.style.boxShadow = theme === "light" ? "0 6px 20px rgba(14,124,142,0.4)" : "0 6px 20px rgba(255,255,255,0.3)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-            e.currentTarget.style.boxShadow = theme === "light" ? "0 4px 15px rgba(14,124,142,0.3)" : "0 4px 15px rgba(255,255,255,0.2)";
-          }}
-        >
-          Sign Up
-        </button>
+            {profileOpen && (
+              <div
+                className="absolute right-0 top-[calc(100%+8px)] w-56 bg-[#0c3040]/95 backdrop-blur-xl border border-white/15 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.4)] overflow-hidden z-50"
+              >
+                {/* User info header */}
+                <div className="px-4 py-3 border-b border-white/10">
+                  <p className="text-sm text-white font-semibold truncate">{user.name}</p>
+                  <p className="text-[10px] text-white/40 truncate">{user.email}</p>
+                  <span className="inline-block mt-1 text-[9px] bg-[#3CC8D8]/20 text-[#3CC8D8] px-2 py-0.5 rounded-full font-medium">
+                    {user.role === "seller" ? "Nelayan / Pengepul" : "Pembeli"}
+                  </span>
+                </div>
+
+                {/* Menu items */}
+                <div className="py-1">
+                  <button
+                    onClick={() => { setProfileOpen(false); navigate(routes.dashboard); }}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  >
+                    <User size={14} />
+                    Profil Saya
+                  </button>
+                  <button
+                    onClick={() => {
+                      setProfileOpen(false);
+                      logout();
+                      navigate(routes.home);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-xs text-red-400/80 hover:text-red-300 hover:bg-red-500/10 transition-colors cursor-pointer"
+                  >
+                    <LogOut size={14} />
+                    Keluar
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          /* ── Not Logged In: Login / Register buttons ── */
+          <>
+            <Link
+              to={routes.login}
+              className="hidden sm:block"
+              style={{
+                padding: "8px 22px",
+                background: "transparent",
+                border: "1px solid rgba(255,255,255,0.45)",
+                borderRadius: "24px",
+                color: "white",
+                cursor: "pointer",
+                fontSize: "13px",
+                fontWeight: 500,
+                fontFamily: "Poppins, sans-serif",
+                transition: "all 0.2s",
+                letterSpacing: "0.3px",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.12)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.7)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
+              }}
+            >
+              Masuk
+            </Link>
+
+            <Link
+              to={routes.register}
+              style={{
+                padding: "8px 22px",
+                background: "white",
+                border: "none",
+                borderRadius: "24px",
+                color: "#0E7C8E",
+                cursor: "pointer",
+                fontSize: "13px",
+                fontWeight: 700,
+                fontFamily: "Poppins, sans-serif",
+                transition: "all 0.2s",
+                letterSpacing: "0.3px",
+                boxShadow: "0 4px 15px rgba(255,255,255,0.2)",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.05)";
+                e.currentTarget.style.boxShadow = "0 6px 20px rgba(255,255,255,0.3)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.boxShadow = "0 4px 15px rgba(255,255,255,0.2)";
+              }}
+            >
+              Daftar
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
