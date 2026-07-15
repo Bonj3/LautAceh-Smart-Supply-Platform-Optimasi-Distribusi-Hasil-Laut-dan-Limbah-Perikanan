@@ -62,7 +62,7 @@ export function Footer() {
             title: "Platform",
             links: [
               { label: "Beranda", to: routes.home },
-              { label: "Toko", to: routes.marketplace },
+              { label: "Pasar", to: routes.marketplace },
               { label: "Berita", to: routes.education },
               { label: "Mulai Menjual", to: routes.penjual },
             ],

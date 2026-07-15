@@ -54,19 +54,6 @@ export default function ProblemSection() {
 
       </div>
 
-      {/* Smooth wave transition to WelcomeSection */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="block w-full h-[60px] sm:h-[120px]">
-          <path
-            d="M0,40 C240,100 480,10 720,60 C960,110 1200,20 1440,50 L1440,120 L0,120 Z"
-            fill="#f0fbfd"
-          />
-          <path
-            d="M0,60 C300,20 600,90 900,50 C1100,25 1300,70 1440,45 L1440,120 L0,120 Z"
-            fill="rgba(240,251,253,0.5)"
-          />
-        </svg>
-      </div>
     </section>
   );
 }

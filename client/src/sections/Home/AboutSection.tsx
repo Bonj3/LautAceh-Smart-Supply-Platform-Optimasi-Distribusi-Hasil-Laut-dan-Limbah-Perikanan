@@ -41,7 +41,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="bg-[#1a3d45] relative overflow-hidden w-full"
+      className="bg-[#1a3d45] relative overflow-hidden w-full pb-[60px] sm:pb-[120px]"
     >
       {/* Brush-stroke top edge */}
       <div className="absolute -top-0.5 left-0 right-0 z-10">
@@ -51,12 +51,12 @@ export function AboutSection() {
           className="block w-full h-[40px] sm:h-[80px]"
         >
           <path
-            d="M0,80 C80,35 160,65 280,38 C400,12 500,70 640,44 C780,18 900,72 1040,35 C1160,8 1300,60 1380,30 C1420,18 1440,40 1440,40 L1440,0 L0,0 Z"
-            fill="#f0fbfd"
+            d="M0,80 C80,35 160,65 280,38 C400,12 500,70 640,44 C780,18 900,72 1040,35 C1160,8 1300,60 1380,30 C1420,18 1440,40 1440,0 L0,0 Z"
+            fill="#0c3547"
           />
           <path
             d="M0,80 C120,45 240,70 380,42 C520,15 640,68 800,38 C960,10 1100,65 1260,32 C1370,12 1430,45 1440,38 L1440,0 L0,0 Z"
-            fill="rgba(240,251,253,0.5)"
+            fill="rgba(12,53,71,0.5)"
           />
         </svg>
       </div>
@@ -326,6 +326,20 @@ export function AboutSection() {
           </motion.button>
         </div>
       </motion.div>
+
+      {/* Smooth wave transition to WelcomeSection */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="block w-full h-[60px] sm:h-[120px]">
+          <path
+            d="M0,40 C240,100 480,10 720,60 C960,110 1200,20 1440,50 L1440,120 L0,120 Z"
+            fill="#f0fbfd"
+          />
+          <path
+            d="M0,60 C300,20 600,90 900,50 C1100,25 1300,70 1440,45 L1440,120 L0,120 Z"
+            fill="rgba(240,251,253,0.5)"
+          />
+        </svg>
+      </div>
     </section>
   );
 }

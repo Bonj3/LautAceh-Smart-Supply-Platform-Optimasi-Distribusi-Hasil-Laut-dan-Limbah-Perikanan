@@ -175,20 +175,20 @@ export default function Penjual() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50/80 pt-[78px]" style={{ fontFamily: "Inter, Poppins, sans-serif" }}>
-            <Navbar theme="light" />
+        <div className="min-h-screen pt-[78px] text-white" style={{ fontFamily: "Inter, Poppins, sans-serif", background: "#0b4553" }}>
+            <Navbar />
             
             {/* ── Header Section ── */}
-            <header className="bg-white border-b border-gray-200 shadow-sm py-12 relative">
+            <header className="relative py-12 overflow-hidden bg-[#0d2b31]/40 border-b border-white/10 shadow-md">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="flex flex-col items-center justify-center text-center">
-                        <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mb-4 border border-teal-100">
-                            <Store className="w-8 h-8 text-teal-600" />
+                        <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 border border-white/20 shadow-[0_4px_20px_rgba(60,200,216,0.3)]">
+                            <Store className="w-8 h-8 text-[#3CC8D8]" />
                         </div>
-                        <h1 className="text-3xl font-bold text-gray-900 mb-3">
+                        <h1 className="text-3xl font-bold text-white mb-3 tracking-wide">
                             Selamat datang Penjual
                         </h1>
-                        <p className="text-gray-500 max-w-lg mb-8 text-sm sm:text-base leading-relaxed">
+                        <p className="text-teal-50 max-w-lg mb-8 text-sm sm:text-base leading-relaxed opacity-90">
                             Kelola inventaris ikan segar Anda, pantau statistik penjualan, dan jangkau lebih banyak pembeli di seluruh ekosistem PasaiEungkot.
                         </p>
                         
@@ -198,9 +198,9 @@ export default function Penjual() {
                                     setEditingProduct(null);
                                     setShowForm(true);
                                 }}
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-medium transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                                className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white/10 backdrop-blur-md border border-[#3CC8D8]/50 text-white font-bold tracking-wide transition-all duration-300 hover:bg-[#3CC8D8]/20 hover:border-[#3CC8D8] hover:shadow-[0_0_30px_rgba(60,200,216,0.6)] hover:-translate-y-1 overflow-hidden"
                             >
-                                <Plus className="w-5 h-5" />
+                                <Plus className="w-5 h-5 text-[#3CC8D8] group-hover:text-white transition-colors" />
                                 Jual Produk
                             </button>
                         </div>
@@ -210,7 +210,7 @@ export default function Penjual() {
                     <div className="absolute bottom-0 right-4 sm:right-6 lg:right-8">
                         <button
                             onClick={() => setShowLimbahPopup(true)}
-                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-t-xl border border-b-0 border-amber-300 bg-amber-50 text-amber-700 text-sm font-medium hover:bg-amber-100 transition-colors shadow-sm"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-t-xl border border-b-0 border-[#3CC8D8]/30 bg-[#0E7C8E]/40 backdrop-blur-md text-teal-100 text-sm font-medium hover:bg-[#0E7C8E]/60 hover:text-white transition-colors shadow-sm"
                         >
                             <Package className="w-4 h-4" />
                             Jual Limbah
@@ -220,34 +220,34 @@ export default function Penjual() {
             </header>
 
             {/* ── Stats Bar ── */}
-            <div className="bg-white border-b border-gray-100">
+            <div className="bg-[#0b4553] border-b border-white/10 shadow-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                     <div className="grid grid-cols-3 gap-4">
-                        <div className="flex items-center gap-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200">
-                            <ShoppingBag className="w-8 h-8 text-emerald-600" />
+                        <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                            <ShoppingBag className="w-8 h-8 text-[#3CC8D8]" />
                             <div>
-                                <p className="text-2xl font-bold text-emerald-700">
+                                <p className="text-2xl font-bold text-white">
                                     {dijualProducts.length}
                                 </p>
-                                <p className="text-xs text-emerald-600">Sedang Dijual</p>
+                                <p className="text-xs text-teal-100/80">Sedang Dijual</p>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-200">
-                            <FileText className="w-8 h-8 text-gray-500" />
+                        <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                            <FileText className="w-8 h-8 text-teal-200/70" />
                             <div>
-                                <p className="text-2xl font-bold text-gray-700">
+                                <p className="text-2xl font-bold text-white">
                                     {draftProducts.length}
                                 </p>
-                                <p className="text-xs text-gray-500">Draft & Selesai</p>
+                                <p className="text-xs text-teal-100/80">Draft & Selesai</p>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3 p-3 rounded-xl bg-teal-50 border border-teal-200">
-                            <Fish className="w-8 h-8 text-teal-600" />
+                        <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                            <Fish className="w-8 h-8 text-[#3CC8D8]" />
                             <div>
-                                <p className="text-2xl font-bold text-teal-700">
+                                <p className="text-2xl font-bold text-white">
                                     {products.reduce((sum, p) => sum + p.stokKilo, 0).toFixed(1)} kg
                                 </p>
-                                <p className="text-xs text-teal-600">Total Stok</p>
+                                <p className="text-xs text-teal-100/80">Total Stok</p>
                             </div>
                         </div>
                     </div>
@@ -257,10 +257,10 @@ export default function Penjual() {
             {/* ── Main Content with Tabs ── */}
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                    <TabsList className="w-full sm:w-auto bg-gray-100 rounded-xl p-1 mb-6">
+                    <TabsList className="w-full sm:w-auto bg-white/10 border border-white/10 rounded-xl p-1 mb-6">
                         <TabsTrigger
                             value="dijual"
-                            className="flex-1 sm:flex-none gap-2 px-4 py-2 rounded-lg text-sm data-[state=active]:bg-teal-600 data-[state=active]:text-white data-[state=active]:shadow-sm"
+                            className="flex-1 sm:flex-none gap-2 px-4 py-2 rounded-lg text-sm text-teal-100 data-[state=active]:bg-[#0E7C8E] data-[state=active]:text-white data-[state=active]:shadow-sm transition-colors"
                         >
                             <ShoppingBag className="w-4 h-4" />
                             Sedang Dijual
@@ -272,7 +272,7 @@ export default function Penjual() {
                         </TabsTrigger>
                         <TabsTrigger
                             value="draft"
-                            className="flex-1 sm:flex-none gap-2 px-4 py-2 rounded-lg text-sm data-[state=active]:bg-gray-700 data-[state=active]:text-white data-[state=active]:shadow-sm"
+                            className="flex-1 sm:flex-none gap-2 px-4 py-2 rounded-lg text-sm text-teal-100 data-[state=active]:bg-[#0d2b31] data-[state=active]:text-white data-[state=active]:shadow-sm transition-colors"
                         >
                             <FileText className="w-4 h-4" />
                             Draft & Selesai
@@ -360,12 +360,12 @@ export default function Penjual() {
                     }
                 }}
             >
-                <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto bg-white">
+                <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto bg-[#0d2b31] border border-[#3CC8D8]/20 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
                     <DialogHeader>
-                        <DialogTitle className="text-xl font-bold text-gray-900">
+                        <DialogTitle className="text-xl font-bold text-white">
                             {editingProduct ? "Edit Produk" : "Tambah Produk Baru"}
                         </DialogTitle>
-                        <DialogDescription className="text-sm text-gray-500">
+                        <DialogDescription className="text-sm text-teal-100/70">
                             {editingProduct
                                 ? "Perbarui informasi produk ikan fresh Anda."
                                 : "Isi detail produk ikan fresh yang ingin Anda jual."}

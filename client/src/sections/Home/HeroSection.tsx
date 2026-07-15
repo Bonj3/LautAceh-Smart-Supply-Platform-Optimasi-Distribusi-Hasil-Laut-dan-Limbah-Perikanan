@@ -176,7 +176,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen relative overflow-hidden flex items-center justify-center w-full"
+      className="min-h-screen pt-[78px] relative overflow-hidden flex items-center justify-center w-full"
       style={{
         background: "linear-gradient(155deg, #022c35 0%, #055a6e 35%, #0e96b0 70%, #3CC8D8 100%)",
       }}

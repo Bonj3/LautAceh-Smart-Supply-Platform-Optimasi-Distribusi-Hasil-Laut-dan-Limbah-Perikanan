@@ -137,18 +137,18 @@ export function SellerProductForm({
     <div className="space-y-6">
       {/* ── Jenis Ikan ── */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">
-          Jenis Ikan <span className="text-red-500">*</span>
+        <label className="block text-sm font-medium text-teal-50 mb-1.5">
+          Jenis Ikan <span className="text-red-400">*</span>
         </label>
         <div className="relative">
           <select
             value={jenisIkan}
             onChange={(e) => setJenisIkan(e.target.value as JenisIkan)}
             className="
-              w-full appearance-none bg-white border border-gray-300 rounded-xl
-              px-4 py-2.5 pr-10 text-sm text-gray-800
-              focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500
-              transition-colors
+              w-full appearance-none bg-[#0a3541]/50 border border-[#3CC8D8]/30 rounded-xl
+              px-4 py-2.5 pr-10 text-sm text-white
+              focus:outline-none focus:ring-2 focus:ring-[#3CC8D8] focus:border-[#3CC8D8]
+              transition-colors [&>option]:text-gray-900
             "
           >
             {JENIS_IKAN_OPTIONS.map((jenis) => (
@@ -157,14 +157,14 @@ export function SellerProductForm({
               </option>
             ))}
           </select>
-          <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-teal-100/60 pointer-events-none" />
         </div>
       </div>
 
       {/* ── Judul Produk (with auto-fill) ── */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">
-          Judul Produk <span className="text-red-500">*</span>
+        <label className="block text-sm font-medium text-teal-50 mb-1.5">
+          Judul Produk <span className="text-red-400">*</span>
         </label>
         <div className="relative">
           <input
@@ -175,9 +175,9 @@ export function SellerProductForm({
             onKeyDown={handleTitleKeyDown}
             placeholder="Ketik judul atau tekan Tab untuk auto-fill..."
             className="
-              w-full bg-white border border-gray-300 rounded-xl
-              px-4 py-2.5 text-sm text-gray-800
-              focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500
+              w-full bg-[#0a3541]/50 border border-[#3CC8D8]/30 rounded-xl
+              px-4 py-2.5 text-sm text-white placeholder-teal-100/40
+              focus:outline-none focus:ring-2 focus:ring-[#3CC8D8] focus:border-[#3CC8D8]
               transition-colors
             "
           />
@@ -185,13 +185,13 @@ export function SellerProductForm({
           {showSuggestion && suggestion && (
             <div className="absolute inset-0 pointer-events-none px-4 py-2.5 text-sm">
               <span className="invisible">{namaJudul}</span>
-              <span className="text-gray-400">
+              <span className="text-teal-100/40">
                 {suggestion.slice(namaJudul.length)}
               </span>
             </div>
           )}
           {showSuggestion && (
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 px-2 py-0.5 rounded-md bg-gray-100 text-[10px] text-gray-500 font-mono">
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#0E7C8E]/40 border border-[#3CC8D8]/30 text-[10px] text-teal-100 font-mono">
               Tab ↹
             </span>
           )}
@@ -207,7 +207,7 @@ export function SellerProductForm({
                 setSuggestion("");
                 setShowSuggestion(false);
               }}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-teal-50 text-teal-700 text-xs font-medium hover:bg-teal-100 transition-colors border border-teal-200"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#3CC8D8]/10 text-[#3CC8D8] text-xs font-medium hover:bg-[#3CC8D8]/20 transition-colors border border-[#3CC8D8]/30"
             >
               <Sparkles className="w-3 h-3" />
               {s}
@@ -218,7 +218,7 @@ export function SellerProductForm({
 
       {/* ── Gambar ── */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">
+        <label className="block text-sm font-medium text-teal-50 mb-1.5">
           Gambar Produk
         </label>
         <div className="flex gap-3 mb-3">
@@ -230,8 +230,8 @@ export function SellerProductForm({
             }}
             className={`flex-1 px-3 py-2 rounded-lg text-xs font-medium border transition-colors ${
               useTemplate
-                ? "bg-teal-50 border-teal-300 text-teal-700"
-                : "bg-white border-gray-200 text-gray-500 hover:bg-gray-50"
+                ? "bg-[#3CC8D8]/20 border-[#3CC8D8] text-[#3CC8D8]"
+                : "bg-white/5 border-white/20 text-teal-100/70 hover:bg-white/10 hover:text-white"
             }`}
           >
             <Camera className="w-4 h-4 mx-auto mb-1" />
@@ -242,8 +242,8 @@ export function SellerProductForm({
             onClick={() => setUseTemplate(false)}
             className={`flex-1 px-3 py-2 rounded-lg text-xs font-medium border transition-colors ${
               !useTemplate
-                ? "bg-teal-50 border-teal-300 text-teal-700"
-                : "bg-white border-gray-200 text-gray-500 hover:bg-gray-50"
+                ? "bg-[#3CC8D8]/20 border-[#3CC8D8] text-[#3CC8D8]"
+                : "bg-white/5 border-white/20 text-teal-100/70 hover:bg-white/10 hover:text-white"
             }`}
           >
             <Camera className="w-4 h-4 mx-auto mb-1" />
@@ -252,13 +252,13 @@ export function SellerProductForm({
         </div>
 
         {useTemplate ? (
-          <div className="relative w-full h-40 rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
+          <div className="relative w-full h-40 rounded-xl overflow-hidden bg-[#0a3541] border border-white/20">
             <ImageWithFallback
               src={TEMPLATE_IMAGES[jenisIkan]}
               alt={`Template ${jenisIkan}`}
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-2 left-2 px-2 py-1 rounded-md bg-black/60 text-white text-xs">
+            <div className="absolute bottom-2 left-2 px-2 py-1 rounded-md bg-[#0d2b31]/80 backdrop-blur-sm text-teal-100 text-xs border border-white/10">
               Template: {jenisIkan}
             </div>
           </div>
@@ -270,14 +270,14 @@ export function SellerProductForm({
               onChange={(e) => setGambarUrl(e.target.value)}
               placeholder="Masukkan URL gambar..."
               className="
-                w-full bg-white border border-gray-300 rounded-xl
-                px-4 py-2.5 text-sm text-gray-800
-                focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500
+                w-full bg-[#0a3541]/50 border border-[#3CC8D8]/30 rounded-xl
+                px-4 py-2.5 text-sm text-white placeholder-teal-100/40
+                focus:outline-none focus:ring-2 focus:ring-[#3CC8D8] focus:border-[#3CC8D8]
                 transition-colors
               "
             />
             {gambarUrl && (
-              <div className="mt-2 relative w-full h-40 rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
+              <div className="mt-2 relative w-full h-40 rounded-xl overflow-hidden bg-[#0a3541] border border-white/20">
                 <ImageWithFallback
                   src={gambarUrl}
                   alt="Preview"
@@ -285,7 +285,7 @@ export function SellerProductForm({
                 />
               </div>
             )}
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-teal-100/60 mt-2">
               * Nantinya bisa upload file langsung. Template gambar dari assets akan disediakan.
             </p>
           </div>
@@ -294,8 +294,8 @@ export function SellerProductForm({
 
       {/* ── Stok ── */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">
-          Stok Tersedia (Kg) <span className="text-red-500">*</span>
+        <label className="block text-sm font-medium text-teal-50 mb-1.5">
+          Stok Tersedia (Kg) <span className="text-red-400">*</span>
         </label>
         <input
           type="number"
@@ -304,23 +304,23 @@ export function SellerProductForm({
           value={stokKilo}
           onChange={(e) => setStokKilo(parseFloat(e.target.value) || 0)}
           className="
-            w-full bg-white border border-gray-300 rounded-xl
-            px-4 py-2.5 text-sm text-gray-800
-            focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500
+            w-full bg-white/10 border border-[#3CC8D8]/30 rounded-xl
+            px-4 py-2.5 text-sm text-white
+            focus:outline-none focus:ring-2 focus:ring-[#3CC8D8] focus:border-[#3CC8D8]
             transition-colors
           "
         />
-        <p className="text-xs text-gray-400 mt-1">
+        <p className="text-xs text-teal-100/60 mt-1">
           Minimum 250 gram (0.25 kg). Sistem stok dalam kilogram.
         </p>
       </div>
 
       {/* ── Harga Tiers (readonly, auto dari jenis ikan) ── */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">
+        <label className="block text-sm font-medium text-teal-50 mb-1.5">
           Harga per Kilogram
         </label>
-        <p className="text-xs text-gray-500 mb-2">
+        <p className="text-xs text-teal-100/60 mb-2">
           Harga otomatis sesuai kondisi pasar di Aceh. Tiga tier berdasarkan jumlah pembelian:
         </p>
         <div className="space-y-2">
@@ -329,27 +329,27 @@ export function SellerProductForm({
               key={i}
               className={`flex items-center justify-between px-4 py-2.5 rounded-xl border ${
                 i === 0
-                  ? "bg-amber-50 border-amber-200"
+                  ? "bg-amber-500/10 border-amber-500/30"
                   : i === 1
-                    ? "bg-teal-50 border-teal-200"
-                    : "bg-blue-50 border-blue-200"
+                    ? "bg-[#3CC8D8]/10 border-[#3CC8D8]/30"
+                    : "bg-blue-500/10 border-blue-500/30"
               }`}
             >
               <div>
-                <span className="text-sm font-medium text-gray-800">
+                <span className="text-sm font-medium text-white">
                   {tier.label}
                 </span>
-                <span className="text-xs text-gray-500 ml-2">
+                <span className="text-xs text-teal-100/70 ml-2">
                   ({tier.minKg}–{tier.maxKg} kg)
                 </span>
               </div>
               <span
                 className={`text-sm font-bold ${
                   i === 0
-                    ? "text-amber-700"
+                    ? "text-amber-400"
                     : i === 1
-                      ? "text-teal-700"
-                      : "text-blue-700"
+                      ? "text-[#3CC8D8]"
+                      : "text-blue-400"
                 }`}
               >
                 {fmtRp(tier.hargaPerKg)}/kg
@@ -361,10 +361,10 @@ export function SellerProductForm({
 
       {/* ── Durasi Jual ── */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">
+        <label className="block text-sm font-medium text-teal-50 mb-1.5">
           Batas Waktu Penjualan (Expired)
         </label>
-        <p className="text-xs text-gray-500 mb-2">
+        <p className="text-xs text-teal-100/60 mb-2">
           Produk akan otomatis dicabut dari marketplace setelah waktu habis untuk menjaga kesegaran.
         </p>
         <div className="grid grid-cols-4 gap-2">
@@ -375,8 +375,8 @@ export function SellerProductForm({
               onClick={() => setDurasiJualJam(opt.value)}
               className={`px-3 py-2.5 rounded-xl text-sm font-medium border transition-colors ${
                 durasiJualJam === opt.value
-                  ? "bg-teal-600 text-white border-teal-600 shadow-sm"
-                  : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
+                  ? "bg-[#3CC8D8] text-[#0d2b31] border-[#3CC8D8] shadow-[0_0_15px_rgba(60,200,216,0.3)]"
+                  : "bg-white/5 text-teal-100/70 border-white/20 hover:bg-white/10 hover:text-white"
               }`}
             >
               {opt.label}
@@ -386,12 +386,12 @@ export function SellerProductForm({
       </div>
 
       {/* ── Action Buttons ── */}
-      <div className="flex items-center gap-3 pt-4 border-t border-gray-200">
+      <div className="flex items-center gap-3 pt-4 border-t border-white/10">
         <button
           type="button"
           onClick={() => handleSubmit("draft")}
           disabled={!namaJudul.trim() || stokKilo < 0.25}
-          className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/20 text-teal-100 font-medium hover:bg-white/10 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
         >
           Simpan Draft
         </button>
@@ -399,7 +399,7 @@ export function SellerProductForm({
           type="button"
           onClick={() => handleSubmit("dijual")}
           disabled={!namaJudul.trim() || stokKilo < 0.25}
-          className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+          className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#0E7C8E] to-[#3CC8D8] hover:shadow-[0_4px_15px_rgba(60,200,216,0.4)] text-white font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed border border-[#3CC8D8]/50"
         >
           <Check className="w-4 h-4" />
           {isEdit ? "Update & Jual" : "Langsung Jual"}
@@ -407,7 +407,7 @@ export function SellerProductForm({
         <button
           type="button"
           onClick={onCancel}
-          className="p-2.5 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-500 transition-colors"
+          className="p-2.5 rounded-xl border border-white/20 hover:bg-white/10 text-teal-100 hover:text-white transition-colors"
         >
           <X className="w-4 h-4" />
         </button>

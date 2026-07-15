@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Search, LogOut, User, ChevronDown } from "lucide-react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { LogOut, User, ChevronDown } from "lucide-react";
 import { motion } from "motion/react";
 import { routes } from "../routes";
 import { useAuth } from "../context/AuthContext";
@@ -9,12 +9,20 @@ import iconUrl from "../assets/PasaieUngkot.png";
 
 // const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Mulai Menjual "];
 const navLinks = [
+<<<<<<< HEAD
   { label: "Home", to: routes.home, type: "route" },
   { label: "Marketplace", to: routes.marketplace, type: "route" },
   { label: "News", to: routes.news, type: "route" },
   { label: "FAQ", to: "#faq", type: "section" },
   { label: "Affiliate", to: "#affiliate", type: "section" },
+=======
+  { label: "Beranda", to: routes.home, type: "route" },
+  { label: "Tentang", to: "#about", type: "section" },
+  { label: "Pasar", to: routes.marketplace, type: "route" },
+  { label: "Berita", to: "#news", type: "section" },
+>>>>>>> 3ed86eb7595707577f673ba2dad93113dc47cab7
   { label: "Mulai Menjual", to: routes.penjual, type: "route" },
+  { label: "FAQ", to: "#faq", type: "section" },
 ];
 
 export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
@@ -23,7 +31,9 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
   const [profileOpen, setProfileOpen] = useState(false);
   const { user, isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const profileRef = useRef<HTMLDivElement>(null);
+  const [activeHash, setActiveHash] = useState(location.hash);
 
   const isPenjual = user?.role === "seller";
 
@@ -32,6 +42,49 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Update active hash based on route changes
+  useEffect(() => {
+    setActiveHash(location.hash);
+  }, [location.hash]);
+
+  // ScrollSpy for sections on the home page
+  useEffect(() => {
+    if (location.pathname !== routes.home) return;
+
+    const sections = navLinks
+      .filter((link) => link.type === "section")
+      .map((link) => link.to.replace("#", ""));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveHash(`#${entry.target.id}`);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    const handleScrollTop = () => {
+      if (window.scrollY < 200) setActiveHash("");
+    };
+    window.addEventListener("scroll", handleScrollTop);
+
+    return () => {
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.unobserve(el);
+      });
+      window.removeEventListener("scroll", handleScrollTop);
+    };
+  }, [location.pathname]);
 
   // Close profile dropdown on outside click
   useEffect(() => {
@@ -129,15 +182,35 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
         className="hidden md:flex items-center gap-6 lg:gap-9"
       >
         {navLinks.map((link) => {
-          const isMarketplace = link.label === "Marketplace";
+          const isMarketplace = link.label === "Pasar";
+          
+          let isActive = false;
+          if (isPenjual && isMarketplace) {
+            isActive = location.pathname.startsWith(routes.penjual);
+          } else if (link.type === "route") {
+            if (link.to === routes.home) {
+               isActive = location.pathname === link.to && !activeHash;
+            } else {
+               isActive = location.pathname.startsWith(link.to);
+            }
+          } else if (link.type === "section") {
+            isActive = location.pathname === routes.home && activeHash === link.to;
+          }
+
+          const linkColor = isActive 
+            ? (theme === "light" ? "#0E7C8E" : "#3CC8D8") 
+            : (theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)");
+
           const linkStyle = {
-            color: theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)",
-            textDecoration: "none",
+            color: linkColor,
+            textDecoration: isActive ? "underline" : "none",
+            textUnderlineOffset: "6px",
+            textDecorationThickness: "2px",
             fontSize: "13px",
-            fontWeight: 500,
+            fontWeight: isActive ? 600 : 500,
             letterSpacing: "0.5px",
             fontFamily: "Poppins, sans-serif",
-            transition: "color 0.2s",
+            transition: "all 0.2s",
             cursor: "pointer",
             whiteSpace: "nowrap" as const,
           };
@@ -149,10 +222,10 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
                 to={routes.penjual}
                 style={linkStyle}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#0E7C8E";
+                  e.currentTarget.style.color = theme === "light" ? "#0E7C8E" : "#3CC8D8";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)";
+                  e.currentTarget.style.color = linkColor;
                 }}
               >
                 Dashboard Penjual
@@ -166,11 +239,18 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
                 key={link.label}
                 to={link.to}
                 style={linkStyle}
+                onClick={(e) => {
+                  if (link.to === routes.home && location.pathname === routes.home) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    setActiveHash("");
+                  }
+                }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#3CC8D8";
+                  e.currentTarget.style.color = theme === "light" ? "#0E7C8E" : "#3CC8D8";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "rgba(255,255,255,0.88)";
+                  e.currentTarget.style.color = linkColor;
                 }}
               >
                 {link.label}
@@ -185,10 +265,10 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
               href={link.to}
               style={linkStyle}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = "#3CC8D8";
+                e.currentTarget.style.color = theme === "light" ? "#0E7C8E" : "#3CC8D8";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = "rgba(255,255,255,0.88)";
+                e.currentTarget.style.color = linkColor;
               }}
             >
               {link.label}
@@ -198,31 +278,6 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
       </div>
       {/* Actions */}
       <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
-        <button
-          style={{
-            width: 38,
-            height: 38,
-            borderRadius: "50%",
-            background: theme === "light" ? "rgba(0,0,0,0.04)" : "rgba(255,255,255,0.15)",
-            border: theme === "light" ? "1px solid rgba(0,0,0,0.08)" : "1px solid rgba(255,255,255,0.25)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            color: theme === "light" ? "#4b5563" : "white",
-            transition: "all 0.2s",
-            flexShrink: 0,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = theme === "light" ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.25)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = theme === "light" ? "rgba(0,0,0,0.04)" : "rgba(255,255,255,0.15)";
-          }}
-        >
-          <Search size={15} />
-        </button>
-
         {isLoggedIn && user ? (
           /* ── Logged In: Profile Dropdown ── */
           <div ref={profileRef} className="relative">
