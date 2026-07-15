@@ -30,13 +30,13 @@ export function AiSection() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className="bg-[#0b1b24] relative overflow-hidden py-24 md:py-32 w-full font-sans">
+    <section id="ai" className="bg-[#0b1b24] relative overflow-hidden py-24 md:py-32 w-full font-sans">
       {/* ── Background Glows ── */}
       <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3" />
       <div className="absolute bottom-0 left-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-teal-600/10 rounded-full blur-[150px] pointer-events-none -translate-x-1/3 translate-y-1/3" />
 
       {/* ── Grid Overlay ── */}
-      <div 
+      <div
         className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(#2dd4bf 1px, transparent 1px), linear-gradient(90deg, #2dd4bf 1px, transparent 1px)`,
@@ -45,10 +45,10 @@ export function AiSection() {
       />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        
+
         {/* ── Header ── */}
         <div className="text-center md:text-left mb-16 md:mb-20">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -57,8 +57,8 @@ export function AiSection() {
             <Bot className="w-4 h-4" />
             <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase">PasaiEungkot AI Assistant</span>
           </motion.div>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -70,8 +70,8 @@ export function AiSection() {
               Semudah Chatting
             </span>
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -84,7 +84,7 @@ export function AiSection() {
 
         {/* ── Interactive Content ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
-          
+
           {/* Left: Interactive Tabs */}
           <div className="flex flex-col gap-4">
             {AI_FEATURES.map((feature, idx) => {
@@ -96,15 +96,15 @@ export function AiSection() {
                   key={feature.id}
                   onClick={() => setActiveTab(idx)}
                   className={`text-left p-5 md:p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group w-full
-                    ${isActive 
-                      ? "bg-teal-950/40 border-teal-500/50 shadow-[0_0_30px_rgba(45,212,191,0.1)]" 
+                    ${isActive
+                      ? "bg-teal-950/40 border-teal-500/50 shadow-[0_0_30px_rgba(45,212,191,0.1)]"
                       : "bg-white/[0.02] border-white/5 hover:bg-white/[0.05] hover:border-white/10"
                     }
                   `}
                 >
                   {/* Active highlight line */}
                   {isActive && (
-                    <motion.div 
+                    <motion.div
                       layoutId="active-ai-tab"
                       className="absolute left-0 top-0 bottom-0 w-1 md:w-1.5 bg-teal-400 shadow-[0_0_10px_rgba(45,212,191,0.8)]"
                     />
@@ -156,7 +156,7 @@ export function AiSection() {
 
           {/* Right: Dynamic Visualizations */}
           <div className="relative h-[450px] md:h-[500px] rounded-3xl bg-slate-900/60 border border-white/5 overflow-hidden flex items-center justify-center shadow-2xl mt-8 lg:mt-0">
-            
+
             {/* Background grid inner */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(45,212,191,0.05)_0%,transparent_70%)] pointer-events-none" />
 
@@ -169,6 +169,20 @@ export function AiSection() {
           </div>
         </div>
       </div>
+
+      {/* Bottom Wave Transition to FaqSection */}
+      <div className="absolute bottom-[-1px] left-0 right-0 z-10 pointer-events-none">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="block w-full h-[40px] sm:h-[80px]">
+          <path
+            d="M0,40 C240,100 480,10 720,60 C960,110 1200,20 1440,50 L1440,120 L0,120 Z"
+            fill="#072430"
+          />
+          <path
+            d="M0,60 C300,20 600,90 900,50 C1100,25 1300,70 1440,45 L1440,120 L0,120 Z"
+            fill="rgba(7,36,48,0.5)"
+          />
+        </svg>
+      </div>
     </section>
   );
 }
@@ -176,9 +190,11 @@ export function AiSection() {
 // ── Visualizations ──
 
 function ChatbotVisual({ type }: { type: 'assistant' | 'recommendation' | 'transaction' }) {
-  
+
+  type ChatMessage = { sender: string; text: string; delay: number; typing?: boolean; isCard?: boolean; showButton?: boolean; };
+
   // Data percakapan berdasarkan tipe tab
-  const getChatData = () => {
+  const getChatData = (): ChatMessage[] => {
     switch (type) {
       case 'assistant':
         return [
@@ -205,7 +221,7 @@ function ChatbotVisual({ type }: { type: 'assistant' | 'recommendation' | 'trans
   const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
 
   useEffect(() => {
-    const timeouts: NodeJS.Timeout[] = [];
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
     messages.forEach((msg, idx) => {
       const to = setTimeout(() => {
         setVisibleMessages(prev => [...prev, idx]);
@@ -216,7 +232,7 @@ function ChatbotVisual({ type }: { type: 'assistant' | 'recommendation' | 'trans
   }, [type]);
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
@@ -242,7 +258,7 @@ function ChatbotVisual({ type }: { type: 'assistant' | 'recommendation' | 'trans
         {messages.map((msg, idx) => {
           const isVisible = visibleMessages.includes(idx);
           const isUser = msg.sender === 'user';
-          
+
           if (!isVisible) return null;
 
           return (

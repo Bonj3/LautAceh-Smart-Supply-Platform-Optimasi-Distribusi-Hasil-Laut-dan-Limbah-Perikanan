@@ -5,6 +5,7 @@ import { HeroSection } from "../sections/Home/HeroSection";
 import { WelcomeSection } from "../sections/Home/WelcomeSection";
 import ProblemSection from "../sections/Home/ProblemSection";
 import { AboutSection } from "../sections/Home/AboutSection";
+import { AiSection } from "../sections/Home/AiSection";
 import { FaqSection } from "../sections/Home/FaqSection";
 import { Footer } from "../components/Footer";
 
@@ -47,6 +48,7 @@ export default function Home() {
       <ProblemSection />
       <AboutSection />
       <WelcomeSection />
+      <AiSection />
       <FaqSection />
       <Footer />
     </div>

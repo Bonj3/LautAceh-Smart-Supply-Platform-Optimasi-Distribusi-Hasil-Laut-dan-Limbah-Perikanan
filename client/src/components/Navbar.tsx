@@ -9,19 +9,12 @@ import iconUrl from "../assets/PasaieUngkot.png";
 
 // const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Mulai Menjual "];
 const navLinks = [
-<<<<<<< HEAD
-  { label: "Home", to: routes.home, type: "route" },
-  { label: "Marketplace", to: routes.marketplace, type: "route" },
-  { label: "News", to: routes.news, type: "route" },
-  { label: "FAQ", to: "#faq", type: "section" },
-  { label: "Affiliate", to: "#affiliate", type: "section" },
-=======
   { label: "Beranda", to: routes.home, type: "route" },
   { label: "Tentang", to: "#about", type: "section" },
   { label: "Pasar", to: routes.marketplace, type: "route" },
   { label: "Berita", to: "#news", type: "section" },
->>>>>>> 3ed86eb7595707577f673ba2dad93113dc47cab7
   { label: "Mulai Menjual", to: routes.penjual, type: "route" },
+  { label: "AI", to: "#ai", type: "section" },
   { label: "FAQ", to: "#faq", type: "section" },
 ];
 
@@ -183,22 +176,22 @@ export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
       >
         {navLinks.map((link) => {
           const isMarketplace = link.label === "Pasar";
-          
+
           let isActive = false;
           if (isPenjual && isMarketplace) {
             isActive = location.pathname.startsWith(routes.penjual);
           } else if (link.type === "route") {
             if (link.to === routes.home) {
-               isActive = location.pathname === link.to && !activeHash;
+              isActive = location.pathname === link.to && !activeHash;
             } else {
-               isActive = location.pathname.startsWith(link.to);
+              isActive = location.pathname.startsWith(link.to);
             }
           } else if (link.type === "section") {
             isActive = location.pathname === routes.home && activeHash === link.to;
           }
 
-          const linkColor = isActive 
-            ? (theme === "light" ? "#0E7C8E" : "#3CC8D8") 
+          const linkColor = isActive
+            ? (theme === "light" ? "#0E7C8E" : "#3CC8D8")
             : (theme === "light" ? "rgba(17, 24, 39, 0.85)" : "rgba(255,255,255,0.88)");
 
           const linkStyle = {
