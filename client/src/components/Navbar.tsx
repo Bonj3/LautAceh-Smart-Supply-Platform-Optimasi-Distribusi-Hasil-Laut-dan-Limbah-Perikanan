@@ -13,10 +13,16 @@ const navLinks = [
   { label: "Tentang", to: "#about", type: "section" },
   { label: "Pasar", to: routes.marketplace, type: "route" },
   { label: "Berita", to: "#news", type: "section" },
+  { label: "Home", to: routes.home, type: "route" },
+  { label: "Marketplace", to: routes.marketplace, type: "route" },
+  { label: "News", to: routes.news, type: "route" },
+  { label: "FAQ", to: "#faq", type: "section" },
+  { label: "Affiliate", to: "#affiliate", type: "section" },
   { label: "Mulai Menjual", to: routes.penjual, type: "route" },
   { label: "AI", to: "#ai", type: "section" },
   { label: "FAQ", to: "#faq", type: "section" },
 ];
+
 
 export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
   const [scrolled, setScrolled] = useState(false);

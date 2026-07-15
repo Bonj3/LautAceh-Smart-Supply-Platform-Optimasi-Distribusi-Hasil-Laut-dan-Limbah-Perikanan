@@ -10,6 +10,7 @@ export const routes = {
   category: '/category',
   penjual: '/penjual',
   news: '/news',
+  faq: '/faq',
   checkout: '/checkout',
   orderTracking: '/orders/:orderId',
   faq: '/faq',
