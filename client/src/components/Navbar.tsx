@@ -9,21 +9,14 @@ import iconUrl from "../assets/PasaieUngkot.png";
 
 // const navLinks = ["Home", "Marketplace", "News", "FAQ", "Affiliate", "Mulai Menjual "];
 const navLinks = [
-<<<<<<< HEAD
   { label: "Home", to: routes.home, type: "route" },
   { label: "Marketplace", to: routes.marketplace, type: "route" },
   { label: "News", to: routes.news, type: "route" },
   { label: "FAQ", to: "#faq", type: "section" },
   { label: "Affiliate", to: "#affiliate", type: "section" },
-=======
-  { label: "Beranda", to: routes.home, type: "route" },
-  { label: "Tentang", to: "#about", type: "section" },
-  { label: "Pasar", to: routes.marketplace, type: "route" },
-  { label: "Berita", to: "#news", type: "section" },
->>>>>>> 3ed86eb7595707577f673ba2dad93113dc47cab7
   { label: "Mulai Menjual", to: routes.penjual, type: "route" },
-  { label: "FAQ", to: "#faq", type: "section" },
 ];
+
 
 export function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
   const [scrolled, setScrolled] = useState(false);
