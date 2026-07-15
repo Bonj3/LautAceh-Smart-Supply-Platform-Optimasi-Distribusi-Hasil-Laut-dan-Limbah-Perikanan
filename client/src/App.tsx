@@ -16,7 +16,6 @@ import News from "./pages/News";
 import Faq from "./pages/Faq";
 import Checkout from "./pages/Checkout";
 import OrderTracking from "./pages/OrderTracking";
-import Faq from "./pages/Faq";
 
 export default function App() {
   return (
@@ -50,9 +49,6 @@ export default function App() {
 
             {/* URL: "/news" */}
             <Route path={routes.news} element={<News />} />
-
-            {/* URL: "/faq" */}
-            <Route path={routes.faq} element={<Faq />} />
 
             {/* URL: "/checkout" */}
             <Route path={routes.checkout} element={<Checkout />} />
