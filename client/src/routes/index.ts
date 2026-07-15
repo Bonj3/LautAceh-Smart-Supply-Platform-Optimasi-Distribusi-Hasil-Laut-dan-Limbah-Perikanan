@@ -9,4 +9,7 @@ export const routes = {
   portal: '/portal',
   category: '/category',
   penjual: '/penjual',
+  news: '/news',
+  checkout: '/checkout',
+  orderTracking: '/orders/:orderId',
 };

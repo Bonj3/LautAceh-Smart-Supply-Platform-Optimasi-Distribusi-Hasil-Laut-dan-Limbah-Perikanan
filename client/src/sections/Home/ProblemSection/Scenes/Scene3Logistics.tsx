@@ -124,9 +124,9 @@ export default function Scene3Logistics({ scrollYProgress }: Props) {
       className="w-screen h-screen flex-shrink-0 relative flex items-center justify-center overflow-hidden"
     >
       {/* ── Atmospheric background glows ── */}
-      <div className="absolute top-[20%] left-[8%] w-80 h-80 rounded-full bg-sky-500/[0.10] blur-[100px]" />
-      <div className="absolute bottom-[15%] right-[10%] w-96 h-96 rounded-full bg-amber-500/[0.08] blur-[120px]" />
-      <div className="absolute top-[60%] left-[50%] w-72 h-72 rounded-full bg-red-500/[0.07] blur-[100px] -translate-x-1/2" />
+      <div className="absolute top-[20%] left-[8%] w-48 md:w-80 h-48 md:h-80 rounded-full bg-sky-500/[0.10] blur-[80px] md:blur-[100px]" />
+      <div className="absolute bottom-[15%] right-[10%] w-64 md:w-96 h-64 md:h-96 rounded-full bg-amber-500/[0.08] blur-[80px] md:blur-[120px]" />
+      <div className="absolute top-[60%] left-[50%] w-48 md:w-72 h-48 md:h-72 rounded-full bg-red-500/[0.07] blur-[80px] md:blur-[100px] -translate-x-1/2" />
 
       {/* ── SVG route lines (dashed, animated) ── */}
       <svg
@@ -166,7 +166,7 @@ export default function Scene3Logistics({ scrollYProgress }: Props) {
           { cx: 500, cy: 310 },
           { cx: 710, cy: 295 },
         ].map((pt, i) => (
-          <g key={i} opacity="0.75">
+          <g key={i} opacity="0.75" className="scale-[0.7] md:scale-100" style={{ transformOrigin: `${pt.cx}px ${pt.cy}px` }}>
             <circle
               cx={pt.cx}
               cy={pt.cy}
@@ -211,25 +211,25 @@ export default function Scene3Logistics({ scrollYProgress }: Props) {
               opacity: nodeOpacities[i],
               x: isTruck ? truckShake : 0,
             }}
-            className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2"
+            className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2 scale-[0.6] sm:scale-[0.8] md:scale-100 origin-center"
           >
             {/* Glow ring */}
             <div
-              className="absolute w-36 h-36 rounded-full blur-2xl -z-10"
+              className="absolute w-24 h-24 md:w-36 md:h-36 rounded-full blur-xl md:blur-2xl -z-10"
               style={{ background: node.glow }}
             />
 
             {/* Icon container */}
             <div
-              className={`w-20 h-20 md:w-24 md:h-24 ${node.bg} rounded-2xl flex items-center justify-center backdrop-blur-xl border ${node.border} shadow-lg relative transition-transform duration-300`}
+              className={`w-16 h-16 md:w-24 md:h-24 ${node.bg} rounded-xl md:rounded-2xl flex items-center justify-center backdrop-blur-xl border ${node.border} shadow-lg relative transition-transform duration-300`}
             >
-              <Icon className={`${node.text} w-9 h-9 md:w-11 md:h-11`} />
+              <Icon className={`${node.text} w-7 h-7 md:w-11 md:h-11`} />
 
               {/* Spinning clock overlay on the truck */}
               {isTruck && (
-                <div className="absolute -top-3 -right-3 w-7 h-7 bg-amber-500/20 rounded-full flex items-center justify-center border border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.3)]">
+                <div className="absolute -top-2 -right-2 md:-top-3 md:-right-3 w-6 h-6 md:w-7 md:h-7 bg-amber-500/20 rounded-full flex items-center justify-center border border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.3)]">
                   <Clock
-                    className="text-amber-400 w-3.5 h-3.5 animate-spin"
+                    className="text-amber-400 w-3 h-3 md:w-3.5 md:h-3.5 animate-spin"
                     style={{ animationDuration: "3s" }}
                   />
                 </div>
@@ -237,7 +237,7 @@ export default function Scene3Logistics({ scrollYProgress }: Props) {
             </div>
 
             {/* Label */}
-            <span className="mt-3 text-[11px] md:text-xs font-semibold tracking-[0.16em] uppercase text-slate-300">
+            <span className="mt-2 md:mt-3 text-[10px] md:text-xs font-semibold tracking-[0.16em] uppercase text-slate-300">
               {node.label}
             </span>
           </motion.div>
@@ -251,7 +251,7 @@ export default function Scene3Logistics({ scrollYProgress }: Props) {
           <motion.div
             key={d.label}
             style={{ left: d.x, top: d.y, opacity: badgeOpacity }}
-            className="absolute -translate-x-1/2 -translate-y-1/2"
+            className="absolute -translate-x-1/2 -translate-y-1/2 scale-[0.7] sm:scale-[0.85] md:scale-100 origin-center"
           >
             <motion.div
               animate={{ y: [0, -4, 0] }}
@@ -261,10 +261,10 @@ export default function Scene3Logistics({ scrollYProgress }: Props) {
                 delay: i * 0.6,
                 ease: "easeInOut",
               }}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-full ${d.bg} border ${d.border} backdrop-blur-xl shadow-lg shadow-black/10`}
+              className={`flex items-center gap-1.5 md:gap-2 px-2.5 md:px-3.5 py-1.5 md:py-2 rounded-full ${d.bg} border ${d.border} backdrop-blur-xl shadow-lg shadow-black/10`}
             >
-              <Icon className={`w-3.5 h-3.5 ${d.color}`} />
-              <span className={`text-[10px] md:text-[11px] font-semibold tracking-wider uppercase ${d.color}`}>
+              <Icon className={`w-3 h-3 md:w-3.5 md:h-3.5 ${d.color}`} />
+              <span className={`text-[9px] md:text-[11px] font-semibold tracking-wider uppercase ${d.color}`}>
                 {d.label}
               </span>
             </motion.div>
@@ -273,15 +273,15 @@ export default function Scene3Logistics({ scrollYProgress }: Props) {
       })}
 
       {/* ── Bottom "broken" indicator line ── */}
-      <div className="absolute bottom-[14%] left-1/2 -translate-x-1/2 flex items-center gap-3 opacity-70">
-        <div className="w-16 h-px bg-gradient-to-r from-transparent to-red-500/50" />
-        <div className="w-6 h-6 rounded-full border border-red-500/40 bg-red-950/40 flex items-center justify-center">
-          <X className="w-3 h-3 text-red-400" />
+      <div className="absolute bottom-[8%] md:bottom-[14%] left-1/2 -translate-x-1/2 flex items-center gap-2 md:gap-3 opacity-70 scale-90 md:scale-100 origin-bottom">
+        <div className="w-10 md:w-16 h-px bg-gradient-to-r from-transparent to-red-500/50" />
+        <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border border-red-500/40 bg-red-950/40 flex items-center justify-center">
+          <X className="w-2.5 h-2.5 md:w-3 md:h-3 text-red-400" />
         </div>
-        <span className="text-[10px] tracking-[0.2em] uppercase text-red-300/70 font-medium">
+        <span className="text-[9px] md:text-[10px] tracking-[0.15em] md:tracking-[0.2em] uppercase text-red-300/70 font-medium whitespace-nowrap">
           Distribusi Manual
         </span>
-        <div className="w-16 h-px bg-gradient-to-l from-transparent to-red-500/50" />
+        <div className="w-10 md:w-16 h-px bg-gradient-to-l from-transparent to-red-500/50" />
       </div>
     </motion.div>
   );

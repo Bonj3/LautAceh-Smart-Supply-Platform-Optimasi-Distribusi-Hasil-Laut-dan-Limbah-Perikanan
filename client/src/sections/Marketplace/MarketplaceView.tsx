@@ -3,6 +3,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { TooltipMarketplace } from "@/components/ui/TooltipMarketplace";
 import { useSearchParams } from "react-router-dom";
+import { useCart, CartProduct } from "../../context/CartContext";
+import ProductDetailModal from "../../components/Marketplace/ProductDetailModal";
 
 /* ──────────────────────────────────────────────
    DATA LAYER – Typed product catalogues
@@ -568,8 +570,13 @@ function BubbleGroup() {
 
 type TabKey = "fresh" | "industri";
 
-export default function MarketplaceView() {
+interface MarketplaceViewProps {
+  onCartOpen?: () => void;
+}
+
+export default function MarketplaceView({ onCartOpen }: MarketplaceViewProps) {
   const [searchParams] = useSearchParams();
+  const { addToCart, cartCount } = useCart();
   const [activeTab, setActiveTab] = useState<TabKey>(() => {
     const tab = searchParams.get("tab");
     if (tab === "fresh" || tab === "industri") {
@@ -591,6 +598,36 @@ export default function MarketplaceView() {
 
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState(() => searchParams.get("category") || "");
+  const [selectedProduct, setSelectedProduct] = useState<CartProduct | null>(null);
+
+  // Convert fresh product to CartProduct
+  function toCartProductFresh(item: ProdukFresh): CartProduct {
+    const numericHarga = parseInt(item.harga.replace(/[^0-9]/g, ""), 10);
+    return {
+      id: `fresh-${item.id}`,
+      nama: item.nama,
+      harga: numericHarga,
+      hargaLabel: item.harga,
+      satuan: item.satuan,
+      gambar: item.gambar,
+      kategori: item.kategori,
+      tag: item.tag,
+    };
+  }
+
+  // Convert industri product to CartProduct
+  function toCartProductIndustri(item: ProdukIndustri): CartProduct {
+    const numericHarga = parseInt(item.hargaPerKilo.replace(/[^0-9]/g, ""), 10);
+    return {
+      id: `industri-${item.id}`,
+      nama: item.jenisLimbah,
+      harga: numericHarga,
+      hargaLabel: item.hargaPerKilo,
+      satuan: "Kg",
+      gambar: item.gambar,
+      kategori: item.kategori,
+    };
+  }
 
   // Filter helper
   const matchSearch = (text: string) =>
@@ -622,46 +659,98 @@ export default function MarketplaceView() {
               tangga, mitra bisnis, hingga kebutuhan industri pengolahan.
             </p>
           </div>
-          <div style={styles.searchWrapper}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", flex: "0 0 auto" }}>
+            <div style={styles.searchWrapper}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{
+                  position: "absolute",
+                  left: "14px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: "18px",
+                  height: "18px",
+                  color: "rgba(120, 200, 220, 0.6)",
+                  pointerEvents: "none",
+                  zIndex: 2,
+                }}
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Cari jenis ikan..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={styles.searchInput}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(0,200,200,0.5)";
+                  e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,200,200,0.1)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(0,200,200,0.2)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              />
+            </div>
+            {/* Cart Button */}
+            <button
+              id="mp-cart-btn"
+              onClick={onCartOpen}
               style={{
-                position: "absolute",
-                left: "14px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                width: "18px",
-                height: "18px",
-                color: "rgba(120, 200, 220, 0.6)",
-                pointerEvents: "none",
-                zIndex: 2,
+                position: "relative",
+                width: "44px",
+                height: "44px",
+                borderRadius: "12px",
+                background: "rgba(93,232,212,0.1)",
+                border: "1px solid rgba(93,232,212,0.3)",
+                color: "#5de8d4",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "20px",
+                flexShrink: 0,
+                transition: "background 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(93,232,212,0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(93,232,212,0.1)";
               }}
             >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-            <input
-              type="text"
-              placeholder="Cari jenis ikan..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={styles.searchInput}
-              onFocus={(e) => {
-                e.currentTarget.style.borderColor = "rgba(0,200,200,0.5)";
-                e.currentTarget.style.boxShadow =
-                  "0 0 0 3px rgba(0,200,200,0.1)";
-              }}
-              onBlur={(e) => {
-                e.currentTarget.style.borderColor = "rgba(0,200,200,0.2)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-            />
+              🛒
+              {cartCount > 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-6px",
+                    right: "-6px",
+                    width: "20px",
+                    height: "20px",
+                    borderRadius: "50%",
+                    background: "linear-gradient(135deg, #0d9488, #0891b2)",
+                    color: "#fff",
+                    fontSize: "10px",
+                    fontWeight: 800,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "2px solid #0a2e3c",
+                  }}
+                >
+                  {cartCount > 9 ? "9+" : cartCount}
+                </span>
+              )}
+            </button>
           </div>
         </div>
 
@@ -716,6 +805,7 @@ export default function MarketplaceView() {
                     }}
                     onMouseEnter={() => setHoveredCard(key)}
                     onMouseLeave={() => setHoveredCard(null)}
+                    onClick={() => setSelectedProduct(toCartProductFresh(item))}
                     className="mp-card"
                   >
                     <div style={{ overflow: "hidden", position: "relative" }}>
@@ -736,7 +826,7 @@ export default function MarketplaceView() {
                             top: "8px",
                             right: "8px",
                             background: "#ffffff",
-                            color: "#4b5563", // gray-600
+                            color: "#4b5563",
                             padding: "2px 8px",
                             borderRadius: "4px",
                             fontSize: "11px",
@@ -750,7 +840,6 @@ export default function MarketplaceView() {
                     </div>
                     <div style={styles.cardBody} className="mp-card-body">
                       <h3 style={styles.productName} className="mp-card-title">
-                        {/* Store Tag (Grosir / Pusat) inline with name */}
                         <span
                           style={{
                             display: "inline-block",
@@ -775,7 +864,6 @@ export default function MarketplaceView() {
                       <div style={styles.priceRow}>
                         <div style={styles.priceBlock}>
                           <span style={styles.price} className="mp-card-price">{item.harga}</span>
-                          {/* Unit / Kg in white */}
                           <span
                             style={{
                               fontSize: "13px",
@@ -787,16 +875,24 @@ export default function MarketplaceView() {
                             / {item.satuan}
                           </span>
                         </div>
-                        {/* Sold count in white */}
-                        <span
-                          style={{
-                            fontSize: "11px",
-                            color: "#ffffff",
-                            fontWeight: 500,
+                        <button
+                          style={styles.beliBtn}
+                          className="mp-card-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            addToCart(toCartProductFresh(item), 1);
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = "linear-gradient(135deg, #14b8a6, #0d9488)";
+                            e.currentTarget.style.transform = "scale(1.05)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "linear-gradient(135deg, #0d9488, #0f766e)";
+                            e.currentTarget.style.transform = "scale(1)";
                           }}
                         >
-                          {item.terjual}
-                        </span>
+                          + Keranjang
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -820,6 +916,7 @@ export default function MarketplaceView() {
                     }}
                     onMouseEnter={() => setHoveredCard(key)}
                     onMouseLeave={() => setHoveredCard(null)}
+                    onClick={() => setSelectedProduct(toCartProductIndustri(item))}
                     className="mp-card"
                   >
                     <div style={{ overflow: "hidden" }}>
@@ -854,18 +951,20 @@ export default function MarketplaceView() {
                         <button
                           style={styles.beliBtn}
                           className="mp-card-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            addToCart(toCartProductIndustri(item), 1);
+                          }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.background =
-                              "linear-gradient(135deg, #14b8a6, #0d9488)";
+                            e.currentTarget.style.background = "linear-gradient(135deg, #14b8a6, #0d9488)";
                             e.currentTarget.style.transform = "scale(1.05)";
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.background =
-                              "linear-gradient(135deg, #0d9488, #0f766e)";
+                            e.currentTarget.style.background = "linear-gradient(135deg, #0d9488, #0f766e)";
                             e.currentTarget.style.transform = "scale(1)";
                           }}
                         >
-                          Beli
+                          + Keranjang
                         </button>
                       </div>
                     </div>
@@ -876,6 +975,16 @@ export default function MarketplaceView() {
           )}
         </TooltipProvider>
       </div>
+
+      {/* ── Product Detail Modal ── */}
+      <ProductDetailModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onCartOpen={() => {
+          setSelectedProduct(null);
+          if (onCartOpen) onCartOpen();
+        }}
+      />
 
       {/* ── Ocean Floor Decorations ── */}
       <div style={styles.oceanFloor}>

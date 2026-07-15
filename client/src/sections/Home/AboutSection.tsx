@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
 import { Anchor, Recycle, Truck, ShieldCheck, Users, Leaf } from "lucide-react";
-
-const ABOUT_IMG = "https://images.unsplash.com/photo-1544551763-46a013bb70d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
+import ABOUT_IMG from "../nelayanabout.jpg";
 
 const stats = [
   { value: "500+", label: "Nelayan Terdaftar", icon: Anchor },

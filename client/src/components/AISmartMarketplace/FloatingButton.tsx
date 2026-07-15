@@ -15,8 +15,44 @@ export default function FloatingButton({ isOpen, onClick }: FloatingButtonProps)
   if (isOpen) return null;
 
   return (
+    <div
+      style={{
+        position: "fixed",
+        bottom: "24px",
+        right: "24px",
+        zIndex: 9998,
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+      }}
+      className={`ai-fab-container${isOpen ? " ai-fab-container--open" : ""}`}
+    >
+      {/* Always visible call-to-action text */}
+      {!isOpen && (
+        <span
+          style={{
+            background: "linear-gradient(135deg, #0d9488, #14b8a6)",
+            color: "#ffffff",
+            padding: "8px 16px",
+            borderRadius: "20px",
+            fontSize: "13px",
+            fontWeight: 600,
+            fontFamily: "var(--ai-font)",
+            boxShadow: "0 4px 16px rgba(20, 184, 166, 0.4)",
+            cursor: "pointer",
+            animation: "ai-bounce 2s infinite ease-in-out",
+          }}
+          onClick={onClick}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          Tanya AI Asisten ✨
+        </span>
+      )}
+
     <button
       id="ai-marketplace-fab"
+      style={{ position: "relative", bottom: 0, right: 0 }} // Override CSS positioning so it flows with the container
       className={`ai-fab${isOpen ? " ai-fab--open" : ""}`}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
@@ -53,32 +89,8 @@ export default function FloatingButton({ isOpen, onClick }: FloatingButtonProps)
         <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none" />
       </svg>
 
-      {/* Tooltip on hover */}
-      {isHovered && (
-        <span
-          style={{
-            position: "absolute",
-            right: "calc(100% + 12px)",
-            top: "50%",
-            transform: "translateY(-50%)",
-            whiteSpace: "nowrap",
-            padding: "6px 14px",
-            borderRadius: "8px",
-            background: "rgba(8, 45, 58, 0.92)",
-            backdropFilter: "blur(12px)",
-            border: "1px solid rgba(0, 180, 180, 0.2)",
-            color: "#e2eff3",
-            fontSize: "12.5px",
-            fontWeight: 500,
-            fontFamily: "var(--ai-font)",
-            boxShadow: "0 4px 16px rgba(0, 0, 0, 0.3)",
-            pointerEvents: "none",
-            animation: "ai-fade-in 0.2s ease",
-          }}
-        >
-          AI Smart Marketplace ✨
-        </span>
-      )}
+      {/* Tooltip on hover is replaced by the always-visible text above */}
     </button>
+    </div>
   );
 }

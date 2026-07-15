@@ -11,7 +11,7 @@ import iconUrl from "../assets/PasaieUngkot.png";
 const navLinks = [
   { label: "Home", to: routes.home, type: "route" },
   { label: "Marketplace", to: routes.marketplace, type: "route" },
-  { label: "News", to: "#news", type: "section" },
+  { label: "News", to: routes.news, type: "route" },
   { label: "FAQ", to: "#faq", type: "section" },
   { label: "Affiliate", to: "#affiliate", type: "section" },
   { label: "Mulai Menjual", to: routes.penjual, type: "route" },
